@@ -10,10 +10,6 @@ package edu.gatech.oad.antlab.person;
  */
 public class Person1 {
 
-    public static void main(String[] args) {
-        Person1 brody = new Person1("Brody");
-        System.out.println(brody.calc("gtg123b"));
-    }
     /** Holds the persons real name */
     private String name;
   	/**

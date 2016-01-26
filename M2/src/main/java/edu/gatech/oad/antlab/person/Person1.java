@@ -33,7 +33,7 @@ public class Person1 {
 	private String calc(String input) {
 	    //Person 1 put your implementation here
 	    String majority = input.substring(2);
-        String returnString = input.substring(0, 2) + majority;
+	    String returnString = majority + input.substring(0, 2);
         return returnString;
 	}
 

@@ -1,0 +1,23 @@
+defaultTasks 'hello'
+
+apply plugin: 'java'
+
+//Define a simple task ourselves
+task hello << {
+    println 'Hello World ayylmao Brody Version'
+}
+
+//set up some variables
+sourceCompatibility = 1.8
+version = '1.0'
+
+jar {
+    manifest {
+        attributes  'Implementation-Title' : 'Gradle Demo',
+                    'Implementation-Version' : version,
+                    'Main-Class' : 'AntLabMain'
+    }
+
+    destinationDir = file(".")
+    archiveName = 'bjohnstone3.jar'
+}

@@ -1,9 +1,4 @@
 apply plugin: 'java'
-
-apply plugin: 'checkstyle'
-
-apply plugin: 'pmd'
-
 apply plugin: 'application'
 
 defaultTasks 'jar'
@@ -22,14 +17,12 @@ repositories {
 
 
 sourceCompatibility = 1.8
-version = '1.0'
-mainClassName='AntLabMain'
+mainClassName = 'AntLabMain'
 
 dependencies {
     compile files('lib/resources.jar')
     runtime files('lib/resources.jar')
     runtime fileTree(dir: 'lib', include: '*.jar')
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
@@ -38,7 +31,7 @@ dependencies {
 jar {
   manifest {
      attributes  'Implementation-Title' : 'Gradle Quickstart' ,
-                 'Implementation-Version' : version,
-                 'Main-Class' : 'AntLabMain' 
+                 'Implementation-Version' : '1.0',
+                 'Main-Class' : 'edu.gatech.oad.pkg1.AntLabMain'
     }
 }

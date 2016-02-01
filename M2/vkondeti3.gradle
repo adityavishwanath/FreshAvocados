@@ -1,0 +1,27 @@
+apply plugin: 'java'
+
+defaultTasks 'jar'
+
+
+dependencies {
+    compile files('lib/resources.jar')
+    runtime files('lib/resources.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+
+jar {
+  manifest {
+     attributes  'Implementation-Title' : 'Gradle Quickstart' ,
+                 'Implementation-Version' : '1.0',
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+                 'Class-Path' : '../../lib/resources.jar'
+    }
+}
+
+
+repositories {
+   mavenCentral()
+}
+

@@ -1,10 +1,6 @@
-defaultTasks 'jar', 'hello'
+defaultTasks 'jar'
 
 apply plugin: 'java'
-
-task hello << {
-    println 'Hello'
-}
 
 jar {
     manifest {

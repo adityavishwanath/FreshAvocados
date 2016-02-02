@@ -15,9 +15,12 @@ public class LoginActivity extends Activity {
     }
 
     public void onClickConfirmLogin(View v) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Temporary toast!", Toast.LENGTH_SHORT);
-        toast.show();
-
+//        Toast toast = Toast.makeText(getApplicationContext(), "Temporary toast!", Toast.LENGTH_SHORT);
+//        toast.show();
+        // the above code can be used to tell them the login info was wrong. The below
+        // statement can be put into a conditional that only activates on correct login info
+        // For now, it always happens
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     public void onClickCancelLogin(View v) {

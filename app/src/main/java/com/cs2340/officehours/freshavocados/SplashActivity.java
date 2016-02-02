@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class SplashActivity extends Activity {
@@ -46,6 +47,11 @@ public class SplashActivity extends Activity {
 
     public void onClickRegister(View v) {
 
+    }
+
+    public void onClickIcon(View v) {
+        Toast toast = Toast.makeText(getApplicationContext(), "You found the easter egg!!", Toast.LENGTH_SHORT);
+        toast.show();
     }
 
 }

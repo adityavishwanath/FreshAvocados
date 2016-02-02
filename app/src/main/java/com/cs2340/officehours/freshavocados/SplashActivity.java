@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class SplashActivity extends Activity {
@@ -35,4 +36,13 @@ public class SplashActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClickLogin(View v) {
+
+    }
+
+    public void onClickRegister(View v) {
+
+    }
+
 }

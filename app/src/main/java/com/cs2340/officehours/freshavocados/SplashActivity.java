@@ -1,8 +1,10 @@
 package com.cs2340.officehours.freshavocados;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,8 +52,9 @@ public class SplashActivity extends Activity {
     }
 
     public void onClickIcon(View v) {
-        Toast toast = Toast.makeText(getApplicationContext(), "You found the easter egg!!", Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(getApplicationContext(), "You found the easter egg!!", Toast.LENGTH_SHORT).show();
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
 }

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fresh Avocados"
+        android:text="@string/app_name"
         android:id="@+id/splashTitle"
         android:textSize="35dp"
         android:layout_marginTop="108dp"
@@ -18,7 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/buttonLogin"
         android:layout_marginBottom="174dp"
         android:layout_alignParentBottom="true"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:id="@+id/buttonRegister"
         android:layout_marginTop="66dp"
         android:clickable="true"

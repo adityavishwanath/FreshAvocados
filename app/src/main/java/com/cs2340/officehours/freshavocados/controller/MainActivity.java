@@ -1,4 +1,4 @@
-package com.cs2340.officehours.freshavocados;
+package com.cs2340.officehours.freshavocados.controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.Vibrator;
 import android.view.View;
+
+import com.cs2340.officehours.freshavocados.R;
 
 public class MainActivity extends Activity {
 

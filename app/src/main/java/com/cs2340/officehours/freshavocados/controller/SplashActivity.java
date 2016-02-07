@@ -1,15 +1,20 @@
-package com.cs2340.officehours.freshavocados;
+package com.cs2340.officehours.freshavocados.controller;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.cs2340.officehours.freshavocados.R;
+import com.cs2340.officehours.freshavocados.model.UserManagementFacade;
+import com.cs2340.officehours.freshavocados.model.UserManager;
 
 
 public class SplashActivity extends Activity {
@@ -18,6 +23,21 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        /*
+        NOTE: The following is placeholder data, which is being used for M3 and for debugging purposes.
+        Subsequently, we will remove this temporary data, and replace it with a holistic registration system.
+         */
+
+        UserManagementFacade uM = new UserManager();
+        //The five of us on the team, in alphabetical order
+        uM.addUser("Aditya", "Vishwanath", "aditya", "password");
+        uM.addUser("Brody", "Johnstone", "brody", "password");
+        uM.addUser("Brandon", "Manuel", "brandon", "password");
+        uM.addUser("Pranathi", "Tupakula", "pranathi", "password");
+        uM.addUser("Vagdevi", "Kondeti", "vagdevi", "password");
+
+        Log.d("SplashActivity", "CREATED THE TEMPORARY USERS!");
     }
 
     @Override
@@ -52,10 +72,11 @@ public class SplashActivity extends Activity {
     public void onClickRegister(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
+        Log.d("SplashActivity", "Register button was pressed - This is M4 stuff bruh.");
     }
 
     public void onClickIcon(View v) {
-        Toast.makeText(getApplicationContext(), "You found the easter egg!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT).show();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

@@ -65,7 +65,6 @@ public class SplashActivity extends Activity {
     }
 
     public void onClickLogin(View v) {
-        Button button = (Button) v;
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

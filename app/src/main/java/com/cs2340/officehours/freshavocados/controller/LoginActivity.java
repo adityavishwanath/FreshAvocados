@@ -15,7 +15,7 @@ import com.cs2340.officehours.freshavocados.model.AuthenticationFacade;
 import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class LoginActivity extends Activity {
-
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,19 +36,22 @@ public class LoginActivity extends Activity {
             text = "Login Failure! Please try again!";
         }
         if (success) {
-            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-            toast.show();
+            showToast(text);
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-            toast.show();
+            showToast(text);
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
     }
-
+    void showToast(CharSequence text) {
+        if (toast == null) {
+            toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+        }
+        toast.show();
+    }
     public void onClickCancelLogin(View v) {
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

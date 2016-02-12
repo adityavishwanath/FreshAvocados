@@ -76,8 +76,12 @@ public class SplashActivity extends Activity {
         Log.d("SplashActivity", "Register button was pressed - This is M4 stuff bruh.");
     }
 
+    Toast toast;
     public void onClickIcon(View v) {
-        Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT).show();
+        if (toast == null) {
+            toast = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);
+        }
+        toast.show();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

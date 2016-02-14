@@ -28,12 +28,7 @@ public class EditProfileActivity extends Activity {
         EditText username = (EditText) findViewById(R.id.confirmUser);
         EditText pass = (EditText) findViewById(R.id.oldPassword);
 
-        if (!newpass.equals(confirmpass)) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
-            toast.show();
-            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(50);
-        } else if (!UserManager.users.containsKey(username.getText().toString())){
+        if (!UserManager.users.containsKey(username.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(), "Username does not exist", Toast.LENGTH_SHORT);
             toast.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -43,7 +38,12 @@ public class EditProfileActivity extends Activity {
             toast.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
-        } else {
+        } else if (!newpass.equals(confirmpass)){
+            Toast toast = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
+            toast.show();
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(50);
+        }  else {
             UserManager.users.get(username.getText().toString()).setPass(newpass.getText().toString());
             Toast toast = Toast.makeText(getApplicationContext(), "Password updated successfully", Toast.LENGTH_SHORT);
             toast.show();

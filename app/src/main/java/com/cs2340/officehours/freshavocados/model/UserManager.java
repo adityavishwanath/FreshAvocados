@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Aditya Vishwanath on 06-02-2016.
  */
 public class UserManager implements AuthenticationFacade, UserManagementFacade {
-    private static Map<String, User> users = new HashMap<>();
+    public static Map<String, User> users = new HashMap<>();
 
 
     public User findUserById(String id) {
@@ -16,7 +16,6 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
 
     public boolean addUser(String firstName, String lastName, String userName, String pass) {
         if (users.containsKey(userName)) {
-
            return false;
         } else {
             User user = new User(firstName, lastName, userName, pass);

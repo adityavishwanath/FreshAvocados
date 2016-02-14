@@ -23,10 +23,13 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".controller.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".controller.RegistrationActivity"
-            android:label="@string/title_activity_registration"></activity>
+            android:label="@string/title_activity_registration" />
+        <activity
+            android:name=".controller.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile"></activity>
     </application>
 
 </manifest>

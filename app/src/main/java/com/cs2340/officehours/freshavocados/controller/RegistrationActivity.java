@@ -21,7 +21,7 @@ public class RegistrationActivity extends Activity {
         uM = new UserManager();
     }
 
-    protected void createUser(View view) {
+    public void createUser(View view) {
         EditText fname = (EditText) findViewById(R.id.f_name);
         EditText lname = (EditText) findViewById(R.id.l_name);
         EditText uname = (EditText) findViewById(R.id.u_name);

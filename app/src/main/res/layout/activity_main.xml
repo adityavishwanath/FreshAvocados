@@ -31,4 +31,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
         android:enabled="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:id="@+id/editProfile"
+        android:layout_marginBottom="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

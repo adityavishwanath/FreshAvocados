@@ -35,10 +35,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Profile"
+        android:text="@string/view_edit_profile"
         android:id="@+id/editProfile"
         android:onClick="onClickEdit"
         android:layout_marginBottom="49dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

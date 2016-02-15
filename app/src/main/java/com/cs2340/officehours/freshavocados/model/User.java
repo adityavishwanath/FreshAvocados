@@ -45,6 +45,9 @@ public class User {
     public int getUserNumber() {
         return userNumber;
     }
+    public String getEmailAddress() {
+        return email;
+    }
     public boolean checkPassword(String pass) {
         return password.equals(pass);
     }

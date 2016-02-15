@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".controller.ViewProfileActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/username"
+        android:id="@+id/viewProfileUsername"
+        android:layout_marginTop="248dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/viewProfileShowUsername"
+        android:text="showusername"
+        android:layout_alignTop="@+id/viewProfileUsername"
+        android:layout_toEndOf="@+id/viewProfileEmailAddress" />
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/avocado_logo"
+        android:clickable="true"
+        android:baselineAlignBottom="false"
+        android:adjustViewBounds="false"
+        android:layout_above="@+id/viewProfileShowUsername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="57dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/first_name"
+        android:id="@+id/viewProfileFirstName"
+        android:layout_above="@+id/viewProfileLastName"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/viewProfileShowFirstName"
+        android:text="showfirstname"
+        android:layout_alignTop="@+id/viewProfileFirstName"
+        android:layout_toEndOf="@+id/viewProfileEmailAddress" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/last_name"
+        android:id="@+id/viewProfileLastName"
+        android:layout_above="@+id/viewProfileEmailAddress"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="52dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/viewProfileShowLastName"
+        android:text="showlastname"
+        android:layout_alignTop="@+id/viewProfileLastName"
+        android:layout_alignStart="@+id/viewProfileShowFirstName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/email_address"
+        android:id="@+id/viewProfileEmailAddress"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="134dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/viewProfileShowEmailAddress"
+        android:text="showemailaddress"
+        android:layout_alignTop="@+id/viewProfileEmailAddress"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

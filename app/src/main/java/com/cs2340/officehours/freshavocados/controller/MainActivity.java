@@ -24,6 +24,6 @@ public class MainActivity extends Activity {
     }
 
     public void onClickEdit(View view) {
-        startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
     }
 }

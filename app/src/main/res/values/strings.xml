@@ -12,10 +12,11 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_registration">RegistrationActivity</string>
-    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_view_profile">ViewProfileActivity</string>
     <string name="create_profile">Create Profile</string>
     <string name="email_address">Email Address</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="view_edit_profile">View/Edit Profile</string>
 </resources>

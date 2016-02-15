@@ -14,8 +14,9 @@ import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class RegistrationActivity extends Activity {
 
-    Toast emptyPass;
+    Toast emptyField;
     Toast wrongPass;
+    Toast invalidEmail;
 
     UserManager uM;
     @Override
@@ -34,19 +35,37 @@ public class RegistrationActivity extends Activity {
         EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
 
         boolean passWasWrong = false;
-        boolean passIsEmpty = false;
+        boolean fieldIsEmpty = false;
+        boolean badEmail = false;
 
-        if (pass.getText().toString().length() == 0) {
-            if (emptyPass == null) {
-                emptyPass = Toast.makeText(getApplicationContext(), "Password field cannot be blank", Toast.LENGTH_SHORT);
+        if (pass.getText().toString().length() == 0 || fname.getText().toString().length() == 0
+                || lname.getText().toString().length() == 0 || uname.getText().toString().length() == 0
+                || email.getText().toString().length() == 0) {
+            if (emptyField == null) {
+                emptyField = Toast.makeText(getApplicationContext(), "All fields must be filled in", Toast.LENGTH_SHORT);
             }
-            passIsEmpty = true;
-            emptyPass.show();
+            fieldIsEmpty = true;
+            emptyField.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
 
-        if (!passIsEmpty && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
+        if (!email.getText().toString().contains("@") || !(email.getText().toString().contains(".com")
+            || email.getText().toString().contains(".gov") || email.getText().toString().contains(".net")
+            || email.getText().toString().contains(".org") || email.getText().toString().contains(".info")
+            || email.getText().toString().contains(".de") || email.getText().toString().contains(".edu"))) {
+            if (invalidEmail == null) {
+                invalidEmail = Toast.makeText(getApplicationContext(), "Please enter in a valid email address", Toast.LENGTH_SHORT);
+            }
+            badEmail = true;
+            if (!fieldIsEmpty) {
+                invalidEmail.show();
+            }
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(50);
+        }
+
+        if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
             if (wrongPass == null) {
                 wrongPass = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
             }
@@ -55,7 +74,7 @@ public class RegistrationActivity extends Activity {
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
-        if (!passIsEmpty && !passWasWrong) {
+        if (!fieldIsEmpty && !badEmail && !passWasWrong) {
             boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), pass.getText().toString(), email.getText().toString());
             if (isTrue) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT);

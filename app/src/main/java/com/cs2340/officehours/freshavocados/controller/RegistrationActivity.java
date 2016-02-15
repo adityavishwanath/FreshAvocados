@@ -14,6 +14,9 @@ import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class RegistrationActivity extends Activity {
 
+    Toast emptyPass;
+    Toast wrongPass;
+
     UserManager uM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +34,29 @@ public class RegistrationActivity extends Activity {
         EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
 
         boolean passWasWrong = false;
-        Toast wrongPass = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
-        if (!(pass.getText().toString().equals(confirm_password.getText().toString()))) {
+        boolean passIsEmpty = false;
+
+        if (pass.getText().toString().length() == 0) {
+            if (emptyPass == null) {
+                emptyPass = Toast.makeText(getApplicationContext(), "Password field cannot be blank", Toast.LENGTH_SHORT);
+            }
+            passIsEmpty = true;
+            emptyPass.show();
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(50);
+        }
+
+        if (!passIsEmpty && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
+            if (wrongPass == null) {
+                wrongPass = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
+            }
             wrongPass.show();
             passWasWrong = true;
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(50);
         }
-        if (!passWasWrong) {
-            boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), pass.getText().toString());
+        if (!passIsEmpty && !passWasWrong) {
+            boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), pass.getText().toString(), email.getText().toString());
             if (isTrue) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT);
                 toast.show();

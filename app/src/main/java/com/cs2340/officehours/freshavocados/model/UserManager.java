@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Aditya Vishwanath on 06-02-2016.
+ * Created by Aditya Vishwanath on 02-06-2016.
+ * Edited by Brandon Manuel on 15-02-2016.
  */
 public class UserManager implements AuthenticationFacade, UserManagementFacade {
     public static Map<String, User> users = new HashMap<>();
@@ -14,11 +15,11 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
         return users.get(id);
     }
 
-    public boolean addUser(String firstName, String lastName, String userName, String pass) {
+    public boolean addUser(String firstName, String lastName, String userName, String pass, String email) {
         if (users.containsKey(userName)) {
            return false;
         } else {
-            User user = new User(firstName, lastName, userName, pass);
+            User user = new User(firstName, lastName, userName, pass, email);
             users.put(userName, user);
             return true;
         }
@@ -26,10 +27,7 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
 
     public boolean handleLoginRequest(String userName, String pass) {
         User u = findUserById(userName);
-        if (u == null) {
-            return false;
-        }
-        return u.checkPassword(pass);
+        return u != null && u.checkPassword(pass);
     }
 
     public UserManager() {

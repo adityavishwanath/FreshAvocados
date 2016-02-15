@@ -31,15 +31,15 @@ public class SplashActivity extends Activity {
 
         UserManagementFacade uM = new UserManager();
         //The five of us on the team, in alphabetical order
-        uM.addUser("Aditya", "Vishwanath", "aditya", "password");
-        uM.addUser("Brody", "Johnstone", "brody", "password");
-        uM.addUser("Brandon", "Manuel", "brandon", "password");
-        uM.addUser("Pranathi", "Tupakula", "pranathi", "password");
-        uM.addUser("Vagdevi", "Kondeti", "vagdevi", "password");
-        //just a dummy user/pass as per the requirement of M3
-        uM.addUser("Temporary", "M3Account", "user", "pass");
-
-        Log.d("SplashActivity", "CREATED THE TEMPORARY USERS!");
+//        uM.addUser("Aditya", "Vishwanath", "aditya", "password");
+//        uM.addUser("Brody", "Johnstone", "brody", "password");
+//        uM.addUser("Brandon", "Manuel", "brandon", "password");
+//        uM.addUser("Pranathi", "Tupakula", "pranathi", "password");
+//        uM.addUser("Vagdevi", "Kondeti", "vagdevi", "password");
+//        //just a dummy user/pass as per the requirement of M3
+//        uM.addUser("Temporary", "M3Account", "user", "pass");
+//
+//        Log.d("SplashActivity", "CREATED THE TEMPORARY USERS!");
     }
 
     @Override

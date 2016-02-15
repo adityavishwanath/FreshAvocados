@@ -25,4 +25,5 @@
     <string name="title_activity_confirm_password">ConfirmPassword</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_new_password">NewPasswordActivity</string>
+
 </resources>

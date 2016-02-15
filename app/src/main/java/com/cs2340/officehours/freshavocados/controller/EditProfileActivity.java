@@ -23,6 +23,8 @@ public class EditProfileActivity extends Activity {
         setContentView(R.layout.activity_edit_profile);
         EditText major = (EditText) findViewById(R.id.majorEdit);
         EditText bio = (EditText) findViewById(R.id.bioEdit);
+        bio.setHorizontallyScrolling(false);
+        bio.setMaxLines(6);
         major.setText(LoginActivity.currentUser.getMajor());
         bio.setText(LoginActivity.currentUser.getBio());
     }

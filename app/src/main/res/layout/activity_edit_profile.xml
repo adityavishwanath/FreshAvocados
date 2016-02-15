@@ -73,7 +73,7 @@
         android:editable="true"
         android:hint="Bio"
         android:enabled="true"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/majorEdit"
         android:text="their bio" />

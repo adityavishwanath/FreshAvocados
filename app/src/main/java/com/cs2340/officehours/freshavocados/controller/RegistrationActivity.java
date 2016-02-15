@@ -24,6 +24,9 @@ public class RegistrationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         uM = new UserManager();
+        EditText bio = (EditText) findViewById(R.id.bio);
+        bio.setHorizontallyScrolling(false);
+        bio.setMaxLines(6);
     }
 
     public void createUser(View view) {

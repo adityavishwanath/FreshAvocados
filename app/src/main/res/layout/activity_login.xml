@@ -18,7 +18,6 @@
         android:id="@+id/loginUsername"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:editable="true"
         android:enabled="true" />
 
     <EditText
@@ -30,7 +29,6 @@
         android:layout_below="@+id/loginUsername"
         android:layout_alignStart="@+id/loginUsername"
         android:hint="@string/password"
-        android:editable="true"
         android:enabled="true" />
 
     <Button

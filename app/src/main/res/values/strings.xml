@@ -25,5 +25,17 @@
     <string name="title_activity_confirm_password">ConfirmPassword</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_new_password">NewPasswordActivity</string>
+    <string name="Bio">Bio</string>
+    <string name="theirbio">their bio</string>
+    <string name="update">Update</string>
+    <string name="theirmajor">their major</string>
+    <string name="major">Major</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="show_first_name">showfirstname</string>
+    <string name="show_last_name">showlastname</string>
+    <string name="show_email_address">showemailaddress</string>
+    <string name="show_major">showmajor</string>
+    <string name="show_bio">showbio</string>
 
 </resources>

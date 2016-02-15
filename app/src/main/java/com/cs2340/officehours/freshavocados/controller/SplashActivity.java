@@ -72,9 +72,9 @@ public class SplashActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickRegister(View v) {
+        startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
-        Log.d("SplashActivity", "Register button was pressed - This is M4 stuff bruh.");
     }
 
     Toast toast;

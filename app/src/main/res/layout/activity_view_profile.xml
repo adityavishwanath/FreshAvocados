@@ -101,10 +101,10 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:id="@+id/cancelViewProfileButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:onClick="onClickCancelViewProfile"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -114,8 +114,8 @@
         android:onClick="onClickConfirmPassword"
         android:enabled="true"
         android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/viewProfileShowEmailAddress" />
+        android:layout_above="@+id/changePassButton"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -157,5 +157,14 @@
         android:layout_below="@+id/viewProfileMajor"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:id="@+id/changePassButton"
+        android:enabled="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

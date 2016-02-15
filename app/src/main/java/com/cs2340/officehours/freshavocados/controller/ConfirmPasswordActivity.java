@@ -41,7 +41,7 @@ public class ConfirmPasswordActivity extends Activity {
                 correctPasswordToast = Toast.makeText(getApplicationContext(), "Password Confirmed", Toast.LENGTH_SHORT);
             }
             correctPasswordToast.show();
-            startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), NewPasswordActivity.class));
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

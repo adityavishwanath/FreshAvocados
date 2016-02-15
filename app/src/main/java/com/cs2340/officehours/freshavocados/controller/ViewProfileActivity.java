@@ -1,13 +1,12 @@
 package com.cs2340.officehours.freshavocados.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Vibrator;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.UserManager;
@@ -32,6 +31,17 @@ public class ViewProfileActivity extends Activity {
 
         TextView viewEmailAddress = (TextView) findViewById(R.id.viewProfileShowEmailAddress);
         viewEmailAddress.setText(LoginActivity.currentUser.getEmailAddress());
+    }
+    public void onClickCancelViewProfile(View v) {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
+    }
+
+    public void onClickConfirmPassword(View v) {
+        startActivity(new Intent(getApplicationContext(), ConfirmPasswordActivity.class));
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 //
 //    public void editPassword(View view) {

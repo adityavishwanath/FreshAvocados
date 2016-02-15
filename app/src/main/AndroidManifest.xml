@@ -37,7 +37,8 @@
             android:label="@string/title_activity_edit_profile" />
         <activity
             android:name=".controller.NewPasswordActivity"
-            android:label="@string/title_activity_new_password"></activity>
+            android:label="@string/title_activity_new_password">
+        </activity>
     </application>
 
 </manifest>

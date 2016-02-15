@@ -44,7 +44,13 @@ public class ViewProfileActivity extends Activity {
         a.vibrate(50);
     }
 
-    public void onClickConfirmPassword(View v) {
+    public void onClickEditProfile(View v) {
+        startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
+    }
+
+    public void onClickChangePassword(View v) {
         startActivity(new Intent(getApplicationContext(), ConfirmPasswordActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

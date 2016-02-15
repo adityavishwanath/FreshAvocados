@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:text="@string/edit_profile"
         android:id="@+id/editProfileButton"
-        android:onClick="onClickConfirmPassword"
+        android:onClick="onClickEditProfile"
         android:enabled="true"
         android:clickable="true"
         android:layout_above="@+id/changePassButton"
@@ -165,6 +165,7 @@
         android:id="@+id/changePassButton"
         android:enabled="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="onClickChangePassword" />
 
 </RelativeLayout>

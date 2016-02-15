@@ -134,6 +134,7 @@
         android:hint="Bio"
         android:layout_below="@+id/confirm_password"
         android:layout_alignStart="@+id/confirm_password"
-        android:enabled="true" />
+        android:enabled="true"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

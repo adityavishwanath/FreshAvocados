@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cs2340.officehours.freshavocados.controller.RegistrationActivity"><![CDATA[
+
+
+
+    //android:layout_above="@+id/pass"
+        android:layout_centerHorizontal="true" />
+
+
+
+    ]]>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_profile"
+        android:id="@+id/createProfile"
+        android:onClick="createUser"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:id="@+id/textView2"
+        android:textSize="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/first_name"
+        android:ems="10"
+        android:id="@+id/f_name"
+        android:enabled="true"
+        android:layout_alignStart="@+id/u_name"
+        android:layout_below="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/last_name"
+        android:ems="10"
+        android:id="@+id/l_name"
+        android:enabled="true"
+        android:layout_below="@+id/f_name"
+        android:layout_alignEnd="@+id/f_name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/username"
+        android:ems="10"
+        android:id="@+id/u_name"
+        android:enabled="true"
+        android:layout_below="@+id/major"
+        android:layout_alignStart="@+id/pass" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/email"
+        android:hint="@string/email_address"
+        android:layout_below="@+id/l_name"
+        android:layout_alignStart="@+id/l_name" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/cancelLoginButton"
+        android:clickable="true"
+        android:enabled="true"
+        android:onClick="onClickCancelRegistration"
+        android:layout_alignBottom="@+id/createProfile"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/pass"
+        android:hint="@string/password"
+        android:layout_below="@+id/u_name"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirm_password"
+        android:layout_below="@+id/pass"
+        android:layout_alignStart="@+id/u_name"
+        android:hint="@string/confirm_password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/major"
+        android:hint="@string/major"
+        android:layout_below="@+id/email"
+        android:layout_alignStart="@+id/f_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bio"
+        android:ems="10"
+        android:hint="@string/Bio"
+        android:layout_below="@+id/confirm_password"
+        android:layout_alignStart="@+id/confirm_password"
+        android:enabled="true"
+        android:inputType="text" />
+
+</RelativeLayout>

@@ -29,17 +29,10 @@ public class SplashActivity extends Activity {
         Subsequently, we will remove this temporary data, and replace it with a holistic registration system.
          */
 
+        /*
+        NOTE: This has since been done.
+         */
         UserManagementFacade uM = new UserManager();
-        //The five of us on the team, in alphabetical order
-        uM.addUser("Aditya", "Vishwanath", "aditya", "password");
-        uM.addUser("Brody", "Johnstone", "brody", "password");
-        uM.addUser("Brandon", "Manuel", "brandon", "password");
-        uM.addUser("Pranathi", "Tupakula", "pranathi", "password");
-        uM.addUser("Vagdevi", "Kondeti", "vagdevi", "password");
-        //just a dummy user/pass as per the requirement of M3
-        uM.addUser("Temporary", "M3Account", "user", "pass");
-
-        Log.d("SplashActivity", "CREATED THE TEMPORARY USERS!");
     }
 
     @Override
@@ -64,12 +57,20 @@ public class SplashActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * The user can click this button to be brought to an activity where they can login to the app
+     * @param v the default param for onClick methods
+     */
     public void onClickLogin(View v) {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
 
+    /**
+     * The user can click this button to be brought to an activity where they can register for the app
+     * @param v the default param for onClick methods
+     */
     public void onClickRegister(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
@@ -77,6 +78,11 @@ public class SplashActivity extends Activity {
     }
 
     Toast toast;
+
+    /**
+     * The user can click the icon to get a fun surprise
+     * @param v the default param for onClick methods
+     */
     public void onClickIcon(View v) {
         if (toast == null) {
             toast = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);

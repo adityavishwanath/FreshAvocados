@@ -12,46 +12,56 @@ import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.AuthenticationFacade;
+import com.cs2340.officehours.freshavocados.model.User;
 import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class LoginActivity extends Activity {
-    Toast toast;
+    public static User currentUser;
+    Toast loginSuccess;
+    Toast loginFailure;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
 
+    /**
+     * Checks the user's username and password and attempts to log them into the system
+     * @param v the default param for onClick methods
+     */
     public void onClickConfirmLogin(View v) {
-        Log.d("LoginActivity", "Login Button Pressed!");
+        //Log.d("LoginActivity", "Login Button Pressed!");
         AuthenticationFacade aF = new UserManager();
         EditText userNameBox = (EditText) findViewById(R.id.loginUsername);
         EditText passwordBox = (EditText) findViewById(R.id.loginPassword);
-        CharSequence text;
         boolean success = false;
         if (aF.handleLoginRequest(userNameBox.getText().toString(), passwordBox.getText().toString())) {
-            text = "Login Success!";
             success = true;
-        } else {
-            text = "Login Failure! Please try again!";
+
         }
         if (success) {
-            showToast(text);
+            currentUser = UserManager.users.get(userNameBox.getText().toString());
+            if (loginSuccess == null) {
+                loginSuccess = Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT);
+            }
+            loginSuccess.show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         } else {
-            showToast(text);
+            if (loginFailure == null) {
+                loginFailure = Toast.makeText(getApplicationContext(), "Login failed. Please review login information and try again.", Toast.LENGTH_SHORT);
+            }
+            loginFailure.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
     }
-    void showToast(CharSequence text) {
-        if (toast == null) {
-            toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-        }
-        toast.show();
-    }
+
+    /**
+     * Cancels the login process and returns to the splash screen
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelLogin(View v) {
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

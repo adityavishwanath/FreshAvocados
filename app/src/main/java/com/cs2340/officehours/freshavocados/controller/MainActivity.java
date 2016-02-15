@@ -23,4 +23,7 @@ public class MainActivity extends Activity {
         a.vibrate(50);
     }
 
+    public void onClickEdit(View view) {
+        startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+    }
 }

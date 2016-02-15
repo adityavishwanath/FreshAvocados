@@ -22,12 +22,21 @@ public class ConfirmPasswordActivity extends Activity {
         setContentView(R.layout.activity_confirm_password);
     }
 
+    /**
+     * Cancels the activity and returns to a view of the user's profile
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelEditProfile(View v) {
         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
 
+    /**
+     * Checks to make sure the user knows their current password before allowing
+     * them to change to a new one
+     * @param v the default param for onClick methods
+     */
     public void onClickConfirmPassword(View v) {
         EditText password = (EditText) findViewById(R.id.passwordConfirm);
 

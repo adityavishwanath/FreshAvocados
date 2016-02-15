@@ -22,6 +22,10 @@ public class NewPasswordActivity extends Activity {
         setContentView(R.layout.activity_new_password);
     }
 
+    /**
+     * Checks to see if the new passwords match and sets the user's password accordingly
+     * @param v the default param for onClick methods
+     */
     public void onClickChangePass(View v) {
         EditText newPass = (EditText) findViewById(R.id.new_pass);
         EditText confirmPass = (EditText) findViewById(R.id.confirm_new_pass);
@@ -45,8 +49,12 @@ public class NewPasswordActivity extends Activity {
         a.vibrate(50);
     }
 
+    /**
+     * Cancels the process of changing the password and returns to the view profile screen
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelChangePassword(View v) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

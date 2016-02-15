@@ -17,6 +17,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Log's the user out and sets the current user of the app to null
+     * @param v the default param for onClick methods
+     */
     public void onClickLogout(View v) {
         LoginActivity.currentUser = null;
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
@@ -24,7 +28,11 @@ public class MainActivity extends Activity {
         a.vibrate(50);
     }
 
-    public void onClickEdit(View view) {
+    /**
+     * Brings the user to a page where they can view and edit their profile
+     * @param v the default param for onClick methods
+     */
+    public void onClickEdit(View v) {
         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

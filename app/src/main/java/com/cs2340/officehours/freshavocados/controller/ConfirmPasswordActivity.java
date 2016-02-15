@@ -43,6 +43,8 @@ public class ConfirmPasswordActivity extends Activity {
             correctUsernameToast.show();
             startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         }
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
 }

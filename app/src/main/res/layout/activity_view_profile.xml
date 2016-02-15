@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/viewProfileShowFirstName"
-        android:text="showfirstname"
+        android:text="@string/show_first_name"
         android:layout_alignTop="@+id/viewProfileFirstName"
         android:layout_alignStart="@+id/viewProfileShowUsername" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/viewProfileShowLastName"
-        android:text="showlastname"
+        android:text="@string/show_last_name"
         android:layout_alignTop="@+id/viewProfileLastName"
         android:layout_alignStart="@+id/viewProfileShowFirstName" />
 
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/viewProfileShowEmailAddress"
-        android:text="showemailaddress"
+        android:text="@string/show_email_address"
         android:layout_below="@+id/viewProfileShowLastName"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp" />
@@ -121,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Major"
+        android:text="@string/major"
         android:id="@+id/viewProfileMajor"
         android:layout_below="@+id/viewProfileEmailAddress"
         android:layout_alignParentStart="true"
@@ -131,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="showmajor"
+        android:text="@string/show_major"
         android:id="@+id/viewProfileShowMajor"
         android:layout_below="@+id/viewProfileShowEmailAddress"
         android:layout_alignStart="@+id/viewProfileShowEmailAddress"
@@ -141,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="showbio"
+        android:text="@string/show_bio"
         android:id="@+id/viewProfileShowBio"
         android:layout_below="@+id/viewProfileShowMajor"
         android:layout_toEndOf="@+id/viewProfileMajor"
@@ -152,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bio"
+        android:text="@string/Bio"
         android:id="@+id/viewProfileBio"
         android:layout_below="@+id/viewProfileMajor"
         android:layout_alignParentStart="true"
@@ -161,7 +161,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Password"
+        android:text="@string/change_password"
         android:id="@+id/changePassButton"
         android:enabled="true"
         android:layout_alignParentBottom="true"

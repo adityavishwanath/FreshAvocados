@@ -10,15 +10,20 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String major;
+    private String bio;
     private static int userNumber;
 
-    public User(String firstName, String lastName, String username, String password, String email) {
+    public User(String firstName, String lastName, String username, String password, String email,
+                String major, String bio) {
         userNumber++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.major = major;
+        this.bio = bio;
     }
 
     public void setFirstName(String first) {
@@ -30,6 +35,8 @@ public class User {
     public void setPass(String pass) {
         password = pass;
     }
+    public void setMajor(String major) { this.major = major; }
+    public void setBio(String bio) { this.bio = bio; }
     public String getFirstName() {
         return firstName;
     }
@@ -47,6 +54,10 @@ public class User {
     }
     public String getEmailAddress() {
         return email;
+    }
+    public String getMajor() { return major; }
+    public String getBio() {
+        return bio;
     }
     public boolean checkPassword(String pass) {
         return password.equals(pass);

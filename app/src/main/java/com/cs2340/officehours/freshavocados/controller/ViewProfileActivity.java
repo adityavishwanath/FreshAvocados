@@ -31,6 +31,12 @@ public class ViewProfileActivity extends Activity {
 
         TextView viewEmailAddress = (TextView) findViewById(R.id.viewProfileShowEmailAddress);
         viewEmailAddress.setText(LoginActivity.currentUser.getEmailAddress());
+
+        TextView viewMajor = (TextView) findViewById(R.id.viewProfileShowMajor);
+        viewMajor.setText(LoginActivity.currentUser.getMajor());
+
+        TextView viewBio = (TextView) findViewById(R.id.viewProfileShowBio);
+        viewBio.setText(LoginActivity.currentUser.getBio());
     }
     public void onClickCancelViewProfile(View v) {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));

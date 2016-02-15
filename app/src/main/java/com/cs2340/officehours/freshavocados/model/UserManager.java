@@ -15,11 +15,12 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
         return users.get(id);
     }
 
-    public boolean addUser(String firstName, String lastName, String userName, String pass, String email) {
+    public boolean addUser(String firstName, String lastName, String userName, String pass,
+                           String email, String major, String bio) {
         if (users.containsKey(userName)) {
            return false;
         } else {
-            User user = new User(firstName, lastName, userName, pass, email);
+            User user = new User(firstName, lastName, userName, pass, email, major, bio);
             users.put(userName, user);
             return true;
         }

@@ -76,5 +76,7 @@
         android:inputType="textMultiLine"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/majorEdit"
-        android:text="their bio" />
+        android:text="their bio"
+        android:layout_below="@+id/majorEdit"
+        android:maxLines="4" />
 </RelativeLayout>

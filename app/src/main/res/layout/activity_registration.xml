@@ -58,8 +58,8 @@
         android:id="@+id/f_name"
         android:editable="true"
         android:enabled="true"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/imageView"
+        android:layout_alignStart="@+id/u_name" />
 
     <EditText
         android:layout_width="wrap_content"

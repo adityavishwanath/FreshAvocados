@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/viewProfileShowUsername"
-        android:text="showusername"
+        android:text="@string/showusername"
         android:layout_below="@+id/imageView2"
         android:layout_alignStart="@+id/viewProfileShowEmailAddress" />
 

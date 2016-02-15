@@ -13,8 +13,8 @@ import com.cs2340.officehours.freshavocados.R;
 
 public class ConfirmPasswordActivity extends Activity {
 
-    Toast wrongUsername;
-    Toast correctUsername;
+    Toast wrongUsernameToast;
+    Toast correctUsernameToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,15 @@ public class ConfirmPasswordActivity extends Activity {
         EditText password = (EditText) findViewById(R.id.passwordConfirm);
 
         if (!(password.getText().toString().equals(LoginActivity.currentUser.getPassword()))) {
-            if (wrongUsername == null) {
-                wrongUsername = Toast.makeText(getApplicationContext(), "Incorrect password. Please try again.", Toast.LENGTH_SHORT);
+            if (wrongUsernameToast == null) {
+                wrongUsernameToast = Toast.makeText(getApplicationContext(), "Incorrect password. Please try again.", Toast.LENGTH_SHORT);
             }
-            wrongUsername.show();
+            wrongUsernameToast.show();
         } else {
-            if (correctUsername == null) {
-                correctUsername = Toast.makeText(getApplicationContext(), "Password Confirmed", Toast.LENGTH_SHORT);
+            if (correctUsernameToast == null) {
+                correctUsernameToast = Toast.makeText(getApplicationContext(), "Password Confirmed", Toast.LENGTH_SHORT);
             }
-            correctUsername.show();
+            correctUsernameToast.show();
             startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         }
     }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cs2340.officehours.freshavocados">
-
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -23,13 +22,8 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".controller.MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity
-            android:name=".controller.RegistrationActivity"
-            android:label="@string/title_activity_registration" />
-        <activity
-            android:name=".controller.EditProfileActivity"
-            android:label="@string/title_activity_edit_profile"></activity>
+            android:label="@string/title_activity_main">
+        </activity>
     </application>
 
 </manifest>

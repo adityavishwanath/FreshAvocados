@@ -57,12 +57,20 @@ public class SplashActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * The user can click this button to be brought to an activity where they can login to the app
+     * @param v the default param for onClick methods
+     */
     public void onClickLogin(View v) {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
 
+    /**
+     * The user can click this button to be brought to an activity where they can register for the app
+     * @param v the default param for onClick methods
+     */
     public void onClickRegister(View v) {
         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -70,6 +78,11 @@ public class SplashActivity extends Activity {
     }
 
     Toast toast;
+
+    /**
+     * The user can click the icon to get a fun surprise
+     * @param v the default param for onClick methods
+     */
     public void onClickIcon(View v) {
         if (toast == null) {
             toast = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);

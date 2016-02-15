@@ -38,18 +38,31 @@ public class ViewProfileActivity extends Activity {
         TextView viewBio = (TextView) findViewById(R.id.viewProfileShowBio);
         viewBio.setText(LoginActivity.currentUser.getBio());
     }
+
+    /**
+     * The user can cancel the view profile screen and return to the main screen
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelViewProfile(View v) {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
 
+    /**
+     * The user can click this button to edit their profile
+     * @param v the default param for onClick methods
+     */
     public void onClickEditProfile(View v) {
         startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
 
+    /**
+     * The user can click this button to change their password
+     * @param v the default param for onClick methods
+     */
     public void onClickChangePassword(View v) {
         startActivity(new Intent(getApplicationContext(), ConfirmPasswordActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

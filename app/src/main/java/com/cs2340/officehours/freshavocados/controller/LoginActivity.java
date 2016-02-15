@@ -25,8 +25,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
     }
 
+    /**
+     * Checks the user's username and password and attempts to log them into the system
+     * @param v the default param for onClick methods
+     */
     public void onClickConfirmLogin(View v) {
-        Log.d("LoginActivity", "Login Button Pressed!");
+        //Log.d("LoginActivity", "Login Button Pressed!");
         AuthenticationFacade aF = new UserManager();
         EditText userNameBox = (EditText) findViewById(R.id.loginUsername);
         EditText passwordBox = (EditText) findViewById(R.id.loginPassword);
@@ -53,6 +57,11 @@ public class LoginActivity extends Activity {
             a.vibrate(50);
         }
     }
+
+    /**
+     * Cancels the login process and returns to the splash screen
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelLogin(View v) {
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

@@ -29,6 +29,10 @@ public class EditProfileActivity extends Activity {
         bio.setText(LoginActivity.currentUser.getBio());
     }
 
+    /**
+     * Sets the user's major and bio accordingly upon click of the update button
+     * @param v the default param for onClick methods
+     */
     public void onClickUpdate(View v) {
         EditText newMajor = (EditText) findViewById(R.id.majorEdit);
         EditText newBio = (EditText) findViewById(R.id.bioEdit);
@@ -54,8 +58,12 @@ public class EditProfileActivity extends Activity {
         }
     }
 
+    /**
+     * Cancels the editing process and goes back to a view of the profile
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelEditProfile(View v) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

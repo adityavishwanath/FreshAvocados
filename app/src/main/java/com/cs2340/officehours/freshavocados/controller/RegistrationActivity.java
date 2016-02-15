@@ -29,7 +29,12 @@ public class RegistrationActivity extends Activity {
         bio.setMaxLines(6);
     }
 
-    public void createUser(View view) {
+    /**
+     * Looks at all of the registration fields and attempts to create a valid User that
+     * can login to the app
+     * @param v the default param for the current activity
+     */
+    public void createUser(View v) {
         EditText fname = (EditText) findViewById(R.id.f_name);
         EditText lname = (EditText) findViewById(R.id.l_name);
         EditText uname = (EditText) findViewById(R.id.u_name);
@@ -98,6 +103,11 @@ public class RegistrationActivity extends Activity {
             }
         }
     }
+
+    /**
+     * Cancels the registration process and returns to the splash screen
+     * @param v the default param for onClick methods
+     */
     public void onClickCancelRegistration(View v) {
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -106,6 +116,10 @@ public class RegistrationActivity extends Activity {
 
     Toast easterEgg;
 
+    /**
+     * The user can touch the icon and a little vibration occurs along with a small message
+     * @param v the default param for onClick methods
+     */
     public void onClickIcon(View v) {
         if (easterEgg == null) {
             easterEgg = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);

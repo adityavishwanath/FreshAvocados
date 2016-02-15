@@ -118,12 +118,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/major"
         android:hint="Major"
         android:layout_below="@+id/email"
-        android:layout_alignStart="@+id/f_name" />
+        android:layout_alignStart="@+id/f_name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:layout_width="wrap_content"

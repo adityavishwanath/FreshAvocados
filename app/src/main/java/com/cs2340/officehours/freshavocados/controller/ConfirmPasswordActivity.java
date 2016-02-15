@@ -13,8 +13,8 @@ import com.cs2340.officehours.freshavocados.R;
 
 public class ConfirmPasswordActivity extends Activity {
 
-    Toast wrongUsernameToast;
-    Toast correctUsernameToast;
+    Toast wrongPasswordToast;
+    Toast correctPasswordToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,15 @@ public class ConfirmPasswordActivity extends Activity {
         EditText password = (EditText) findViewById(R.id.passwordConfirm);
 
         if (!(password.getText().toString().equals(LoginActivity.currentUser.getPassword()))) {
-            if (wrongUsernameToast == null) {
-                wrongUsernameToast = Toast.makeText(getApplicationContext(), "Incorrect password. Please try again.", Toast.LENGTH_SHORT);
+            if (wrongPasswordToast == null) {
+                wrongPasswordToast = Toast.makeText(getApplicationContext(), "Incorrect password. Please try again.", Toast.LENGTH_SHORT);
             }
-            wrongUsernameToast.show();
+            wrongPasswordToast.show();
         } else {
-            if (correctUsernameToast == null) {
-                correctUsernameToast = Toast.makeText(getApplicationContext(), "Password Confirmed", Toast.LENGTH_SHORT);
+            if (correctPasswordToast == null) {
+                correctPasswordToast = Toast.makeText(getApplicationContext(), "Password Confirmed", Toast.LENGTH_SHORT);
             }
-            correctUsernameToast.show();
+            correctPasswordToast.show();
             startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

@@ -79,7 +79,7 @@ public class RegistrationActivity extends Activity {
             if (isTrue) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT);
                 toast.show();
-                startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 a.vibrate(50);
             } else {

@@ -33,6 +33,8 @@ public class RegistrationActivity extends Activity {
         EditText pass = (EditText) findViewById(R.id.pass);
         EditText email = (EditText) findViewById(R.id.email);
         EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
+        EditText major = (EditText) findViewById(R.id.major);
+        EditText bio = (EditText) findViewById(R.id.bio);
 
         boolean passWasWrong = false;
         boolean fieldIsEmpty = false;
@@ -40,7 +42,8 @@ public class RegistrationActivity extends Activity {
 
         if (pass.getText().toString().length() == 0 || fname.getText().toString().length() == 0
                 || lname.getText().toString().length() == 0 || uname.getText().toString().length() == 0
-                || email.getText().toString().length() == 0) {
+                || email.getText().toString().length() == 0 || major.getText().toString().length() == 0
+                || bio.getText().toString().length() == 0) {
             if (emptyField == null) {
                 emptyField = Toast.makeText(getApplicationContext(), "All fields must be filled in", Toast.LENGTH_SHORT);
             }
@@ -75,7 +78,9 @@ public class RegistrationActivity extends Activity {
             a.vibrate(50);
         }
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
-            boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), pass.getText().toString(), email.getText().toString());
+            boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(),
+                    uname.getText().toString(), pass.getText().toString(),
+                    email.getText().toString(), major.getText().toString(), bio.getText().toString());
             if (isTrue) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT);
                 toast.show();

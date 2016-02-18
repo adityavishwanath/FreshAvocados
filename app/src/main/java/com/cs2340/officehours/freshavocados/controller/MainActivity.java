@@ -7,14 +7,20 @@ import android.app.Activity;
 import android.os.Vibrator;
 import android.view.View;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.cs2340.officehours.freshavocados.R;
 
 public class MainActivity extends Activity {
+
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        queue = Volley.newRequestQueue(this);
     }
 
     /**

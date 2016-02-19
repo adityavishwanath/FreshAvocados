@@ -14,53 +14,111 @@
         android:layout_height="wrap_content"
         android:text="@string/logout"
         android:id="@+id/logoutButton"
-        android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
         android:enabled="true"
         android:clickable="true"
         android:onClick="onClickLogout"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Main Screen / End of M3"
-        android:id="@+id/tempTextM3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:enabled="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/view_edit_profile"
-        android:id="@+id/editProfile"
-        android:onClick="onClickEdit"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/view_profile"
+        android:id="@+id/editProfile"
+        android:onClick="onClickEdit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/searchButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Search"
         android:id="@+id/searchButton"
-        android:layout_below="@+id/logoutButton"
-        android:layout_alignParentEnd="true"
         android:clickable="true"
         android:enabled="true"
-        android:onClick="onClickSearch" />
+        android:onClick="onClickSearch"
+        android:layout_above="@+id/top_button"
+        android:layout_toEndOf="@+id/recommended_button_major"
+        android:layout_marginBottom="70dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchField"
-        android:layout_alignBottom="@+id/searchButton"
+        android:hint="Search"
+        android:layout_above="@+id/top_button"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="70dp"
+        android:layout_toStartOf="@+id/searchButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Rentals"
+        android:id="@+id/top_button"
+        android:layout_above="@+id/new_button_theatres"
+        android:layout_alignStart="@+id/recommended_button_major"
         android:layout_toStartOf="@+id/searchButton"
-        android:hint="Search" />
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New to Theatres"
+        android:id="@+id/new_button_theatres"
+        android:layout_above="@+id/new_button_dvd"
+        android:layout_alignStart="@+id/top_button"
+        android:layout_alignEnd="@+id/top_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New to DVD"
+        android:id="@+id/new_button_dvd"
+        android:layout_above="@+id/recommended_button_major"
+        android:layout_alignStart="@+id/top_button"
+        android:layout_alignEnd="@+id/recommended_button_major" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended by Major"
+        android:id="@+id/recommended_button_major"
+        android:layout_above="@+id/recommend_button_all"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended by All"
+        android:id="@+id/recommend_button_all"
+        android:layout_marginBottom="70dp"
+        android:layout_above="@+id/editProfile"
+        android:layout_alignStart="@+id/recommended_button_major"
+        android:layout_alignEnd="@+id/recommended_button_major" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Or..."
+        android:id="@+id/textView3"
+        android:layout_above="@+id/top_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp" />
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:id="@+id/main_logo"
+        android:src="@drawable/avocado_logo"
+        android:clickable="false"
+        android:baselineAlignBottom="false"
+        android:adjustViewBounds="false"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

@@ -20,7 +20,7 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="view_edit_profile">View/Edit Profile</string>
+    <string name="view_profile">View Profile</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="title_activity_confirm_password">ConfirmPassword</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>

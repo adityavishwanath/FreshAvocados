@@ -37,5 +37,6 @@
     <string name="show_email_address">showemailaddress</string>
     <string name="show_major">showmajor</string>
     <string name="show_bio">showbio</string>
+    <string name="title_activity_display_movie_list">DisplayMovieListActivity</string>
 
 </resources>

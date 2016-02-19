@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cs2340.officehours.freshavocados">
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -37,8 +38,11 @@
             android:label="@string/title_activity_edit_profile" />
         <activity
             android:name=".controller.NewPasswordActivity"
-            android:label="@string/title_activity_new_password">
-        </activity>
+            android:label="@string/title_activity_new_password" />
+        <activity
+            android:name=".controller.DisplayMovieListActivity"
+            android:label="@string/title_activity_display_movie_list" />
+        <activity android:name=".controller.IndividualMovieActivity"></activity>
     </application>
 
 </manifest>

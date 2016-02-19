@@ -60,7 +60,10 @@
         android:layout_alignStart="@+id/recommended_button_major"
         android:layout_toStartOf="@+id/searchButton"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp" />
+        android:layout_marginBottom="0dp"
+        android:clickable="true"
+        android:enabled="true"
+        android:onClick="onClickTopRentals" />
 
     <Button
         android:layout_width="wrap_content"
@@ -69,7 +72,10 @@
         android:id="@+id/new_button_theatres"
         android:layout_above="@+id/new_button_dvd"
         android:layout_alignStart="@+id/top_button"
-        android:layout_alignEnd="@+id/top_button" />
+        android:layout_alignEnd="@+id/top_button"
+        android:onClick="onClickNewTheatres"
+        android:enabled="true"
+        android:clickable="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -78,7 +84,10 @@
         android:id="@+id/new_button_dvd"
         android:layout_above="@+id/recommended_button_major"
         android:layout_alignStart="@+id/top_button"
-        android:layout_alignEnd="@+id/recommended_button_major" />
+        android:layout_alignEnd="@+id/recommended_button_major"
+        android:clickable="true"
+        android:enabled="true"
+        android:onClick="onClickNewDVD" />
 
     <Button
         android:layout_width="wrap_content"
@@ -86,7 +95,10 @@
         android:text="Recommended by Major"
         android:id="@+id/recommended_button_major"
         android:layout_above="@+id/recommend_button_all"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickRecommendedMajor"
+        android:enabled="true"
+        android:clickable="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -96,14 +108,17 @@
         android:layout_marginBottom="70dp"
         android:layout_above="@+id/editProfile"
         android:layout_alignStart="@+id/recommended_button_major"
-        android:layout_alignEnd="@+id/recommended_button_major" />
+        android:layout_alignEnd="@+id/recommended_button_major"
+        android:enabled="true"
+        android:clickable="true"
+        android:onClick="onClickRecommendedAll" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Or..."
-        android:id="@+id/textView3"
+        android:id="@+id/or"
         android:layout_above="@+id/top_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp" />

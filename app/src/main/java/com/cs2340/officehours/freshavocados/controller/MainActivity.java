@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,6 +24,7 @@ import java.net.URLEncoder;
 public class MainActivity extends Activity {
 
     private RequestQueue queue;
+    Toast emptySearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,19 @@ public class MainActivity extends Activity {
 
     public void onClickSearch(View v) {
         // check if corresponding text field R.id.searchField == null
+        EditText searchField = (EditText) findViewById(R.id.searchField);
+        if (searchField.getText().toString().equals("")) {
+            if (emptySearch == null) {
+                emptySearch = Toast.makeText(getApplicationContext(),
+                        "The search field is empty", Toast.LENGTH_SHORT);
+            }
+            emptySearch.show();
+            return;
+        }
 
         String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=";
 
         try {
-            EditText searchField = (EditText) findViewById(R.id.searchField);
             String query = searchField.getText().toString();
             String encodedQuery = URLEncoder.encode(query, "utf-8");
 
@@ -48,6 +58,26 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("Main Activity", e.getMessage());
         }
+    }
+
+    public void onClickTopRentals(View V) {
+
+    }
+
+    public void onClickNewTheatres(View v) {
+
+    }
+
+    public void onClickNewDVD(View v) {
+
+    }
+
+    public void onClickRecommendedMajor(View v) {
+
+    }
+
+    public void onClickRecommendedAll(View v) {
+
     }
 
     /**

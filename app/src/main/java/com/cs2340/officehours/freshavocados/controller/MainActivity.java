@@ -5,11 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs2340.officehours.freshavocados.R;
+
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
 
 public class MainActivity extends Activity {
 
@@ -21,6 +30,24 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         queue = Volley.newRequestQueue(this);
+    }
+
+    public void onClickSearch(View v) {
+        // check if corresponding text field R.id.searchField == null
+
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=";
+
+        try {
+            EditText searchField = (EditText) findViewById(R.id.searchField);
+            String query = searchField.getText().toString();
+            String encodedQuery = URLEncoder.encode(query, "utf-8");
+
+            url = url + encodedQuery;
+            url = url + "&page_limit=10&page=1&apikey=yedukp76ffytfuy24zsqk7f5";
+
+        } catch (Exception e) {
+            Log.d("Main Activity", e.getMessage());
+        }
     }
 
     /**

@@ -43,4 +43,24 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/searchButton"
+        android:layout_below="@+id/logoutButton"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:onClick="onClickSearch" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchField"
+        android:layout_alignBottom="@+id/searchButton"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/searchButton"
+        android:hint="Search" />
+
 </RelativeLayout>

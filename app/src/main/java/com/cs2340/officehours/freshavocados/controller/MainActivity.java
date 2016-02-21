@@ -45,11 +45,13 @@ public class MainActivity extends Activity {
 
     /**
      * Method that handles the clicking of "Search" after entering the search query.
-     * @param v
+     * @param v the view
      */
     public void onClickSearch(View v) {
         // check if corresponding text field R.id.searchField == null
         EditText searchField = (EditText) findViewById(R.id.searchField);
+        searchField.setHorizontallyScrolling(false);
+        searchField.setMaxLines(1);
         if (searchField.getText().toString().equals("")) {
             if (emptySearch == null) {
                 emptySearch = Toast.makeText(getApplicationContext(),
@@ -143,6 +145,8 @@ public class MainActivity extends Activity {
      */
     private void changeView(ArrayList<Movie> movies, String title) {
         Intent intent = new Intent(this, DisplayMovieListActivity.class);
+        intent.putExtra("movies", movies);
+        intent.putExtra("title", title);
         /*
         Bundle extras = new Bundle();
         extras.putSerializable("MOVIES", movies);

@@ -18,8 +18,8 @@ public class Movie implements Serializable {
 
     /**
      * Method to set the title and year in the required display format.
-     * @param title
-     * @param year
+     * @param title the title to be set
+     * @param year the year to be set
      */
     private void setTitleAndYear(String title, String year) {
         title_year = title + " (" + year + ")";
@@ -27,20 +27,20 @@ public class Movie implements Serializable {
 
     /**
      * Method to set the two actors in the required format for display purposes.
-     * @param actor1
-     * @param actor2
+     * @param actor1 primary actor
+     * @param actor2 secondary actor
      */
     private void setActors(String actor1, String actor2) {
-        actors = actor1 + "  " + actor2;
+        actors = actor1 + ",  " + actor2;
     }
 
     /**
      * Method to initialize all the data members of the instance.
-     * @param title
-     * @param year
-     * @param actor1
-     * @param actor2
-     * @param synopsis
+     * @param title title of movie
+     * @param year year of movie
+     * @param actor1 primary actor
+     * @param actor2 secondary actor
+     * @param synopsis short description of movie
      */
     public void setData(String title, String year, String actor1, String actor2, String synopsis) {
         setTitleAndYear(title, year);

@@ -9,12 +9,20 @@ import java.util.Map;
  */
 public class Movies {
 
-    public static final ArrayList<Movie> MOVIES = new ArrayList<>();
+    public static ArrayList<Movie> MOVIES = new ArrayList<>();
 
-    public static final Map<String, Movie> MOVIE_MAP = new HashMap<>();
+    public static Map<String, Movie> MOVIE_MAP = new HashMap<>();
 
     public static void addItem(Movie movie) {
         MOVIES.add(movie);
         MOVIE_MAP.put(movie.getTitleYear(), movie);
+    }
+
+    public static Movie getMovieAt(int position) {
+        return MOVIES.get(position);
+    }
+
+    public static void clear() {
+        MOVIES = new ArrayList<>();
     }
 }

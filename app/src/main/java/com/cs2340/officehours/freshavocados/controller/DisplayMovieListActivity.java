@@ -90,6 +90,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         Intent i = new Intent(DisplayMovieListActivity.this, IndividualMovieActivity.class);
 
         i.putExtra("position", position);
+        i.putExtra("movies", movies);
         startActivity(i);
     }
 

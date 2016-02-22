@@ -31,18 +31,6 @@
         android:layout_marginTop="48dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/majorEdit"
-        android:layout_marginTop="55dp"
-        android:inputType="text"
-        android:text="@string/theirmajor"
-        android:layout_below="@+id/updateProfile"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/major" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,9 +60,19 @@
         android:hint="@string/Bio"
         android:enabled="true"
         android:inputType="text"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/majorEdit"
         android:text="@string/theirbio"
+        android:maxLines="4"
         android:layout_below="@+id/majorEdit"
-        android:maxLines="4" />
+        android:layout_centerHorizontal="true" />
+
+
+    <Spinner
+        android:id="@+id/majorEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:background="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="48dp" />
 </RelativeLayout>

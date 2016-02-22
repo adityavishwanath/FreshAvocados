@@ -67,6 +67,7 @@
         android:ems="10"
         android:id="@+id/u_name"
         android:enabled="true"
+        android:layout_centerVertical="true"
         android:layout_below="@+id/major"
         android:layout_alignStart="@+id/pass" />
 
@@ -78,7 +79,7 @@
         android:id="@+id/email"
         android:hint="@string/email_address"
         android:layout_below="@+id/l_name"
-        android:layout_alignStart="@+id/l_name" />
+        android:layout_alignStart="@+id/l_name"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -115,16 +116,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/major"
-        android:hint="@string/major"
-        android:layout_below="@+id/email"
-        android:layout_alignStart="@+id/f_name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/bio"
         android:ems="10"
         android:hint="@string/Bio"
@@ -132,5 +123,15 @@
         android:layout_alignStart="@+id/confirm_password"
         android:enabled="true"
         android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/email"
+        android:layout_alignStart="@+id/email"
+    />
 
 </RelativeLayout>

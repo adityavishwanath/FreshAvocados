@@ -133,9 +133,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/show_major"
         android:id="@+id/viewProfileShowMajor"
-        android:layout_below="@+id/viewProfileShowEmailAddress"
-        android:layout_alignStart="@+id/viewProfileShowEmailAddress"
-        android:layout_marginTop="20dp" />
+        android:layout_alignTop="@+id/viewProfileMajor"
+        android:layout_toEndOf="@+id/viewProfileEmailAddress" />
 
     <TextView
         android:layout_width="wrap_content"

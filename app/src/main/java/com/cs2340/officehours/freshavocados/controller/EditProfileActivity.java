@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
@@ -21,12 +23,25 @@ public class EditProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        EditText major = (EditText) findViewById(R.id.majorEdit);
         EditText bio = (EditText) findViewById(R.id.bioEdit);
         bio.setHorizontallyScrolling(false);
         bio.setMaxLines(6);
-        major.setText(LoginActivity.currentUser.getMajor());
         bio.setText(LoginActivity.currentUser.getBio());
+        Spinner dropdown = (Spinner) findViewById(R.id.majorEdit);
+        String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies",
+                "Applied Mathematics", "Applied Physics",
+                "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction",
+                "Business Administration", "Civil Engineering", "Chemical Engineering",
+                "Chemistry", "Computational Media", "Computer Engineering", "Computer Science",
+                "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics",
+                "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society",
+                "Industrial Design", "Industrial Engineering", "International Affairs",
+                "International Affairs and Modern Language", "Literature, Media, and Communication",
+                "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering",
+                "Physics", "Psychology", "Public Policy"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
     }
 
     /**
@@ -34,14 +49,15 @@ public class EditProfileActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickUpdate(View v) {
-        EditText newMajor = (EditText) findViewById(R.id.majorEdit);
+        Spinner majorSpinner = (Spinner) findViewById(R.id.majorEdit);
+        String newMajor = majorSpinner.getSelectedItem().toString();
         EditText newBio = (EditText) findViewById(R.id.bioEdit);
 
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
 
-        if (newMajor.getText().toString().length() != 0 && newBio.getText().toString().length() != 0) {
-            LoginActivity.currentUser.setMajor(newMajor.getText().toString());
+        if (newBio.getText().toString().length() != 0 && !newMajor.equals("Major")) {
+            LoginActivity.currentUser.setMajor(newMajor);
             LoginActivity.currentUser.setBio(newBio.getText().toString());
             if (profileUpdatedToast == null) {
                 profileUpdatedToast = Toast.makeText(getApplicationContext(),

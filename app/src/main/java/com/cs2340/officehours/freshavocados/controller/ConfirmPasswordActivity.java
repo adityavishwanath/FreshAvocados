@@ -27,7 +27,8 @@ public class ConfirmPasswordActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickCancelEditProfile(View v) {
-        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+//        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+        finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
@@ -51,6 +52,7 @@ public class ConfirmPasswordActivity extends Activity {
             }
             correctPasswordToast.show();
             startActivity(new Intent(getApplicationContext(), NewPasswordActivity.class));
+            finish();
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

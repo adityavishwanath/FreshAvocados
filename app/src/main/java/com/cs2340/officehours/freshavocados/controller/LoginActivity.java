@@ -46,6 +46,7 @@ public class LoginActivity extends Activity {
             }
             loginSuccess.show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         } else {
@@ -63,7 +64,8 @@ public class LoginActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickCancelLogin(View v) {
-        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+//        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+        finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

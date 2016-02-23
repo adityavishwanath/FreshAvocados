@@ -37,7 +37,8 @@ public class NewPasswordActivity extends Activity {
                         "Password Changed!", Toast.LENGTH_SHORT);
             }
             passwordChangedToast.show();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         } else {
             if (passwordsNotMatched == null) {
                 passwordsNotMatched = Toast.makeText(getApplicationContext(),
@@ -54,7 +55,8 @@ public class NewPasswordActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickCancelChangePassword(View v) {
-        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+        //startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+        finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

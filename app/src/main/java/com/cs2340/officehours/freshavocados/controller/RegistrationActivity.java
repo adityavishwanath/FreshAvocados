@@ -124,6 +124,7 @@ public class RegistrationActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 a.vibrate(50);
+                finish();
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT);
                 toast.show();
@@ -143,7 +144,8 @@ public class RegistrationActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickCancelRegistration(View v) {
-        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+//        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+        finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

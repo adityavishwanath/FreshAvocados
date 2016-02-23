@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +79,8 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
             actors.setText(mov.getActors());
 
 //            String url = mov.getThumbnailLink();
-//            new DownloadImageTask((ImageView) findViewById(R.id.thumbnail)).execute(url);
+//            ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
+//            new DownloadImageTask(thumbnail).execute(url);
 
             return view;
         }
@@ -103,10 +105,10 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
+        ImageView thumbnail;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
+        public DownloadImageTask(ImageView thumbnail) {
+            this.thumbnail = thumbnail;
         }
 
         protected Bitmap doInBackground(String ... urls) {
@@ -122,7 +124,12 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+            if (thumbnail != null) {
+                thumbnail.setImageBitmap(result);
+            } else {
+                Log.d("DisplayListActivity", "wtf is going on");
+            }
+
         }
     }
 

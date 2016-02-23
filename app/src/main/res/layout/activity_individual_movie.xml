@@ -37,10 +37,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Actor 1, Actor 2"
         android:id="@+id/actor_actor"
-        android:layout_below="@+id/movie_title_year"
         android:layout_toEndOf="@+id/movie_img"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/movie_title_year" />
 
     <TextView
         android:layout_width="wrap_content"

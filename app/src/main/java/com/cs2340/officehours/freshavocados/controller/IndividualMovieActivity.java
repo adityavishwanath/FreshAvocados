@@ -42,7 +42,6 @@ public class IndividualMovieActivity extends Activity {
         short_synop.setText(m.getSynopsis());
 
         String url = m.getThumbnailLink();
-        ImageView movie_img = (ImageView) findViewById(R.id.movie_img);
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
     }
 

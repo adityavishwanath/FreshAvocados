@@ -26,7 +26,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Movie Title (Year)"
         android:id="@+id/movie_title_year"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/movie_img"
         android:layout_marginLeft="20dp" />
@@ -39,7 +39,7 @@
         android:id="@+id/actor_actor"
         android:layout_below="@+id/movie_title_year"
         android:layout_toEndOf="@+id/movie_img"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp" />
 
     <TextView
@@ -51,7 +51,8 @@
         android:layout_below="@+id/movie_img"
         android:layout_centerHorizontal="true"
         android:textStyle="italic"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp"
+        android:maxLines="3" />
 
     <LinearLayout
         android:orientation="vertical"

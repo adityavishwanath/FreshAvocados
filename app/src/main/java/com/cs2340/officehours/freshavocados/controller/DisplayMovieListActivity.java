@@ -133,4 +133,8 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         }
     }
 
+    public void onClickBackButton(View v) {
+        finish();
+    }
+
 }

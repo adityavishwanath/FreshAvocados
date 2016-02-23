@@ -8,7 +8,10 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cs2340.officehours.freshavocados.R;
@@ -21,12 +24,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class IndividualMovieActivity extends Activity {
+public class IndividualMovieActivity extends Activity { //implements AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_movie);
+
+        //code for stuff concerning the movie
 
         ArrayList<Movie> movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
         int position = getIntent().getIntExtra("position", 1);
@@ -43,6 +48,11 @@ public class IndividualMovieActivity extends Activity {
 
         String url = m.getThumbnailLink();
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
+
+        //code for the reviews
+
+//        ListView list_view = (ListView) findViewById(R.id.review_list);
+//        list_view.setOnItemClickListener(this);
     }
 
     public void onClickBack(View v) {

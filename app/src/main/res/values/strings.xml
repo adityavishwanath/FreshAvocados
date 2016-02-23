@@ -39,5 +39,6 @@
     <string name="show_bio">showbio</string>
     <string name="title_activity_display_movie_list">DisplayMovieListActivity</string>
     <string name="spinner_title">Major</string>
+    <string name="title_activity_review">ReviewActivity</string>
 
 </resources>

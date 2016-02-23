@@ -362,7 +362,9 @@ public class MainActivity extends Activity {
      */
     public void onClickLogout(View v) {
         LoginActivity.currentUser = null;
-        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }

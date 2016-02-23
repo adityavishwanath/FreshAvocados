@@ -46,7 +46,7 @@ public class IndividualMovieActivity extends Activity {
     }
 
     public void onClickBack(View v) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

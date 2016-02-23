@@ -1,9 +1,12 @@
 package com.cs2340.officehours.freshavocados.model;
 
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
 
 /**
  * Created by Aditya Vishwanath on 19-02-2016.
@@ -15,6 +18,8 @@ public class Movie implements Serializable {
     private String title_year;
     private String actors;
     private String synopsis;
+    private String thumbnailLink;
+    private Drawable thumbnail;
 
     /**
      * Method to set the title and year in the required display format.
@@ -35,17 +40,28 @@ public class Movie implements Serializable {
     }
 
     /**
+     * Method to set the thumbnail for the movie
+     * @param thumbnailLink the thumbnail for the movie
+     */
+    private void setThumbnailLink(String thumbnailLink) {
+        this.thumbnailLink = thumbnailLink;
+    }
+
+    /**
      * Method to initialize all the data members of the instance.
      * @param title title of movie
      * @param year year of movie
      * @param actor1 primary actor
      * @param actor2 secondary actor
      * @param synopsis short description of movie
+     * @param thumbnailLink link to thumbnail
      */
-    public void setData(String title, String year, String actor1, String actor2, String synopsis) {
+    public void setData(String title, String year, String actor1, String actor2, String synopsis,
+                        String thumbnailLink) {
         setTitleAndYear(title, year);
         setActors(actor1, actor2);
         this.synopsis = synopsis;
+        this.thumbnailLink = thumbnailLink;
     }
 
     /**
@@ -70,5 +86,13 @@ public class Movie implements Serializable {
      */
     public String getSynopsis() {
         return synopsis;
+    }
+
+    /*
+     * Getter method
+     * @return thumbnailLink
+     */
+    public String getThumbnailLink() {
+        return thumbnailLink;
     }
 }

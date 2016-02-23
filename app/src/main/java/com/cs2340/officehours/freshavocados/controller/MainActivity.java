@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -108,12 +109,15 @@ public class MainActivity extends Activity {
                                 String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                 String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                 String synopsis = jsonObject.optString("synopsis");
+                                JSONObject links = jsonObject.getJSONObject("posters");
+                                String thumbnailLink = links.getString("thumbnail");
+
                                 Log.d("MAINACTIVITY", title);
                                 Log.d("MAINACTIVITY", year);
                                 Log.d("MAINACTIVITY", actor1);
                                 Log.d("MAINACTIVITY", actor2);
                                 Log.d("MAINACTIVITY", synopsis);
-                                m.setData(title, year, actor1, actor2, synopsis);
+                                m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                 movies.add(m);
                             } catch (JSONException e) {
                                 Log.d("VolleyApp", "Failed to get JSON object");
@@ -183,12 +187,15 @@ public class MainActivity extends Activity {
                                     String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                     String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                     String synopsis = jsonObject.optString("synopsis");
+                                    JSONObject links = jsonObject.getJSONObject("posters");
+                                    String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
                                     Log.d("MAINACTIVITY", actor2);
                                     Log.d("MAINACTIVITY", synopsis);
-                                    m.setData(title, year, actor1, actor2, synopsis);
+                                    Log.d("MAINACTIVITY", thumbnailLink);
+                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");
@@ -243,12 +250,14 @@ public class MainActivity extends Activity {
                                     String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                     String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                     String synopsis = jsonObject.optString("synopsis");
+                                    JSONObject links = jsonObject.getJSONObject("posters");
+                                    String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
                                     Log.d("MAINACTIVITY", actor2);
                                     Log.d("MAINACTIVITY", synopsis);
-                                    m.setData(title, year, actor1, actor2, synopsis);
+                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");
@@ -303,12 +312,14 @@ public class MainActivity extends Activity {
                                     String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                     String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                     String synopsis = jsonObject.optString("synopsis");
+                                    JSONObject links = jsonObject.getJSONObject("posters");
+                                    String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
                                     Log.d("MAINACTIVITY", actor2);
                                     Log.d("MAINACTIVITY", synopsis);
-                                    m.setData(title, year, actor1, actor2, synopsis);
+                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");

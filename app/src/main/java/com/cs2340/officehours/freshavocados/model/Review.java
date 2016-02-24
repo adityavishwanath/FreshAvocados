@@ -33,7 +33,7 @@ public class Review implements Comparable<Review> {
             reviews = new LinkedList<>();
         }
         if (!(reviews.contains(review))) {
-            reviews.add(review);
+            reviews.add(review); //if user has already made a review, do nothing
         }
         reviewMap.put(movie, reviews);
     }
@@ -84,7 +84,7 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int compareTo(Review review) {
-        return this.rating.getNumStars() - review.rating.getNumStars();
+        return (int) this.rating.getRating() - (int) review.rating.getRating();
     }
 
     @Override

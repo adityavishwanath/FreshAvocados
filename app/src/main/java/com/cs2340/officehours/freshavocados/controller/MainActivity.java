@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +40,8 @@ public class MainActivity extends Activity {
     private RequestQueue queue;
     private Toast emptySearch;
     private Toast JSONFailure;
+    private Toast noRecommendedMoviesAll;
+    private Toast noRecommendedMoviesMajor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -363,12 +367,60 @@ public class MainActivity extends Activity {
         a.vibrate(50);
     }
 
+
     public void onClickRecommendedMajor(View v) {
-        //TODO
+        Set<String> keys = Review.reviewMap.keySet();
+        ArrayList<Review> reviews = new ArrayList<>();
+        ArrayList<Movie> sorted_movies = new ArrayList<>();
+        for (String key : keys) {
+            LinkedList<Review> value = Review.reviewMap.get(key);
+            for (Review r : value) {
+                if (r.getMajor().equals(LoginActivity.currentUser.getMajor())) {
+                    reviews.add(r);
+                }
+            }
+        }
+        if (!(reviews.isEmpty())) {
+            Collections.sort(reviews);
+            for (Review rev : reviews) {
+                if (!(sorted_movies.contains(rev.getMovie()))) {
+                    sorted_movies.add(rev.getMovie());
+                }
+            }
+            changeView(sorted_movies, "Recommended by Major");
+        } else {
+            if (noRecommendedMoviesMajor == null) {
+                noRecommendedMoviesMajor = Toast.makeText(getApplicationContext(), "No movies to recommend", Toast.LENGTH_SHORT);
+            }
+            noRecommendedMoviesMajor.show();
+        }
+
     }
 
     public void onClickRecommendedAll(View v) {
-        //TODO
+        Set<String> keys = Review.reviewMap.keySet();
+        ArrayList<Review> reviews = new ArrayList<>();
+        ArrayList<Movie> sorted_movies = new ArrayList<>();
+        for (String key : keys) {
+            LinkedList<Review> value = Review.reviewMap.get(key);
+            for (Review r : value) {
+                reviews.add(r);
+            }
+        }
+        if (!(reviews.isEmpty())) {
+            Collections.sort(reviews);
+            for (Review rev : reviews) {
+                if (!(sorted_movies.contains(rev.getMovie()))) {
+                    sorted_movies.add(rev.getMovie());
+                }
+            }
+            changeView(sorted_movies, "Recommended by All");
+        } else {
+            if (noRecommendedMoviesAll == null) {
+                noRecommendedMoviesAll = Toast.makeText(getApplicationContext(), "No movies to recommend", Toast.LENGTH_SHORT);
+            }
+            noRecommendedMoviesAll.show();
+        }
     }
 
     /**

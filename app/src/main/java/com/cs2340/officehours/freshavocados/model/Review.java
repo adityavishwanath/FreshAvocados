@@ -84,7 +84,7 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int compareTo(Review review) {
-        return (int) this.rating.getRating() - (int) review.rating.getRating();
+        return (int) review.rating.getRating() - (int) this.rating.getRating();
     }
 
     @Override

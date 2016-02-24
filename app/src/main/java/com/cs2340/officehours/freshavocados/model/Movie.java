@@ -95,4 +95,19 @@ public class Movie implements Serializable {
     public String getThumbnailLink() {
         return thumbnailLink;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Movie)) {
+            return false;
+        }
+        Movie that = (Movie) other;
+        return this.getTitleYear().equals(that.getTitleYear());
+    }
 }

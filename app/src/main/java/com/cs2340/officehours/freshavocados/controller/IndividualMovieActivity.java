@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     }
 
     public void onClickBack(View v) {
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
         finish();
     }
 
@@ -80,6 +83,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
         intent.putExtra("movie", m);
         startActivity(intent);
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
     private class MyAdapter extends ArrayAdapter<Review> {

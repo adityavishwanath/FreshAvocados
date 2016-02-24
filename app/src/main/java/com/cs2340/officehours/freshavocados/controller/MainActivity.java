@@ -146,6 +146,8 @@ public class MainActivity extends Activity {
                 });
         //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
     /**
@@ -229,6 +231,8 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
     public void onClickNewTheatres(View v) {
@@ -291,6 +295,8 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
     public void onClickNewDVD(View v) {
@@ -353,6 +359,8 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 
     public void onClickRecommendedMajor(View v) {

@@ -1,8 +1,10 @@
 package com.cs2340.officehours.freshavocados.controller;
 
+import android.content.Context;
 import android.media.Rating;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -38,6 +40,8 @@ public class ReviewActivity extends Activity {
     }
 
     public void onClickBackToIndiv(View v) {
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
         finish();
     }
 
@@ -47,11 +51,15 @@ public class ReviewActivity extends Activity {
                 t = Toast.makeText(getApplicationContext(), "Review text cannot be empty.", Toast.LENGTH_SHORT);
                 t.show();
             }
+        } else {
+            Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
+                    rating, review_text.getText().toString(), m);
+            Review.addReview(m.getTitleYear(), review);
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(50);
+            finish();
         }
-        Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
-                rating, review_text.getText().toString(), m);
-        Review.addReview(m.getTitleYear(), review);
-        finish();
+
     }
 
 }

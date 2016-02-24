@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="A Moving Recommending App"
+        android:text="A Movie Recommendation App"
         android:id="@+id/splashDescription"
         android:textStyle="italic"
         android:layout_above="@+id/splashIcon"

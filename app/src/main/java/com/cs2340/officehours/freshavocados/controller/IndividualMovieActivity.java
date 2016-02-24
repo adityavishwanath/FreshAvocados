@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 public class IndividualMovieActivity extends Activity { //implements AdapterView.OnItemClickListener {
 
+    Movie m;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class IndividualMovieActivity extends Activity { //implements AdapterView
 
         ArrayList<Movie> movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
         int position = getIntent().getIntExtra("position", 1);
-        Movie m = movies.get(position);
+        m = movies.get(position);
 
         TextView movie_title_year = (TextView) findViewById(R.id.movie_title_year);
         movie_title_year.setText(m.getTitleYear());
@@ -57,6 +59,12 @@ public class IndividualMovieActivity extends Activity { //implements AdapterView
 
     public void onClickBack(View v) {
         finish();
+    }
+
+    public void onClickAddReview(View v) {
+        Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
+        intent.putExtra("movie", m);
+        startActivity(intent);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

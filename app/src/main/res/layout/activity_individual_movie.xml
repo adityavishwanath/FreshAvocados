@@ -93,7 +93,9 @@
         android:text="Add Review"
         android:id="@+id/add_review"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onClickAddReview" />
 
     <TextView
         android:layout_width="wrap_content"

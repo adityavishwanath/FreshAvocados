@@ -1,8 +1,10 @@
 package com.cs2340.officehours.freshavocados.model;
 
 import android.media.Rating;
+import android.widget.RatingBar;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -10,15 +12,15 @@ import java.util.Map;
  */
 public class Review implements Comparable<Review> {
 
-    public static Map<String, Review> reviewMap= new HashMap<>();
+    public static Map<String, LinkedList<Review>> reviewMap= new HashMap<>();
 
     private String username;
     private String major;
-    private Rating rating;
+    private RatingBar rating;
     private String review_text;
     private Movie movie;
 
-    public Review(String username, String major, Rating rating, String review_text, Movie movie) {
+    public Review(String username, String major, RatingBar rating, String review_text, Movie movie) {
         this.username = username;
         this.major = major;
         this.rating = rating;
@@ -27,7 +29,11 @@ public class Review implements Comparable<Review> {
     }
 
     public static void addReview(String movie, Review review) {
-        reviewMap.put(movie, review);
+        LinkedList<Review> reviews = reviewMap.get(movie);
+        if (!(reviews.contains(review))) {
+            reviews.add(review);
+        }
+        reviewMap.put(movie, reviews);
     }
 
     //getters
@@ -40,7 +46,7 @@ public class Review implements Comparable<Review> {
         return major;
     }
 
-    public Rating getRating() {
+    public RatingBar getRating() {
         return rating;
     }
 
@@ -62,7 +68,7 @@ public class Review implements Comparable<Review> {
         this.major = major;
     }
 
-    public void setRating(Rating rating) {
+    public void setRating(RatingBar rating) {
         this.rating = rating;
     }
 
@@ -76,7 +82,7 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int compareTo(Review review) {
-        return ((int) this.rating.getStarRating()) - ((int) review.rating.getStarRating());
+        return this.rating.getNumStars() - review.rating.getNumStars();
     }
 
     @Override
@@ -96,7 +102,7 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return username.hashCode() * 43 * review_text.hashCode() * 19 * major.hashCode() * 17;
     }
 
     @Override

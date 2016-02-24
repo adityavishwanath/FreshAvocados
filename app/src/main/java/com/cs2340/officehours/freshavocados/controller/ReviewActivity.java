@@ -51,6 +51,7 @@ public class ReviewActivity extends Activity {
         Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
                 rating, review_text.getText().toString(), m);
         Review.addReview(m.getTitleYear(), review);
+        finish();
     }
 
 }

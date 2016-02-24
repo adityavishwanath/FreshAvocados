@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.Movie;
+import com.cs2340.officehours.freshavocados.model.Review;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +29,9 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends Activity {
 
@@ -42,6 +45,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         queue = Volley.newRequestQueue(this);
+        Set<String> keys = Review.reviewMap.keySet();
+        for (String key : keys) {
+            Log.d("ReviewCheck", Review.reviewMap.get(key).toString());
+        }
     }
 
     /**

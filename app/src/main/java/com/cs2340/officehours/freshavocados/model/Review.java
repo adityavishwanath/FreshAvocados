@@ -30,6 +30,9 @@ public class Review implements Comparable<Review> {
 
     public static void addReview(String movie, Review review) {
         LinkedList<Review> reviews = reviewMap.get(movie);
+        if (reviews == null) {
+            reviews = new LinkedList<>();
+        }
         if (!(reviews.contains(review))) {
             reviews.add(review);
         }

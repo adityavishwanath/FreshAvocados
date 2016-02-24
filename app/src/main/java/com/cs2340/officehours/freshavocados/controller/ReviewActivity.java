@@ -7,26 +7,33 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.Movie;
+import com.cs2340.officehours.freshavocados.model.Review;
 
 public class ReviewActivity extends Activity {
+
+    EditText review_text;
+    RatingBar rating;
+    Movie m;
+    Toast t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        EditText review_text = (EditText) findViewById(R.id.review_text);
+        review_text = (EditText) findViewById(R.id.review_text);
         review_text.setHorizontallyScrolling(false);
         review_text.setMaxLines(8);
 
-        Movie mov = (Movie) getIntent().getSerializableExtra("movie");
+        m = (Movie) getIntent().getSerializableExtra("movie");
         TextView title = (TextView) findViewById(R.id.movie_name);
-        title.setText(mov.getTitleYear());
+        title.setText(m.getTitleYear());
 
-        RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
+        rating = (RatingBar) findViewById(R.id.ratingBar);
         rating.setStepSize(1);
     }
 
@@ -35,7 +42,15 @@ public class ReviewActivity extends Activity {
     }
 
     public void onClickSubmitReview(View v) {
-
+        if (review_text.getText().toString().equals("")) {
+            if (t == null) {
+                t = Toast.makeText(getApplicationContext(), "Review text cannot be empty.", Toast.LENGTH_SHORT);
+                t.show();
+            }
+        }
+        Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
+                rating, review_text.getText().toString(), m);
+        Review.addReview(m.getTitleYear(), review);
     }
 
 }

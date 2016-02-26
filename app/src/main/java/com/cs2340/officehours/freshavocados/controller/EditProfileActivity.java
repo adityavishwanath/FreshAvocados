@@ -1,9 +1,9 @@
 package com.cs2340.officehours.freshavocados.controller;
-
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +14,20 @@ import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Arrays;
+
 public class EditProfileActivity extends Activity {
-
-    Toast profileUpdatedToast;
-    Toast emptyFieldsToast;
-
+    String data;
+    protected String newMajor;
+    protected EditText newBio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +37,7 @@ public class EditProfileActivity extends Activity {
         bio.setMaxLines(6);
         bio.setText(LoginActivity.currentUser.getBio());
         Spinner dropdown = (Spinner) findViewById(R.id.majorEdit);
-        String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies",
+        String[] items = new String[]{"Aerospace Engineering", "Applied Language and Cultural Studies",
                 "Applied Mathematics", "Applied Physics",
                 "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction",
                 "Business Administration", "Civil Engineering", "Chemical Engineering",
@@ -40,8 +49,14 @@ public class EditProfileActivity extends Activity {
                 "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering",
                 "Physics", "Psychology", "Public Policy"
         };
+        String userMajor = LoginActivity.currentUser.getMajor();
+        int pos = Arrays.asList(items).indexOf(userMajor);
+        System.out.println("POSITION OF CURRENT MAJOR IS " + pos);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+        dropdown.requestFocusFromTouch();
+        dropdown.setSelection(pos);
+        dropdown.requestFocus();
     }
 
     /**
@@ -50,27 +65,19 @@ public class EditProfileActivity extends Activity {
      */
     public void onClickUpdate(View v) {
         Spinner majorSpinner = (Spinner) findViewById(R.id.majorEdit);
-        String newMajor = majorSpinner.getSelectedItem().toString();
-        EditText newBio = (EditText) findViewById(R.id.bioEdit);
+        newMajor = majorSpinner.getSelectedItem().toString();
+        newBio = (EditText) findViewById(R.id.bioEdit);
+        String username = LoginActivity.currentUser.getUsername();
 
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
 
-        if (newBio.getText().toString().length() != 0 && !newMajor.equals("Major")) {
-            LoginActivity.currentUser.setMajor(newMajor);
-            LoginActivity.currentUser.setBio(newBio.getText().toString());
-            if (profileUpdatedToast == null) {
-                profileUpdatedToast = Toast.makeText(getApplicationContext(),
-                        "Profile Updated!", Toast.LENGTH_SHORT);
-            }
-            profileUpdatedToast.show();
-            startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+        if (newBio.getText().toString().length() != 0) {
+            new editProfileTask().execute(username, newMajor,
+                    newBio.getText().toString().trim());
         } else {
-            if (emptyFieldsToast == null) {
-                emptyFieldsToast = Toast.makeText(getApplicationContext(),
-                        "One or more of the fields was left empty. Profile was not updated.", Toast.LENGTH_SHORT);
-            }
-            emptyFieldsToast.show();
+            Toast.makeText(getApplicationContext(),
+                "One or more of the fields was left empty. Profile was not updated.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -79,8 +86,100 @@ public class EditProfileActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickCancelEditProfile(View v) {
-        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+        finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
+    private class editProfileTask extends AsyncTask<String, Void, String> {
+
+        /**
+         * This process immediately starts running when execute() is called. Inputs are username
+         * and password. It will fetch from php database to see if data exists. It will pass return
+         * message to onPostExecute() method
+         *
+         * @param args username and password
+         * @return sql database query in json format
+         */
+        @Override
+        protected String doInBackground(String... args) {
+            String username = args[0];
+            String major = args[1];
+            String bio = args[2];
+
+            String link;
+            BufferedReader bufferedReader;
+            String result = "";
+            try {
+                data = "?username=" + URLEncoder.encode(username, "UTF-8");
+                data += "&Major=" + URLEncoder.encode(major, "UTF-8");
+                data += "&bio=" + URLEncoder.encode(bio, "UTF-8");
+                link = "http://officehours.netau.net/editprofile.php" + data;
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                result = bufferedReader.readLine();
+                return result;
+            } catch (Exception e) {
+                Log.d("NewPasswordActivity", e.getMessage());
+                return e.getMessage();
+            }
+        }
+
+        /**
+         * This method runs after doInBackground. It will process the json result and either use it
+         * to realize that the connection failed, or use it to update the CurrentUser for the Login
+         * Activity.
+         * This uses a bit of a hack to process the result. When we query the database there are two
+         * possible results:
+         * 1) the actual object with user details - such as name, password, bio,
+         * major, etc.
+         * 2) An error message starting with "query_result".
+         * In this, we check to see if query_result is in the result, if it is not that means the result
+         * contains (1) - actual object with user results - in this case java will throw an error,
+         * so we catch this error and process that json object
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            String jsonStr = result;
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    String query_result = "";
+                    try {
+                        Log.d("EditProfileActivity", "Entry query_result exists");
+                        query_result = jsonObj.getString("query_result");
+                        if (query_result.equals("SUCCESS")) {
+                            Toast.makeText(getApplicationContext(), "Profile editted successfully!", Toast.LENGTH_SHORT).show();
+                            System.out.println("PROFILE EDITTED");
+                            LoginActivity.currentUser.setMajor(newMajor);
+                            LoginActivity.currentUser.setBio(newBio.getText().toString());
+                            startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                            finish();
+                        } else if (query_result.equals("FAILURE")) {
+                            Toast.makeText(getApplicationContext(), "Profile failed to change.", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Couldn't connect to remote database.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e){
+
+                    }
+                } catch (JSONException e) {
+                    Log.d("EditProfileActivity", "Some fatal error occurred");
+                    Log.d("EditProfileActivity", "Exception: " + e.getMessage());
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Log.d("EditProfileActivity", "Some major error occurred");
+                Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

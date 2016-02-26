@@ -1,27 +1,36 @@
 package com.cs2340.officehours.freshavocados.controller;
-
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView;
-
 
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.UserManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class RegistrationActivity extends Activity {
 
     Toast emptyField;
     Toast wrongPass;
     Toast invalidEmail;
-
+    String data;
     UserManager uM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +82,7 @@ public class RegistrationActivity extends Activity {
         boolean passWasWrong = false;
         boolean fieldIsEmpty = false;
         boolean badEmail = false;
-
+        //Checks for no empty fields
         if (pass.getText().toString().length() == 0 || fname.getText().toString().length() == 0
                 || lname.getText().toString().length() == 0 || uname.getText().toString().length() == 0
                 || email.getText().toString().length() == 0 || major.equals("Major")
@@ -89,11 +98,11 @@ public class RegistrationActivity extends Activity {
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
-
+        //Checks for valid email address
         if (!email.getText().toString().contains("@") || !(email.getText().toString().contains(".com")
-            || email.getText().toString().contains(".gov") || email.getText().toString().contains(".net")
-            || email.getText().toString().contains(".org") || email.getText().toString().contains(".info")
-            || email.getText().toString().contains(".de") || email.getText().toString().contains(".edu"))) {
+                || email.getText().toString().contains(".gov") || email.getText().toString().contains(".net")
+                || email.getText().toString().contains(".org") || email.getText().toString().contains(".info")
+                || email.getText().toString().contains(".de") || email.getText().toString().contains(".edu"))) {
             if (invalidEmail == null) {
                 invalidEmail = Toast.makeText(getApplicationContext(), "Please enter in a valid email address", Toast.LENGTH_SHORT);
             }
@@ -104,7 +113,7 @@ public class RegistrationActivity extends Activity {
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
-
+        //Checks for matched passwords
         if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
             if (wrongPass == null) {
                 wrongPass = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
@@ -114,22 +123,18 @@ public class RegistrationActivity extends Activity {
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
         }
+        //Create new user
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
-            boolean isTrue = uM.addUser(fname.getText().toString(), lname.getText().toString(),
-                    uname.getText().toString(), pass.getText().toString(),
-                    email.getText().toString(), major, bio.getText().toString());
-            if (isTrue) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT);
-                toast.show();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            try {
+                data = "no data inputted yet";
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 a.vibrate(50);
-                finish();
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT);
-                toast.show();
-                Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(50);
+                new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
+                        email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
+                        lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
+                System.out.println("Result is: " + data);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -165,4 +170,103 @@ public class RegistrationActivity extends Activity {
         a.vibrate(50);
     }
 
+    private class RegisterTask extends AsyncTask<String, Void, String> {
+
+        /**
+         * This process immediately starts running when execute() is called. Inputs are username
+         * and password. It will fetch from php database to see if data exists. It will pass return
+         * message to onPostExecute() method
+         * @param args username and password
+         * @return sql database query in json format
+         */
+        @Override
+        protected String doInBackground(String... args) {
+            String name = args[0];
+            String pass = args[1];
+            String email = args[2];
+            String major = args[3];
+            String fname = args[4];
+            String lname = args[5];
+            String bio = args[6];
+
+            String link;
+            BufferedReader bufferedReader;
+            String result = "";
+            try {
+                data = "?username=" + URLEncoder.encode(name, "UTF-8");
+                data += "&password=" + URLEncoder.encode(pass, "UTF-8");
+                data += "&Email=" + URLEncoder.encode(email, "UTF-8");
+                data += "&Major=" + URLEncoder.encode(major, "UTF-8");
+                data += "&FirstName=" + URLEncoder.encode(fname, "UTF-8");
+                data += "&LastName=" + URLEncoder.encode(lname, "UTF-8");
+                data += "&bio=" + URLEncoder.encode(bio, "UTF-8");
+                link = "http://officehours.netau.net/signup.php" + data;
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                result = bufferedReader.readLine();
+                return result;
+            } catch (Exception e) {
+                Log.d("RegistrationActivity", e.getMessage());
+                return e.getMessage();
+            }
+        }
+
+        /**
+         * This method runs after doInBackground. It will process the json result and either use it
+         * to realize that the connection failed, or use it to update the CurrentUser for the Login
+         * Activity.
+         * This uses a bit of a hack to process the result. When we query the database there are two
+         * possible results:
+         * 1) the actual object with user details - such as name, password, bio,
+         * major, etc.
+         * 2) An error message starting with "query_result".
+         * In this, we check to see if query_result is in the result, if it is not that means the result
+         * contains (1) - actual object with user results - in this case java will throw an error,
+         * so we catch this error and process that json object
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            String jsonStr = result;
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    String query_result = "";
+                    try {
+                        Log.d("RegistrationActivity", "Entry query_result exists");
+                        query_result = jsonObj.getString("query_result");
+                        if (query_result.equals("SUCCESS")) {
+                            Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            finish();
+                        } else if (query_result.equals("EXISTING")) {
+                            Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
+                        } else if (query_result.equals("EMAIL")) {
+                            Toast.makeText(getApplicationContext(), "Email is being used!", Toast.LENGTH_SHORT).show();
+                        } else if (query_result.equals("FAILURE")) {
+                            Toast.makeText(getApplicationContext(), "Registeration failed.", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e){
+
+                    }
+                } catch (JSONException e) {
+                    Log.d("RegistrationActivity", "Some fatal error occurred");
+                    Log.d("RegistrationActivity", "Exception: " + e.getMessage());
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Log.d("RegistrationActivity", "Some major error occurred");
+                Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }
+

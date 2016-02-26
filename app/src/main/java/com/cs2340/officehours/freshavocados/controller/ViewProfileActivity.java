@@ -57,6 +57,7 @@ public class ViewProfileActivity extends Activity {
         startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
+        finish();
     }
 
     /**

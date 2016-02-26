@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
             }
         } else if (name.equals("")) {
             Toast.makeText(getApplicationContext(),
-                    "You  left your username field blank!", Toast.LENGTH_LONG).show();
+                    "You left your username field blank!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getApplicationContext(),
                     "You left your password field blank!", Toast.LENGTH_LONG).show();
@@ -81,19 +81,18 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * Asynchronous call to login. Takes in username and password as input. It uses hardcoded php
-     * links to connect to the database and retrieve user information.
-     * It will update currentuser with user details if valid user is inputted
-     *
+     * Asynchronous call to LoginTask.
+     * Takes in username and password as input.
+     * Connects to remote database to retrieve user information and update CurrentUser accordingly.
      */
     private class LoginTask extends AsyncTask<String, Void, String> {
 
         /**
-         * This process immediately starts running when execute() is called. Inputs are username
-         * and password. It will fetch from php database to see if data exists. It will pass return
-         * message to onPostExecute() method
+         * This method immediately starts running when execute() is called.
+         * Inputs are username and password.
+         * It will retrieve data from php database and pass the return message to onPostExecute().
          * @param args username and password
-         * @return sql database query in json format
+         * @return sql database query in JSON format
          */
         @Override
         protected String doInBackground(String... args) {
@@ -118,18 +117,15 @@ public class LoginActivity extends Activity {
         }
 
         /**
-         * This method runs after doInBackground. It will process the json result and either use it
-         * to realize that the connection failed, or use it to update the CurrentUser for the Login
-         * Activity.
+         * This method runs after doInBackground.
+         * It will process the JSON result to determine any errors or if it was successful.
          * This uses a bit of a hack to process the result. When we query the database there are two
          * possible results:
-         * 1) the actual object with user details - such as name, password, bio,
-         * major, etc.
+         * 1) the actual object with user details (name, major, bio, etc)
          * 2) An error message starting with "query_result".
-         * In this, we check to see if query_result is in the result, if it is not that means the result
-         * contains (1) - actual object with user results - in this case java will throw an error,
-         * so we catch this error and process that json object
-         * @param result
+         * If there are no error messages, then we use the catch exception to retrieve the JSON object
+         * containing the user information and update CurrentUser accordingly.
+         * @param result JSON object retrieved from php response
          */
         @Override
         protected void onPostExecute(String result) {
@@ -158,7 +154,7 @@ public class LoginActivity extends Activity {
                         String firstName = jsonObj.getString("FirstName");
                         String lastName = jsonObj.getString("LastName");
                         String bio = jsonObj.getString("Bio");
-                        Toast.makeText(getApplicationContext(), "Login successfully. Login successful.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
                         currentUser = new User(firstName, lastName, username, password, email,
                                 major, bio);
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));

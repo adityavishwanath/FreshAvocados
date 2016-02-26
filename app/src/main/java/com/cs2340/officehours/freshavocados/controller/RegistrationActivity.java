@@ -169,14 +169,18 @@ public class RegistrationActivity extends Activity {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
     }
-
+    /**
+     * Asynchronous call to RegisterTask.
+     * Takes in inputs: username, password, email, major, first name, last name, bio
+     * Connects to remote database to retrieve user information and update CurrentUser accordingly.
+     */
     private class RegisterTask extends AsyncTask<String, Void, String> {
 
         /**
-         * This process immediately starts running when execute() is called. Inputs are username
-         * and password. It will fetch from php database to see if data exists. It will pass return
-         * message to onPostExecute() method
-         * @param args username and password
+         * This process immediately starts running when execute() is called.
+         * It will fetch from php database to see if data exists. It will pass return message
+         * to onPostExecute() method.
+         * @param args username, password, email, major, first name, last name, bio
          * @return sql database query in json format
          */
         @Override
@@ -213,18 +217,9 @@ public class RegistrationActivity extends Activity {
         }
 
         /**
-         * This method runs after doInBackground. It will process the json result and either use it
-         * to realize that the connection failed, or use it to update the CurrentUser for the Login
-         * Activity.
-         * This uses a bit of a hack to process the result. When we query the database there are two
-         * possible results:
-         * 1) the actual object with user details - such as name, password, bio,
-         * major, etc.
-         * 2) An error message starting with "query_result".
-         * In this, we check to see if query_result is in the result, if it is not that means the result
-         * contains (1) - actual object with user results - in this case java will throw an error,
-         * so we catch this error and process that json object
-         * @param result
+         *This method runs after doInBackground.
+         * It will process the JSON result to determine any errors or if it was successful.
+         * @param result JSON object retrieved from php response
          */
         @Override
         protected void onPostExecute(String result) {
@@ -243,7 +238,7 @@ public class RegistrationActivity extends Activity {
                         } else if (query_result.equals("EXISTING")) {
                             Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
                         } else if (query_result.equals("EMAIL")) {
-                            Toast.makeText(getApplicationContext(), "Email is being used!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Email is already used!", Toast.LENGTH_SHORT).show();
                         } else if (query_result.equals("FAILURE")) {
                             Toast.makeText(getApplicationContext(), "Registeration failed.", Toast.LENGTH_SHORT).show();
                             return;

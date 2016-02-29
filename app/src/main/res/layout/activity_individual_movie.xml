@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/review_list"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="40dp">
 
 
         </ListView>
@@ -103,7 +103,33 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Reviews"
         android:id="@+id/review_header"
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
         android:layout_alignTop="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_toStartOf="@+id/actor_actor" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/overallRating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_gravity="center_horizontal"
+        android:layout_toEndOf="@+id/textView4"
+        android:stepSize=".1"
+        android:isIndicator="true"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Overall Rating"
+        android:id="@+id/textView4"
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignStart="@+id/actor_actor" />
 
 </RelativeLayout>

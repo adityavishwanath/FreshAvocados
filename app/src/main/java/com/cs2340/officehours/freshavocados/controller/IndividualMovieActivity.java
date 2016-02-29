@@ -57,6 +57,9 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         TextView short_synop = (TextView) findViewById(R.id.short_synop);
         short_synop.setText(m.getSynopsis());
 
+        RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
+        overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
+
         String url = m.getThumbnailLink();
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
 

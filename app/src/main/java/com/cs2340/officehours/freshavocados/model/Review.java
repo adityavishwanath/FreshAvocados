@@ -51,6 +51,23 @@ public class Review implements Comparable<Review> {
         reviewMap.put(movie, reviews);
     }
 
+    /**
+     * Returns the overall rating for a requested movie
+     * @param movie the requested movie
+     * @return the movie's overall rating
+     */
+    public static float getOverallRating(String movie) {
+        LinkedList<Review> temp = reviewMap.get(movie);
+        float rating = 0;
+        if (temp == null) {
+            return rating;
+        }
+        for (Review r : temp) {
+            rating = rating + r.getRating().getRating();
+        }
+        return rating / temp.size();
+    }
+
     //getters
 
     /**

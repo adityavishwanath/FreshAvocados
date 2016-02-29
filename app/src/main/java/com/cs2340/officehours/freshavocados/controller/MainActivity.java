@@ -379,7 +379,11 @@ public class MainActivity extends Activity {
         a.vibrate(50);
     }
 
-
+    /**
+     * Returns a list of all movies reviewed by User's of the same major as the CurrentUser
+     * sorted by top User rating
+     * @param v default param for an app's View
+     */
     public void onClickRecommendedMajor(View v) {
         Set<String> keys = Review.reviewMap.keySet();
         ArrayList<Review> reviews = new ArrayList<>();
@@ -409,6 +413,10 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     * Returns a list of all reviewed movies, sorted by top User rating
+     * @param v default param for an app's View
+     */
     public void onClickRecommendedAll(View v) {
         Set<String> keys = Review.reviewMap.keySet();
         ArrayList<Review> reviews = new ArrayList<>();

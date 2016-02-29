@@ -139,11 +139,11 @@ public class RegistrationActivity extends Activity {
         }
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String major = parent.getItemAtPosition(position).toString();
-
-    }
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        // On selecting a spinner item
+//        String major = parent.getItemAtPosition(position).toString();
+//
+//    }
     /**
      * Cancels the registration process and returns to the splash screen
      * @param v the default param for onClick methods

@@ -64,6 +64,9 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
 
     }
 
+    /**
+     * Class that sets our custom adapter for the listview of movies
+     */
     private class MyAdapter extends ArrayAdapter<Movie> {
 
         @Override
@@ -86,6 +89,13 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
             return view;
         }
 
+        /**
+         * Constructor for our custom adapter
+         * @param context the system's current context
+         * @param resource the indexing location of the movies
+         * @param textViewResourceId one of the on-screen widgets to be set
+         * @param objects the list of movies to be displayed
+         */
         public MyAdapter(Context context, int resource, int textViewResourceId, ArrayList<Movie> objects) {
             super(context, resource, textViewResourceId, objects);
         }
@@ -96,6 +106,14 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         }
     }
 
+    /**
+     * Allows clicking an individual movie in the list, loading a new screen with more info
+     * on that movie.
+     * @param parent the adapter used for the list
+     * @param view the system view
+     * @param position the position on the list that was touched
+     * @param id the id of the movie
+     */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         Intent i = new Intent(DisplayMovieListActivity.this, IndividualMovieActivity.class);
@@ -105,35 +123,39 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         startActivity(i);
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView thumbnail;
+//    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+//        ImageView thumbnail;
+//
+//        public DownloadImageTask(ImageView thumbnail) {
+//            this.thumbnail = thumbnail;
+//        }
+//
+//        protected Bitmap doInBackground(String ... urls) {
+//            String urlDisplay = urls[0];
+//            Bitmap mIcon = null;
+//            try {
+//                InputStream in = new java.net.URL(urlDisplay).openStream();
+//                mIcon = BitmapFactory.decodeStream(in);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return mIcon;
+//        }
+//
+//        protected void onPostExecute(Bitmap result) {
+//            if (thumbnail != null) {
+//                thumbnail.setImageBitmap(result);
+//            } else {
+//                Log.d("DisplayListActivity", "wtf is going on");
+//            }
+//
+//        }
+//    }
 
-        public DownloadImageTask(ImageView thumbnail) {
-            this.thumbnail = thumbnail;
-        }
-
-        protected Bitmap doInBackground(String ... urls) {
-            String urlDisplay = urls[0];
-            Bitmap mIcon = null;
-            try {
-                InputStream in = new java.net.URL(urlDisplay).openStream();
-                mIcon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            if (thumbnail != null) {
-                thumbnail.setImageBitmap(result);
-            } else {
-                Log.d("DisplayListActivity", "wtf is going on");
-            }
-
-        }
-    }
-
+    /**
+     * Returns the user back to the main screen of the application
+     * @param v default param for an app's View
+     */
     public void onClickBackButton(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);

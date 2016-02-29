@@ -28,6 +28,7 @@ public class EditProfileActivity extends Activity {
     String data;
     protected String newMajor;
     protected EditText newBio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

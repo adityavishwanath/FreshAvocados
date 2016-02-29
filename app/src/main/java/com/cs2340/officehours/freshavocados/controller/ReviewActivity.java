@@ -39,12 +39,20 @@ public class ReviewActivity extends Activity {
         rating.setStepSize(1);
     }
 
+    /**
+     * Returns the user to the previous screen
+     * @param v default param for the app's View
+     */
     public void onClickBackToIndiv(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
         finish();
     }
 
+    /**
+     * Submits the user's review if it is valid
+     * @param v default param for the app's View
+     */
     public void onClickSubmitReview(View v) {
         if (review_text.getText().toString().equals("")) {
             if (t == null) {

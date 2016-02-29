@@ -73,12 +73,20 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         }
     }
 
+    /**
+     * Returns the User back to the list of movies queried
+     * @param v default param for an app's View
+     */
     public void onClickBack(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(50);
         finish();
     }
 
+    /**
+     * Loads the review activity so that the User can leave a review for the movie
+     * @param v default param for an app's View
+     */
     public void onClickAddReview(View v) {
         Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
         intent.putExtra("movie", m);
@@ -87,6 +95,9 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         a.vibrate(50);
     }
 
+    /**
+     * The adapter used to display all reviews for the currently displayed movie
+     */
     private class MyAdapter extends ArrayAdapter<Review> {
 
         @Override
@@ -111,23 +122,49 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 
         }
 
+        /**
+         * Constructor for our custom adapter
+         * @param context the system context
+         * @param resource the indexing location of our list
+         * @param textViewResourceId one of the on-screen widgets to be edited
+         * @param objects the list of Reviews to be displayed
+         */
         public MyAdapter(Context context, int resource, int textViewResourceId,
                          LinkedList<Review> objects) {
             super(context, resource, textViewResourceId, objects);
         }
     }
 
+    /**
+     * Handles clicking an individual review so that it can be viewed in its entirety
+     * @param parent the adapter used
+     * @param view the system View
+     * @param position the position in the list that the user tapped
+     * @param id the id of the review
+     */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("Clicking indiv reviews", "success");
     }
 
+    /**
+     * Class that handles setting the tiny icon for an individual movie view
+     */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
+        /**
+         * Constructor for our class
+         * @param bmImage the image to be set on the screen
+         */
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
         }
 
+        /**
+         * Standard doInBackground method for our AsyncTask
+         * @param urls the url of the picture we are trying to set
+         * @return the resulting bitmap
+         */
         protected Bitmap doInBackground(String ... urls) {
             String urlDisplay = urls[0];
             Bitmap mIcon = null;
@@ -140,6 +177,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             return mIcon;
         }
 
+        /**
+         * Defines how the execute method will operate
+         * @param result the bitmap that will be used to set the picture
+         */
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }

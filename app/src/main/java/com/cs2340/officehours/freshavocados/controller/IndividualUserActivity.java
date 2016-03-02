@@ -70,4 +70,12 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         //not sure yet what we'll do here.
     }
 
+    public void onClickBackAdmin(View v) {
+        finish();
+    }
+
+    public void onClickSubmitChanges(View v) {
+        //code here to save the changed data back to the database
+    }
+
 }

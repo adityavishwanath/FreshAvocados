@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -63,5 +64,14 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
         //------------------------
         startActivity(i);
+    }
+
+    public void onClickLogoutAdmin(View v) {
+        LoginActivity.currentUser = null;
+        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(50);
     }
 }

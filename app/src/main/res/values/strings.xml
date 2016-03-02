@@ -40,5 +40,7 @@
     <string name="title_activity_display_movie_list">DisplayMovieListActivity</string>
     <string name="spinner_title">Major</string>
     <string name="title_activity_review">ReviewActivity</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_activity_individual_user">IndividualUserActivity</string>
 
 </resources>

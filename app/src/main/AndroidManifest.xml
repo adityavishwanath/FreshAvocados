@@ -46,7 +46,14 @@
         <activity android:name=".controller.IndividualMovieActivity" />
         <activity
             android:name=".controller.ReviewActivity"
-            android:label="@string/title_activity_review"></activity>
+            android:label="@string/title_activity_review" />
+        <activity
+            android:name=".controller.AdminActivity"
+            android:label="@string/title_activity_admin" />
+        <activity
+            android:name=".controller.IndividualUserActivity"
+            android:label="@string/title_activity_individual_user">
+        </activity>
     </application>
 
 </manifest>

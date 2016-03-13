@@ -36,6 +36,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 
     private Movie m;
     private LinkedList<Review> rev;
+    private MyAdapter adapt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +68,14 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         ListView list_view = (ListView) findViewById(R.id.review_list);
         list_view.setOnItemClickListener(this);
         if (Review.reviewMap.get(m.getTitleYear()) == null) {
-            list_view.setAdapter(new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
-                    new LinkedList<Review>()));
+            adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
+                    new LinkedList<Review>());
+            list_view.setAdapter(adapt);
         } else {
             rev = Review.reviewMap.get(m.getTitleYear());
-            list_view.setAdapter(new MyAdapter(this, R.layout.review_item, R.id.reviewer,
-                    rev));
+            adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
+                    rev);
+            list_view.setAdapter(adapt);
         }
     }
 

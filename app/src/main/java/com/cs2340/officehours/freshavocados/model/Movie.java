@@ -12,8 +12,6 @@ import java.net.URL;
  * Created by Aditya Vishwanath on 19-02-2016.
  */
 public class Movie implements Serializable {
-    //TODO Later: Add the image/movie thumbnail to this model too.
-    //TODO Later: Add the Reviews Functionality.
 
     private String title_year;
     private String actors;

@@ -18,6 +18,7 @@ public class User {
     private boolean isAdmin;
     private boolean isLocked;
     private boolean isBanned;
+    private int loginAttempts;
     private static int userNumber;
 
     /**
@@ -84,6 +85,14 @@ public class User {
      */
     public void setIsBanned(boolean isBanned) {
         this.isBanned = isBanned;
+    }
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
+    }
+
+    public int getLoginAttempts() {
+        return loginAttempts;
     }
 
     /**

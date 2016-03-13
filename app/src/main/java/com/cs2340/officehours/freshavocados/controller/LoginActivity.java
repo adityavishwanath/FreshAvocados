@@ -154,10 +154,16 @@ public class LoginActivity extends Activity {
                         String firstName = jsonObj.getString("FirstName");
                         String lastName = jsonObj.getString("LastName");
                         String bio = jsonObj.getString("Bio");
+                        Integer adminStatus = Integer.parseInt(jsonObj.getString("IsAdmin"));
+                        boolean isAdmin = (adminStatus == 1);
                         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
                         currentUser = new User(firstName, lastName, username, password, email,
                                 major, bio);
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        if (!isAdmin) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                        }
                         finish();
                     }
                 } catch (JSONException e) {

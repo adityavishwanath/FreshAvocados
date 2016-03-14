@@ -1,6 +1,7 @@
 package com.cs2340.officehours.freshavocados.controller;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -76,6 +77,19 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
 
     public void onClickSubmitChanges(View v) {
         //code here to save the changed data back to the database
+    }
+
+    private class AdminTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String ... args) {
+            //stuff
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            //
+        }
     }
 
 }

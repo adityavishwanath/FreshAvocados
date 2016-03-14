@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,12 +18,19 @@ import android.widget.TextView;
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.Review;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private LinkedList<Review> userReviews = new LinkedList<>();
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,17 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         setContentView(R.layout.activity_individual_user);
 
         //any relevant setup code here
+        boolean userLockedStatus = getIntent().getBooleanExtra("isLocked", true);
+        boolean userBanStatus = getIntent().getBooleanExtra("isBanned", true);
+        username = getIntent().getStringExtra("user");
+
+        CheckBox isLocked = (CheckBox) findViewById(R.id.isLockedCheck);
+        CheckBox isBanned = (CheckBox) findViewById(R.id.isBannedCheck);
+        TextView username_display = (TextView) findViewById(R.id.username_display);
+
+        isLocked.setChecked(userLockedStatus);
+        isBanned.setChecked(userBanStatus);
+        username_display.setText(username);
 
         //----------------------------
         ListView listViewUserReviews = (ListView) findViewById(R.id.listViewUserReviews);
@@ -76,19 +95,55 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
     }
 
     public void onClickSubmitChanges(View v) {
-        //code here to save the changed data back to the database
+        CheckBox newLockedStatus = (CheckBox) findViewById(R.id.isLockedCheck);
+        CheckBox newBanStatus = (CheckBox) findViewById(R.id.isBannedCheck);
+
+        boolean updatedLockedStatus = newLockedStatus.isChecked();
+        boolean updatedBanStatus = newBanStatus.isChecked();
+
+        String lock_status;
+        String ban_status;
+        if (updatedLockedStatus) {
+            lock_status = "1";
+        } else {
+            lock_status = "0";
+        }
+        if (updatedBanStatus) {
+            ban_status = "1";
+        } else {
+            ban_status = "0";
+        }
+
+        new UpdateTask().execute(username, lock_status, ban_status);
+        finish();
+
     }
 
-    private class AdminTask extends AsyncTask<String, Void, String> {
+    private class UpdateTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String ... args) {
-            //stuff
-            return null;
+            String link;
+            BufferedReader bufferedReader;
+            String result;
+            try {
+                String data = "username=" + URLEncoder.encode(args[0]);
+                data = data + "&isLocked=" + URLEncoder.encode(args[1]);
+                data = data + "&isBanned=" + URLEncoder.encode(args[2]);
+                link = "http://officehours.netau.net/updateuser.php?" + data;
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                result = bufferedReader.readLine();
+                return result;
+            } catch (Exception e) {
+                Log.d("UpdateTask", e.getMessage());
+                return e.getMessage();
+            }
         }
 
         protected void onPostExecute(String result) {
-            //
+            //does not need to do anything
         }
     }
 

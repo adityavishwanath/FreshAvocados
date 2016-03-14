@@ -172,6 +172,7 @@ public class LoginActivity extends Activity {
                                 startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                             }
                             finish();
+                            
                         }
                     }
                 } catch (JSONException e) {

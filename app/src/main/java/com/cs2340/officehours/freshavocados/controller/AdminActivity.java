@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.User;
 
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,11 +29,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ArrayList<String> admin_usernames = new ArrayList<>();
     private MyAdapter adapter;
+    private String isBanned = "";
+    private String isLocked = "";
 
 
     @Override
@@ -81,7 +85,20 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
         String user = admin_usernames.get(position);
+        try {
+            AsyncTask uit = new UserInfoTask().execute(user);
+            uit.get(1000, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            Log.d("Uh oh", e.getMessage());
+        }
         Log.d("User", user);
+        Log.d("isLocked", isLocked);
+        Log.d("isBanned", isBanned);
+        boolean userLockStatus = isLocked.equals("1");
+        boolean userBanStatus = isBanned.equals("1");
+        i.putExtra("isLocked", userLockStatus);
+        i.putExtra("isBanned", userBanStatus);
+        i.putExtra("user", user);
 
         //add extras to the intent
 
@@ -109,6 +126,44 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         adapter = new MyAdapter(this, R.layout.list_item_user, R.id.listing_users, admin_usernames);
         listView.setAdapter(adapter);
         //adapter.notifyDataSetChanged();
+    }
+
+    private class UserInfoTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String ... args) {
+            String link;
+            BufferedReader bufferedReader;
+            String result = "";
+            try {
+                link = "http://officehours.netau.net/getuserstatus.php?username=";
+                link = link + URLEncoder.encode(args[0], "UTF-8");
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                result = bufferedReader.readLine();
+                return result;
+            } catch (Exception e) {
+                Log.d("UserInfoTask", e.getMessage());
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            String jsonStr = result;
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    isLocked = jsonObj.getString("isLocked");
+                    isBanned = jsonObj.getString("isBanned");
+                } catch (Exception e) {
+                    Log.d("Could not get status from user", "Uh-oh");
+                }
+            }
+        }
+
+
     }
 
     private class AdminTask extends AsyncTask<String, Void, String> {

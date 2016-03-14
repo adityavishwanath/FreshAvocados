@@ -80,6 +80,8 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
+        String user = admin_usernames.get(position);
+        Log.d("User", user);
 
         //add extras to the intent
 

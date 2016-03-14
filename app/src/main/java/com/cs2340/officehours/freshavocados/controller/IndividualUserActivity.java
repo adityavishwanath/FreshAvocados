@@ -22,7 +22,7 @@ import java.util.LinkedList;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private LinkedList<Review> userReviews;
+    private LinkedList<Review> userReviews = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

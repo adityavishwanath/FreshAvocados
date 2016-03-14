@@ -154,17 +154,25 @@ public class LoginActivity extends Activity {
                         String firstName = jsonObj.getString("FirstName");
                         String lastName = jsonObj.getString("LastName");
                         String bio = jsonObj.getString("Bio");
+                        String isLocked = jsonObj.getString("isLocked");
+                        String isBanned = jsonObj.getString("isBanned");
                         Integer adminStatus = Integer.parseInt(jsonObj.getString("IsAdmin"));
                         boolean isAdmin = (adminStatus == 1);
-                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
-                        currentUser = new User(firstName, lastName, username, password, email,
-                                major, bio);
-                        if (!isAdmin) {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        if (isBanned.equals("1")) {
+                            Toast.makeText(getApplicationContext(), "Account is banned.", Toast.LENGTH_SHORT).show();
+                        } else if (isLocked.equals("1")) {
+                            Toast.makeText(getApplicationContext(), "Account is locked. Please contact an admin for help.", Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                            currentUser = new User(firstName, lastName, username, password, email,
+                                    major, bio);
+                            Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+                            if (!isAdmin) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            } else {
+                                startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                            }
+                            finish();
                         }
-                        finish();
                     }
                 } catch (JSONException e) {
                     Log.d("LoginActivity", "Some fatal error occurred");

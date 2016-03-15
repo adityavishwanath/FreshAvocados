@@ -1,5 +1,6 @@
 package com.cs2340.officehours.freshavocados.controller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -87,7 +88,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         String user = admin_usernames.get(position);
         try {
             AsyncTask uit = new UserInfoTask().execute(user);
-            uit.get(1000, TimeUnit.MILLISECONDS);
+            uit.get(10000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             Log.d("Uh oh", e.getMessage());
         }
@@ -99,6 +100,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         i.putExtra("isLocked", userLockStatus);
         i.putExtra("isBanned", userBanStatus);
         i.putExtra("user", user);
+
 
         //add extras to the intent
 
@@ -142,6 +144,15 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
+                if (result != null) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        isLocked = jsonObject.getString("isLocked");
+                        isBanned = jsonObject.getString("isBanned");
+                    } catch (Exception e) {
+                        Log.d("uh oh", e.getMessage());
+                    }
+                }
                 return result;
             } catch (Exception e) {
                 Log.d("UserInfoTask", e.getMessage());
@@ -149,18 +160,40 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             }
         }
 
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(AdminActivity.this);
+//            progressDialog.setMessage("Loading info...");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void ... values) {
+            // do nothing
+        }
+
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-                    isLocked = jsonObj.getString("isLocked");
-                    isBanned = jsonObj.getString("isBanned");
-                } catch (Exception e) {
-                    Log.d("Could not get status from user", "Uh-oh");
-                }
-            }
+//            String jsonStr = result;
+//            if (jsonStr != null) {
+//                try {
+//                    JSONObject jsonObj = new JSONObject(jsonStr);
+//                    isLocked = jsonObj.getString("isLocked");
+//                    isBanned = jsonObj.getString("isBanned");
+//                    this.get(1000, TimeUnit.MILLISECONDS);
+//                    while (true) {
+//                        if (isLocked != null && isBanned != null) {
+//                            progressDialog.cancel();
+//                            return;
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                    Log.d("Could not get status", "Uh-oh");
+//                }
+//            }
         }
 
 

@@ -58,6 +58,9 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 //        listView.setAdapter(adapter);
     }
 
+    /**
+     * This defines the way in which the users are displayed in the this activity's list view
+     */
     private class MyAdapter extends ArrayAdapter<String> {
 
         @Override
@@ -73,6 +76,13 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             return view;
         }
 
+        /**
+         * The constructor for our adapter
+         * @param context the source content
+         * @param resource the resource to be affected
+         * @param textView the location of the textView
+         * @param objects the list of objects to be displayed
+         */
         public MyAdapter(Context context, int resource, int textView, ArrayList<String> objects) {
             super(context, resource, textView, objects);
         }
@@ -83,6 +93,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         }
     }
 
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
         String user = admin_usernames.get(position);
@@ -108,6 +119,10 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         startActivity(i);
     }
 
+    /**
+     * Defines the logout process for an admin
+     * @param v the current view
+     */
     public void onClickLogoutAdmin(View v) {
         LoginActivity.currentUser = null;
         Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
@@ -117,6 +132,10 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         a.vibrate(50);
     }
 
+    /**
+     * Generates the list of users onto the screen
+     * @param v the current view
+     */
     public void onClickGenerateUserList(View v) {
         Integer i = admin_usernames.size();
         Log.d("List size", i.toString());
@@ -130,6 +149,9 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         //adapter.notifyDataSetChanged();
     }
 
+    /**
+     * An AsyncTask that grabs the user information from the database
+     */
     private class UserInfoTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -199,16 +221,11 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
     }
 
+    /**
+     * An AsyncTask that grabes the usernames from the database
+     */
     private class AdminTask extends AsyncTask<String, Void, String> {
 
-        /**
-         * This method immediately starts running when execute() is called.
-         * Inputs are username and password.
-         * It will retrieve data from php database and pass the return message to onPostExecute().
-         *
-         * @param args username and password
-         * @return sql database query in JSON format
-         */
         @Override
         protected String doInBackground(String... args) {
             String link;
@@ -230,18 +247,6 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             }
         }
 
-        /**
-         * This method runs after doInBackground.
-         * It will process the JSON result to determine any errors or if it was successful.
-         * This uses a bit of a hack to process the result. When we query the database there are two
-         * possible results:
-         * 1) the actual object with user details (name, major, bio, etc)
-         * 2) An error message starting with "query_result".
-         * If there are no error messages, then we use the catch exception to retrieve the JSON object
-         * containing the user information and update CurrentUser accordingly.
-         *
-         * @param result JSON object retrieved from php response
-         */
         @Override
         protected void onPostExecute(String result) {
             String jsonStr = result;

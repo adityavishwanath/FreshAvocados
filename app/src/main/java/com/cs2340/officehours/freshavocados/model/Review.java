@@ -1,6 +1,5 @@
 package com.cs2340.officehours.freshavocados.model;
 
-import android.widget.RatingBar;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,7 +14,7 @@ public class Review implements Comparable<Review> {
 
     private String username;
     private String major;
-    private RatingBar rating;
+    private float rating;
     private String review_text;
     private Movie movie;
 
@@ -23,11 +22,11 @@ public class Review implements Comparable<Review> {
      * Constructor for an instance of a Review
      * @param username username of the reviewer
      * @param major major of the reviewer
-     * @param rating rating given to the movie
+     * @param rating given to the movie
      * @param review_text the text written about the movie
      * @param movie the reviewed movie
      */
-    public Review(String username, String major, RatingBar rating, String review_text, Movie movie) {
+    public Review(String username, String major, float rating, String review_text, Movie movie) {
         this.username = username;
         this.major = major;
         this.rating = rating;
@@ -63,7 +62,7 @@ public class Review implements Comparable<Review> {
             return rating;
         }
         for (Review r : temp) {
-            rating = rating + r.getRating().getRating();
+            rating = rating + r.getRating();
         }
         return rating / temp.size();
     }
@@ -90,7 +89,7 @@ public class Review implements Comparable<Review> {
      * Returns the rating given
      * @return rating the rating given
      */
-    public RatingBar getRating() {
+    public float getRating() {
         return rating;
     }
 
@@ -132,7 +131,7 @@ public class Review implements Comparable<Review> {
      * Sets the rating of the review
      * @param rating rating to be set
      */
-    public void setRating(RatingBar rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -154,7 +153,7 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int compareTo(Review review) {
-        return (int) review.rating.getRating() - (int) this.rating.getRating();
+        return (int) review.getRating() - (int) this.getRating();
     }
 
     @Override

@@ -146,7 +146,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             major.setText(rev.getMajor());
 
             RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
-            rating.setRating(rev.getRating().getRating());
+            rating.setRating(rev.getRating());
 
             TextView review_text = (TextView) view.findViewById(R.id.review_text);
             review_text.setText(rev.getReviewText());
@@ -278,8 +278,9 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
                     String username = review.getString("Username");
                     String comment = review.getString("Comment");
                     String major = review.getString("Major");
-                    RatingBar rat = (RatingBar) findViewById(R.id.user_rating);
-                    Review r = new Review(username, major, rat,comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
+                    String ratS = review.getString("Rating");
+                    float rating = Float.parseFloat(ratS);
+                    Review r = new Review(username, major, rating, comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
                     Review.addReview(m.getTitleYear(), r);
                 }
             } catch (JSONException e) {

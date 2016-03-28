@@ -137,7 +137,7 @@ public class ReviewActivity extends Activity {
                         query_result = jsonObj.getString("query_result");
                         if (query_result.equals("SUCCESS")) {
                             Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
-                                    rating, review_text.getText().toString(), m);
+                                    rating.getRating(), review_text.getText().toString(), m);
                             Review.addReview(m.getTitleYear(), review);
                         } else {
                             Toast.makeText(getApplicationContext(),

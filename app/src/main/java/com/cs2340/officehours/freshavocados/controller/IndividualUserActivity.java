@@ -1,10 +1,9 @@
 package com.cs2340.officehours.freshavocados.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
@@ -72,7 +69,7 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
             major.setText(rev.getMajor());
 
             RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
-            rating.setRating(rev.getRating().getRating());
+            rating.setRating(rev.getRating());
 
             TextView review_text = (TextView) view.findViewById(R.id.review_text);
             review_text.setText(rev.getReviewText());

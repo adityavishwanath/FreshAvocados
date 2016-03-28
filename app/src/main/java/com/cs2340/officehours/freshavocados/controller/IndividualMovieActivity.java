@@ -47,7 +47,6 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_movie);
-
         //code for stuff concerning the movie
 
         ArrayList<Movie> movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
@@ -70,7 +69,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
 
         //populate the review list
-        new GetReviewsTask().execute();
+        new GetReviewsTask().execute(m.getTitleYear());
+        Log.d("IndividualMovieActivity", "Movie name is " + m.getTitleYear());
 
 //        //code for the reviews
 //        ListView list_view = (ListView) findViewById(R.id.review_list);
@@ -94,10 +94,12 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         list_view.setOnItemClickListener(this);
 
         if (Review.reviewMap.get(m.getTitleYear()) == null) {
+            Log.d("Reviews in movie?", "NO");
             adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
                     new LinkedList<Review>());
             list_view.setAdapter(adapt);
         } else {
+            Log.d("Reviews in movie?", "YES");
             rev = Review.reviewMap.get(m.getTitleYear());
             adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
                     rev);
@@ -242,10 +244,14 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
         try {
             data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
            link = "http://officehours.netau.net/getreviews.php" + data;
+            Log.d("DATA SENT", data);
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             result = bufferedReader.readLine();
+            result = result.substring(0, result.length() - 1);
+            result = "{ Reviews: [" + result + "] }";
+            Log.d("RESULT", result);
             return result;
         } catch (Exception e) {
             Log.d("IndividualMovieActivity", e.getMessage());
@@ -261,18 +267,19 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         String jsonStr = result;
+        Log.d("JSONSTR", jsonStr);
         if (jsonStr != null) {
+            if (jsonStr.contains("EMPTY") && jsonStr.contains("query_result")) return;
             try {
                 JSONObject jsnObject = new JSONObject(jsonStr);
-                JSONArray array = jsnObject.getJSONArray("Usernames");
-                String query_result = "";
+                JSONArray array = jsnObject.getJSONArray("Reviews");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject review = array.getJSONObject(i);
                     String username = review.getString("Username");
                     String comment = review.getString("Comment");
                     String major = review.getString("Major");
                     RatingBar rat = (RatingBar) findViewById(R.id.user_rating);
-                    Review r = new Review(username, major, rat,comment, m); //RATING BAR IS WRONG.
+                    Review r = new Review(username, major, rat,comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
                     Review.addReview(m.getTitleYear(), r);
                 }
             } catch (JSONException e) {

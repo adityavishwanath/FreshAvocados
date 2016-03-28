@@ -132,4 +132,14 @@
         android:layout_alignTop="@+id/linearLayout"
         android:layout_alignStart="@+id/actor_actor" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Reviews"
+        android:id="@+id/generateReviewlist"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onClickGenerateReviewList"
+        android:layout_alignTop="@+id/back"
+        android:layout_toEndOf="@+id/review_header" />
+
 </RelativeLayout>

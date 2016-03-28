@@ -5,35 +5,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.Movie;
-import com.cs2340.officehours.freshavocados.model.Movies;
 import com.cs2340.officehours.freshavocados.model.Review;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
+    String data;
     private Movie m;
     private LinkedList<Review> rev;
     private MyAdapter adapt;
@@ -64,9 +69,30 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         String url = m.getThumbnailLink();
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
 
+        //populate the review list
+        new GetReviewsTask().execute();
+
+//        //code for the reviews
+//        ListView list_view = (ListView) findViewById(R.id.review_list);
+//        list_view.setOnItemClickListener(this);
+//
+//        if (Review.reviewMap.get(m.getTitleYear()) == null) {
+//            adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
+//                    new LinkedList<Review>());
+//            list_view.setAdapter(adapt);
+//        } else {
+//            rev = Review.reviewMap.get(m.getTitleYear());
+//            adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
+//                    rev);
+//            list_view.setAdapter(adapt);
+//        }
+    }
+
+    public void onClickGenerateReviewList(View v) {
         //code for the reviews
         ListView list_view = (ListView) findViewById(R.id.review_list);
         list_view.setOnItemClickListener(this);
+
         if (Review.reviewMap.get(m.getTitleYear()) == null) {
             adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
                     new LinkedList<Review>());
@@ -78,7 +104,6 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             list_view.setAdapter(adapt);
         }
     }
-
     /**
      * Returns the User back to the list of movies queried
      * @param v default param for an app's View
@@ -191,4 +216,75 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             bmImage.setImageBitmap(result);
         }
     }
+
+
+/**
+ * Asynchronous call to GetReviewsTask.
+ * Takes in inputs: movie
+ * Connects to remote database to retrieve reviews and display them accordingly.
+ */
+private class GetReviewsTask extends AsyncTask<String, Void, String> {
+
+    /**
+     * This process immediately starts running when execute() is called.
+     * It will fetch from php database to see if data exists. It will pass return message
+     * to onPostExecute() method.
+     * @param args movie
+     * @return sql database query in json format
+     */
+    @Override
+    protected String doInBackground(String... args) {
+        String movie = args[0];
+
+        String link;
+        BufferedReader bufferedReader;
+        String result = "";
+        try {
+            data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
+           link = "http://officehours.netau.net/getreviews.php" + data;
+            URL url = new URL(link);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            result = bufferedReader.readLine();
+            return result;
+        } catch (Exception e) {
+            Log.d("IndividualMovieActivity", e.getMessage());
+            return e.getMessage();
+        }
+    }
+
+    /**
+     *This method runs after doInBackground.
+     * It will process the JSON result to determine any errors or if it was successful.
+     * @param result JSON object retrieved from php response
+     */
+    @Override
+    protected void onPostExecute(String result) {
+        String jsonStr = result;
+        if (jsonStr != null) {
+            try {
+                JSONObject jsnObject = new JSONObject(jsonStr);
+                JSONArray array = jsnObject.getJSONArray("Usernames");
+                String query_result = "";
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject review = array.getJSONObject(i);
+                    String username = review.getString("Username");
+                    String comment = review.getString("Comment");
+                    String major = review.getString("Major");
+                    RatingBar rat = (RatingBar) findViewById(R.id.user_rating);
+                    Review r = new Review(username, major, rat,comment, m); //RATING BAR IS WRONG.
+                    Review.addReview(m.getTitleYear(), r);
+                }
+            } catch (JSONException e) {
+                Log.d("IndividualMovieActivity", "Some fatal error occurred");
+                Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
 }

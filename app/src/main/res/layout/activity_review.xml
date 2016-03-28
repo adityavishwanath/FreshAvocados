@@ -37,7 +37,8 @@
         android:id="@+id/ratingBar"
         android:layout_below="@+id/dont_edit"
         android:layout_centerHorizontal="true"
-        android:numStars="5" />
+        android:numStars="5"
+        android:rating="3.0" />
 
     <EditText
         android:layout_width="wrap_content"

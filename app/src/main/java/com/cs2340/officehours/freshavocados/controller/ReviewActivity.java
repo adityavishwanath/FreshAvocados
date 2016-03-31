@@ -32,6 +32,7 @@ public class ReviewActivity extends Activity {
     RatingBar rating;
     Movie m;
     Toast t;
+    String rat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class ReviewActivity extends Activity {
 
         rating = (RatingBar) findViewById(R.id.ratingBar);
         rating.setStepSize(1);
+        rat = Float.toString(rating.getRating());
     }
 
     /**
@@ -103,6 +105,7 @@ public class ReviewActivity extends Activity {
                 data = "?username=" + URLEncoder.encode(username, "UTF-8");
                 data += "&movie=" + URLEncoder.encode(movie, "UTF-8");
                 data += "&comment=" + URLEncoder.encode(comment, "UTF-8");
+                data += "&rating=" + URLEncoder.encode(rat, "UTF-8");
                 link = "http://officehours.netau.net/insertreview.php" + data;
                 URL url = new URL(link);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();

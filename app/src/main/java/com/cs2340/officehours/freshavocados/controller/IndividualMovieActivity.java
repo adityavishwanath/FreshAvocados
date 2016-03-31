@@ -62,8 +62,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         TextView short_synop = (TextView) findViewById(R.id.short_synop);
         short_synop.setText(m.getSynopsis());
 
-        RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
-        overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
+        //RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
+        //overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
         String url = m.getThumbnailLink();
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
@@ -92,6 +92,9 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         //code for the reviews
         ListView list_view = (ListView) findViewById(R.id.review_list);
         list_view.setOnItemClickListener(this);
+
+        RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
+        overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
         if (Review.reviewMap.get(m.getTitleYear()) == null) {
             Log.d("Reviews in movie?", "NO");

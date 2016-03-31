@@ -49,7 +49,6 @@ public class ReviewActivity extends Activity {
 
         rating = (RatingBar) findViewById(R.id.ratingBar);
         rating.setStepSize(1);
-        rat = Float.toString(rating.getRating());
     }
 
     /**
@@ -76,6 +75,7 @@ public class ReviewActivity extends Activity {
 //            Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
 //                    rating, review_text.getText().toString(), m);
 //            Review.addReview(m.getTitleYear(), review);
+            rat = Float.toString(rating.getRating());
             new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), review_text.getText().toString());
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(50);
@@ -141,6 +141,9 @@ public class ReviewActivity extends Activity {
                         if (query_result.equals("SUCCESS")) {
                             Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
                                     rating.getRating(), review_text.getText().toString(), m);
+                            Float f = rating.getRating();
+                            String s = f.toString();
+                            Log.d("Rating: ", s);
                             Review.addReview(m.getTitleYear(), review);
                         } else {
                             Toast.makeText(getApplicationContext(),

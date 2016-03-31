@@ -1,6 +1,8 @@
 package com.cs2340.officehours.freshavocados.model;
 
 
+import com.cs2340.officehours.freshavocados.controller.LoginActivity;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -46,6 +48,10 @@ public class Review implements Comparable<Review> {
         }
         if (!(reviews.contains(review))) {
             reviews.add(review); //if user has already made a review, do nothing
+        } else {
+            reviews.remove(review);
+            review.setMajor(LoginActivity.currentUser.getMajor());
+            reviews.add(review);
         }
         reviewMap.put(movie, reviews);
     }

@@ -39,7 +39,6 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     private String isBanned = "";
     private String isLocked = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -32,6 +32,7 @@ public class RegistrationActivity extends Activity {
     Toast invalidEmail;
     String data;
     UserManager uM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

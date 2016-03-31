@@ -84,6 +84,9 @@ public class ReviewActivity extends Activity {
 
     }
 
+    /**
+     * Handles adding a review to the multi-user database so that reviews are persistent
+     */
     private class AddReviewTask extends AsyncTask<String, Void, String> {
 
         /**

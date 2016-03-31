@@ -88,6 +88,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 //        }
     }
 
+    /**
+     * Gets all of the reviews for the on-screen movie
+     * @param v the default view param
+     */
     public void onClickGenerateReviewList(View v) {
         //code for the reviews
         ListView list_view = (ListView) findViewById(R.id.review_list);

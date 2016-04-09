@@ -9,10 +9,8 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.ExecutorDelivery;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,8 +29,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class MainActivity extends Activity {
@@ -181,7 +177,7 @@ public class MainActivity extends Activity {
     public void onClickTopRentals(View V) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL.toString();
+            String url = BASE_URL;
             Log.d("MAINACTIVITY", url);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -250,7 +246,7 @@ public class MainActivity extends Activity {
     public void onClickNewTheatres(View v) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL.toString();
+            String url = BASE_URL;
             Log.d("MAINACTIVITY", url);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -318,7 +314,7 @@ public class MainActivity extends Activity {
     public void onClickNewDVD(View v) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL.toString();
+            String url = BASE_URL;
             Log.d("MAINACTIVITY", url);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest

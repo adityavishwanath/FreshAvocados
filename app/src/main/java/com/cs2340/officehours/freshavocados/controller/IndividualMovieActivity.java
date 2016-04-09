@@ -40,8 +40,6 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 
     String data;
     private Movie m;
-    private LinkedList<Review> rev;
-    private MyAdapter adapt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +98,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
         overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
+        MyAdapter adapt;
         if (Review.reviewMap.get(m.getTitleYear()) == null) {
             Log.d("Reviews in movie?", "NO");
             adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
@@ -107,7 +106,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             list_view.setAdapter(adapt);
         } else {
             Log.d("Reviews in movie?", "YES");
-            rev = Review.reviewMap.get(m.getTitleYear());
+            LinkedList<Review> rev = Review.reviewMap.get(m.getTitleYear());
             adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
                     rev);
             list_view.setAdapter(adapt);

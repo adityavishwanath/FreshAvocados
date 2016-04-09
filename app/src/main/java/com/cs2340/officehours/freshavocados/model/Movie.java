@@ -1,12 +1,8 @@
 package com.cs2340.officehours.freshavocados.model;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URL;
 
 /**
  * Created by Aditya Vishwanath on 19-02-2016.

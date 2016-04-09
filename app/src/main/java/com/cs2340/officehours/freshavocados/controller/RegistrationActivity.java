@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -242,7 +241,6 @@ public class RegistrationActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Email is already used!", Toast.LENGTH_SHORT).show();
                         } else if (query_result.equals("FAILURE")) {
                             Toast.makeText(getApplicationContext(), "Registration failed.", Toast.LENGTH_SHORT).show();
-                            return;
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();
                         }

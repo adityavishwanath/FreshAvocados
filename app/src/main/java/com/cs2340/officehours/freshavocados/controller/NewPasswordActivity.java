@@ -124,7 +124,6 @@ public class NewPasswordActivity extends Activity {
                             finish();
                         } else if (query_result.equals("FAILURE")) {
                             Toast.makeText(getApplicationContext(), "Password failed to change.", Toast.LENGTH_SHORT).show();
-                            return;
                         } else {
                             Toast.makeText(getApplicationContext(),
                                     "Couldn't connect to remote database.",

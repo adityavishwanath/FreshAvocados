@@ -2,21 +2,13 @@ package com.cs2340.officehours.freshavocados.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,14 +16,11 @@ import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.Movie;
 import com.cs2340.officehours.freshavocados.model.Movies;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DisplayMovieListActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Movie> movies;
-    private String pageTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +29,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         ListView list_view = (ListView) findViewById(R.id.list_view);
         list_view.setOnItemClickListener(this);
 
-        pageTitle = (String) getIntent().getSerializableExtra("title");
+        String pageTitle = (String) getIntent().getSerializableExtra("title");
         TextView titleText = (TextView) findViewById(R.id.pageTitle);
         titleText.setText(pageTitle);
         movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");

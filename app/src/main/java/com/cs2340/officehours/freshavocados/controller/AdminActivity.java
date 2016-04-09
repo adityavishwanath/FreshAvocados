@@ -14,14 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
-import com.cs2340.officehours.freshavocados.model.User;
 
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -35,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ArrayList<String> admin_usernames = new ArrayList<>();
-    private MyAdapter adapter;
     private String isBanned = "";
     private String isLocked = "";
 
@@ -70,7 +65,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             assert u != null;
 
             TextView username_list_item = (TextView) view.findViewById(R.id.listing_users);
-            username_list_item.setText(u.toString());
+            username_list_item.setText(u);
 
             return view;
         }
@@ -78,12 +73,10 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         /**
          * The constructor for our adapter
          * @param context the source content
-         * @param resource the resource to be affected
-         * @param textView the location of the textView
          * @param objects the list of objects to be displayed
          */
-        public MyAdapter(Context context, int resource, int textView, ArrayList<String> objects) {
-            super(context, resource, textView, objects);
+        public MyAdapter(Context context, ArrayList<String> objects) {
+            super(context, R.layout.list_item_user, R.id.listing_users, objects);
         }
 
         @Override
@@ -139,11 +132,11 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         Integer i = admin_usernames.size();
         Log.d("List size", i.toString());
         for (String s : admin_usernames) {
-            Log.d("User", s.toString());
+            Log.d("User", s);
         }
         ListView listView = (ListView) findViewById(R.id.list_view_admin);
         listView.setOnItemClickListener(this);
-        adapter = new MyAdapter(this, R.layout.list_item_user, R.id.listing_users, admin_usernames);
+        MyAdapter adapter = new MyAdapter(this, admin_usernames);
         listView.setAdapter(adapter);
         //adapter.notifyDataSetChanged();
     }

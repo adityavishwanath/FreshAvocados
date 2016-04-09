@@ -241,7 +241,7 @@ public class RegistrationActivity extends Activity {
                         } else if (query_result.equals("EMAIL")) {
                             Toast.makeText(getApplicationContext(), "Email is already used!", Toast.LENGTH_SHORT).show();
                         } else if (query_result.equals("FAILURE")) {
-                            Toast.makeText(getApplicationContext(), "Registeration failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Registration failed.", Toast.LENGTH_SHORT).show();
                             return;
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();

@@ -147,8 +147,8 @@ public class EditProfileActivity extends Activity {
                         Log.d("EditProfileActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
                         if (query_result.equals("SUCCESS")) {
-                            Toast.makeText(getApplicationContext(), "Profile editted successfully!", Toast.LENGTH_SHORT).show();
-                            System.out.println("PROFILE EDITTED");
+                            Toast.makeText(getApplicationContext(), "Profile edited successfully!", Toast.LENGTH_SHORT).show();
+                            System.out.println("PROFILE EDITED");
                             LoginActivity.currentUser.setMajor(newMajor);
                             LoginActivity.currentUser.setBio(newBio.getText().toString());
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));

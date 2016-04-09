@@ -144,7 +144,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = super.getView(position, convertView, parent);
 
-            Review rev = (Review) getItem(position);
+            Review rev = getItem(position);
 
             TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
             reviewer.setText(rev.getUsername());

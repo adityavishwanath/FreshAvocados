@@ -73,7 +73,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = super.getView(position, convertView, parent);
 
-            Movie mov = (Movie) getItem(position);
+            Movie mov = getItem(position);
             assert mov != null;
 
             TextView title_year = (TextView) view.findViewById(R.id.title_year);

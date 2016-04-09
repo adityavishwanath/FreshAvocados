@@ -66,7 +66,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = super.getView(position, convertView, parent);
 
-            String u = (String) getItem(position);
+            String u = getItem(position);
             assert u != null;
 
             TextView username_list_item = (TextView) view.findViewById(R.id.listing_users);

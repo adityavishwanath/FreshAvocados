@@ -129,10 +129,9 @@ public class LoginActivity extends Activity {
          */
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("LoginActivity", "Entry query_result exists");

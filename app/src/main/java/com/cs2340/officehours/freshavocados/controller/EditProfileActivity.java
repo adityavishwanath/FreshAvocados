@@ -25,7 +25,6 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 
 public class EditProfileActivity extends Activity {
-    private String data;
     private String newMajor;
     private EditText newBio;
 
@@ -116,7 +115,7 @@ public class EditProfileActivity extends Activity {
             BufferedReader bufferedReader;
             String result;
             try {
-                data = "?username=" + URLEncoder.encode(username, "UTF-8");
+                String data = "?username=" + URLEncoder.encode(username, "UTF-8");
                 data += "&Major=" + URLEncoder.encode(major, "UTF-8");
                 data += "&bio=" + URLEncoder.encode(bio, "UTF-8");
                 link = "http://officehours.netau.net/editprofile.php" + data;
@@ -138,10 +137,9 @@ public class EditProfileActivity extends Activity {
          */
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("EditProfileActivity", "Entry query_result exists");

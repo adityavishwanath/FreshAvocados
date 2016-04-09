@@ -13,13 +13,11 @@ import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class ViewProfileActivity extends Activity {
 
-    private UserManager uM;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        uM = new UserManager();
+        UserManager uM = new UserManager();
         TextView viewusername = (TextView) findViewById(R.id.viewProfileShowUsername);
         viewusername.setText(LoginActivity.currentUser.getUsername());
 

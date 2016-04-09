@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class Movies {
 
-    private static ArrayList<Movie> MOVIES = new ArrayList<>();
+    private static final ArrayList<Movie> MOVIES = new ArrayList<>();
 
     private static final Map<String, Movie> MOVIE_MAP = new HashMap<>();
 

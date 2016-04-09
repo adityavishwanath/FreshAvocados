@@ -1,7 +1,5 @@
 package com.cs2340.officehours.freshavocados.model;
 
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 
 /**

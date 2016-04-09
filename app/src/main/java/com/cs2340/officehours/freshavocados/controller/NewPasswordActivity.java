@@ -25,7 +25,7 @@ public class NewPasswordActivity extends Activity {
 //    Toast passwordChangedToast;
     private Toast passwordsNotMatched;
     private String password;
-    private String data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class NewPasswordActivity extends Activity {
             BufferedReader bufferedReader;
             String result;
             try {
-                data = "?username=" + URLEncoder.encode(name, "UTF-8");
+                String data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
                 link = "http://officehours.netau.net/newpass.php" + data;
                 URL url = new URL(link);
@@ -109,10 +109,9 @@ public class NewPasswordActivity extends Activity {
          */
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("NewPasswordActivity", "Entry query_result exists");

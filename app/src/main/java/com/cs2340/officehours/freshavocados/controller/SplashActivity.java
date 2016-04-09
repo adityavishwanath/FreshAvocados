@@ -30,8 +30,8 @@ public class SplashActivity extends Activity {
         /*
         NOTE: This has since been done.
          */
-        UserManagementFacade uM = new UserManager();
-        uM.addUser("b", "b", "b", "b", "b@b.com", "CS", "ayylmao");
+//        UserManagementFacade uM = new UserManager();
+//        uM.addUser("b", "b", "b", "b", "b@b.com", "CS", "ayylmao");
     }
 
     @Override

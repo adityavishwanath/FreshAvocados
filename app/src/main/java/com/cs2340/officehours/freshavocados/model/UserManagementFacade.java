@@ -7,7 +7,7 @@ package com.cs2340.officehours.freshavocados.model;
  * Defines the process by which a user is added.
  */
 public interface UserManagementFacade {
-    boolean addUser(String firstName, String lastName, String userName, String pass, String email,
-                    String major, String bio);
-    User findUserById(String id);
+//    boolean addUser(String firstName, String lastName, String userName, String pass, String email,
+//                    String major, String bio);
+//    User findUserById(String id);
 }

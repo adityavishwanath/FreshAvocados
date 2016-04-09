@@ -27,7 +27,6 @@ import java.net.URLEncoder;
 
 public class ReviewActivity extends Activity {
 
-    private String data;
     private EditText review_text;
     private RatingBar rating;
     private Movie m;
@@ -105,7 +104,7 @@ public class ReviewActivity extends Activity {
             BufferedReader bufferedReader;
             String result;
             try {
-                data = "?username=" + URLEncoder.encode(username, "UTF-8");
+                String data = "?username=" + URLEncoder.encode(username, "UTF-8");
                 data += "&movie=" + URLEncoder.encode(movie, "UTF-8");
                 data += "&comment=" + URLEncoder.encode(comment, "UTF-8");
                 data += "&rating=" + URLEncoder.encode(rat, "UTF-8");
@@ -134,10 +133,9 @@ public class ReviewActivity extends Activity {
          */
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         query_result = jsonObj.getString("query_result");

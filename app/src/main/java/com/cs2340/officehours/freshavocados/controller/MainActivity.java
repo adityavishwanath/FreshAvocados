@@ -177,11 +177,10 @@ public class MainActivity extends Activity {
     public void onClickTopRentals(View V) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL;
-            Log.d("MAINACTIVITY", url);
+            Log.d("MAINACTIVITY", BASE_URL);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -246,11 +245,10 @@ public class MainActivity extends Activity {
     public void onClickNewTheatres(View v) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL;
-            Log.d("MAINACTIVITY", url);
+            Log.d("MAINACTIVITY", BASE_URL);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -314,11 +312,10 @@ public class MainActivity extends Activity {
     public void onClickNewDVD(View v) {
         final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            String url = BASE_URL;
-            Log.d("MAINACTIVITY", url);
+            Log.d("MAINACTIVITY", BASE_URL);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug

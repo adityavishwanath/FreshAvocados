@@ -18,7 +18,7 @@ public class User {
     private boolean isAdmin;
     private boolean isLocked;
     private boolean isBanned;
-    private int loginAttempts;
+//    private int loginAttempts;
     private static int userNumber;
 
     /**
@@ -67,25 +67,25 @@ public class User {
      * Sets the admin status of a user
      * @param isAdmin true for yes, false for no
      */
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
+//    public void setIsAdmin(boolean isAdmin) {
+//        this.isAdmin = isAdmin;
+//    }
 
     /**
      * Sets the locked status of a user
      * @param isLocked true for yes, false for no
      */
-    public void setIsLocked(boolean isLocked) {
-        this.isLocked = isLocked;
-    }
+//    public void setIsLocked(boolean isLocked) {
+//        this.isLocked = isLocked;
+//    }
 
     /**
      * Sets the banned status of a user
      * @param isBanned true for yes, false for no
      */
-    public void setIsBanned(boolean isBanned) {
-        this.isBanned = isBanned;
-    }
+//    public void setIsBanned(boolean isBanned) {
+//        this.isBanned = isBanned;
+//    }
 
 //    public void setLoginAttempts(int loginAttempts) {
 //        this.loginAttempts = loginAttempts;
@@ -99,25 +99,25 @@ public class User {
      * Gets the admin status of a user
      * @return isAdmin
      */
-    public boolean getIsAdmin() {
-        return isAdmin;
-    }
+//    public boolean getIsAdmin() {
+//        return isAdmin;
+//    }
 
     /**
      * Gets the locked status of a user
      * @return isLocked
      */
-    public boolean getIsLocked() {
-        return isLocked;
-    }
+//    public boolean getIsLocked() {
+//        return isLocked;
+//    }
 
     /**
      * Gets the banned status of a user
      * @return isBanned
      */
-    public boolean getIsBanned() {
-        return isBanned;
-    }
+//    public boolean getIsBanned() {
+//        return isBanned;
+//    }
 
     /**
      * Gets the user's first name

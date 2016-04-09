@@ -16,11 +16,11 @@ public class Review implements Comparable<Review> {
 
     public static final Map<String, LinkedList<Review>> reviewMap= new HashMap<>();
 
-    private String username;
+    private final String username;
     private String major;
-    private float rating;
-    private String review_text;
-    private Movie movie;
+    private final float rating;
+    private final String review_text;
+    private final Movie movie;
 
     /**
      * Constructor for an instance of a Review

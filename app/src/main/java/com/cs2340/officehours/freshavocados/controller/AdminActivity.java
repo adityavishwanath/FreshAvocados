@@ -1,6 +1,5 @@
 package com.cs2340.officehours.freshavocados.controller;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -241,10 +240,9 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsnObject = new JSONObject(jsonStr);
+                    JSONObject jsnObject = new JSONObject(result);
                     JSONArray array = jsnObject.getJSONArray("Usernames");
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject user = array.getJSONObject(i);

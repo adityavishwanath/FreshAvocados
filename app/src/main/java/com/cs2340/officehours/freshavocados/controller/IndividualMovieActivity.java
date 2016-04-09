@@ -38,7 +38,6 @@ import java.util.LinkedList;
 
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private String data;
     private Movie m;
 
     @Override
@@ -248,7 +247,7 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
         BufferedReader bufferedReader;
         String result;
         try {
-            data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
+            String data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
            link = "http://officehours.netau.net/getreviews.php" + data;
             Log.d("DATA SENT", data);
             URL url = new URL(link);
@@ -272,12 +271,11 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected void onPostExecute(String result) {
-        String jsonStr = result;
-        Log.d("JSONSTR", jsonStr);
-        if (jsonStr != null) {
-            if (jsonStr.contains("EMPTY") && jsonStr.contains("query_result")) return;
+        Log.d("JSONSTR", result);
+        if (result != null) {
+            if (result.contains("EMPTY") && result.contains("query_result")) return;
             try {
-                JSONObject jsnObject = new JSONObject(jsonStr);
+                JSONObject jsnObject = new JSONObject(result);
                 JSONArray array = jsnObject.getJSONArray("Reviews");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject review = array.getJSONObject(i);

@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
-import com.cs2340.officehours.freshavocados.model.UserManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -223,10 +222,9 @@ public class RegistrationActivity extends Activity {
          */
         @Override
         protected void onPostExecute(String result) {
-            String jsonStr = result;
-            if (jsonStr != null) {
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("RegistrationActivity", "Entry query_result exists");

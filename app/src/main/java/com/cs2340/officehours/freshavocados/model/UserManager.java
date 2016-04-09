@@ -8,7 +8,7 @@ import java.util.Map;
  * Edited by Brandon Manuel on 15-02-2016.
  */
 public class UserManager implements AuthenticationFacade, UserManagementFacade {
-    public static Map<String, User> users = new HashMap<>();
+    private static final Map<String, User> users = new HashMap<>();
 
     /**
      * Returns the user by id

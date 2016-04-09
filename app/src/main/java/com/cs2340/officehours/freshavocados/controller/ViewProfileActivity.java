@@ -13,7 +13,7 @@ import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class ViewProfileActivity extends Activity {
 
-    UserManager uM;
+    private UserManager uM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

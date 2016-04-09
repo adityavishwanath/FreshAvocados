@@ -25,9 +25,9 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 
 public class EditProfileActivity extends Activity {
-    String data;
-    protected String newMajor;
-    protected EditText newBio;
+    private String data;
+    private String newMajor;
+    private EditText newBio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public class EditProfileActivity extends Activity {
 
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 data = "?username=" + URLEncoder.encode(username, "UTF-8");
                 data += "&Major=" + URLEncoder.encode(major, "UTF-8");
@@ -142,7 +142,7 @@ public class EditProfileActivity extends Activity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    String query_result = "";
+                    String query_result;
                     try {
                         Log.d("EditProfileActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
@@ -160,8 +160,8 @@ public class EditProfileActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e){
-
+                    } catch (Exception e ){
+                        Log.d("EditProfileActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {
                     Log.d("EditProfileActivity", "Some fatal error occurred");

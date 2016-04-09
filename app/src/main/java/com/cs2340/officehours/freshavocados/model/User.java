@@ -8,11 +8,11 @@ package com.cs2340.officehours.freshavocados.model;
  * Contains information about a User.
  */
 public class User {
-    private String firstName;
-    private String lastName;
-    private String username;
+    private final String firstName;
+    private final String lastName;
+    private final String username;
     private String password;
-    private String email;
+    private final String email;
     private String major;
     private String bio;
     private boolean isAdmin;
@@ -87,13 +87,13 @@ public class User {
         this.isBanned = isBanned;
     }
 
-    public void setLoginAttempts(int loginAttempts) {
-        this.loginAttempts = loginAttempts;
-    }
+//    public void setLoginAttempts(int loginAttempts) {
+//        this.loginAttempts = loginAttempts;
+//    }
 
-    public int getLoginAttempts() {
-        return loginAttempts;
-    }
+//    public int getLoginAttempts() {
+//        return loginAttempts;
+//    }
 
     /**
      * Gets the admin status of a user
@@ -155,9 +155,9 @@ public class User {
      * Gets the total number of current users
      * @return userNumber total number of current users
      */
-    public int getUserNumber() {
-        return userNumber;
-    }
+//    public int getUserNumber() {
+//        return userNumber;
+//    }
 
     /**
      * Gets the user's email address

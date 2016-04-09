@@ -26,17 +26,17 @@ import java.net.URLEncoder;
 
 public class RegistrationActivity extends Activity {
 
-    Toast emptyField;
-    Toast wrongPass;
-    Toast invalidEmail;
-    String data;
-    UserManager uM;
+    private Toast emptyField;
+    private Toast wrongPass;
+    private Toast invalidEmail;
+    private String data;
+//    private UserManager uM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        uM = new UserManager();
+//        uM = new UserManager();
         EditText bio = (EditText) findViewById(R.id.bio);
         bio.setHorizontallyScrolling(false);
         bio.setMaxLines(6);
@@ -155,7 +155,7 @@ public class RegistrationActivity extends Activity {
         a.vibrate(50);
     }
 
-    Toast easterEgg;
+    private Toast easterEgg;
 
     /**
      * The user can touch the icon and a little vibration occurs along with a small message
@@ -195,7 +195,7 @@ public class RegistrationActivity extends Activity {
 
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
@@ -227,7 +227,7 @@ public class RegistrationActivity extends Activity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    String query_result = "";
+                    String query_result;
                     try {
                         Log.d("RegistrationActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
@@ -244,8 +244,8 @@ public class RegistrationActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e){
-
+                    } catch (Exception e) {
+                        Log.d("RegistrationActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {
                     Log.d("RegistrationActivity", "Some fatal error occurred");

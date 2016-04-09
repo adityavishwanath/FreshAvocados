@@ -9,9 +9,9 @@ import java.util.Map;
  */
 public class Movies {
 
-    public static ArrayList<Movie> MOVIES = new ArrayList<>();
+    private static ArrayList<Movie> MOVIES = new ArrayList<>();
 
-    public static Map<String, Movie> MOVIE_MAP = new HashMap<>();
+    private static final Map<String, Movie> MOVIE_MAP = new HashMap<>();
 
     /**
      * Adds a movie to both the arraylist and the map
@@ -27,14 +27,14 @@ public class Movies {
      * @param position position in the arraylist
      * @return the requested movie
      */
-    public static Movie getMovieAt(int position) {
-        return MOVIES.get(position);
-    }
+//    public static Movie getMovieAt(int position) {
+//        return MOVIES.get(position);
+//    }
 
     /**
      * Clears the arraylist of movies
      */
-    public static void clear() {
-        MOVIES = new ArrayList<>();
-    }
+//    public static void clear() {
+//        MOVIES = new ArrayList<>();
+//    }
 }

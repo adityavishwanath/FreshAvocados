@@ -76,7 +76,7 @@ public class SplashActivity extends Activity {
         a.vibrate(50);
     }
 
-    Toast toast;
+    private Toast toast;
 
     /**
      * The user can click the icon to get a fun surprise

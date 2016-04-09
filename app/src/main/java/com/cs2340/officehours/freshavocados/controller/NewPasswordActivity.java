@@ -22,10 +22,10 @@ import java.net.URLEncoder;
 
 public class NewPasswordActivity extends Activity {
 
-    Toast passwordChangedToast;
-    Toast passwordsNotMatched;
-    protected String password;
-    String data;
+//    Toast passwordChangedToast;
+    private Toast passwordsNotMatched;
+    private String password;
+    private String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +86,7 @@ public class NewPasswordActivity extends Activity {
 
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
@@ -113,7 +113,7 @@ public class NewPasswordActivity extends Activity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    String query_result = "";
+                    String query_result;
                     try {
                         Log.d("NewPasswordActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
@@ -129,7 +129,8 @@ public class NewPasswordActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
+                        Log.d("NewPasswordActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {
                     Log.d("RegistrationActivity", "Some fatal error occurred");

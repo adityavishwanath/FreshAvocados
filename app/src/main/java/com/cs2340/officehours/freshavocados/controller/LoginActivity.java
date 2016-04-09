@@ -25,7 +25,7 @@ import java.net.URLEncoder;
 
 public class LoginActivity extends Activity {
     public static User currentUser;
-    String data;
+    private String data;
 
     private EditText username, password;
 
@@ -100,7 +100,7 @@ public class LoginActivity extends Activity {
             String pass = args[1];
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
@@ -133,7 +133,7 @@ public class LoginActivity extends Activity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    String query_result = "";
+                    String query_result;
                     try {
                         Log.d("LoginActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");

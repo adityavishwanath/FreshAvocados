@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private ArrayList<String> admin_usernames = new ArrayList<>();
+    private final ArrayList<String> admin_usernames = new ArrayList<>();
     private String isBanned = "";
     private String isLocked = "";
 
@@ -150,7 +150,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         protected String doInBackground(String ... args) {
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 link = "http://officehours.netau.net/getuserstatus.php?username=";
                 link = link + URLEncoder.encode(args[0], "UTF-8");
@@ -174,7 +174,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             }
         }
 
-        ProgressDialog progressDialog;
+//        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
@@ -222,7 +222,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         protected String doInBackground(String... args) {
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 link = "http://officehours.netau.net/getusernames.php";
                 URL url = new URL(link);

@@ -26,8 +26,8 @@ import java.util.LinkedList;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private LinkedList<Review> userReviews = new LinkedList<>();
-    String username;
+    private final LinkedList<Review> userReviews = new LinkedList<>();
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

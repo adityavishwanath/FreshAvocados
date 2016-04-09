@@ -13,7 +13,7 @@ public class Movie implements Serializable {
     private String actors;
     private String synopsis;
     private String thumbnailLink;
-    private Drawable thumbnail;
+//    private Drawable thumbnail;
 
     /**
      * Method to set the title and year in the required display format.
@@ -37,9 +37,9 @@ public class Movie implements Serializable {
      * Method to set the thumbnail for the movie
      * @param thumbnailLink the thumbnail for the movie
      */
-    private void setThumbnailLink(String thumbnailLink) {
-        this.thumbnailLink = thumbnailLink;
-    }
+//    private void setThumbnailLink(String thumbnailLink) {
+//        this.thumbnailLink = thumbnailLink;
+//    }
 
     /**
      * Method to initialize all the data members of the instance.

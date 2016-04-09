@@ -27,12 +27,12 @@ import java.net.URLEncoder;
 
 public class ReviewActivity extends Activity {
 
-    String data;
-    EditText review_text;
-    RatingBar rating;
-    Movie m;
-    Toast t;
-    String rat;
+    private String data;
+    private EditText review_text;
+    private RatingBar rating;
+    private Movie m;
+    private Toast t;
+    private String rat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +103,7 @@ public class ReviewActivity extends Activity {
             String comment = args[2];
             String link;
             BufferedReader bufferedReader;
-            String result = "";
+            String result;
             try {
                 data = "?username=" + URLEncoder.encode(username, "UTF-8");
                 data += "&movie=" + URLEncoder.encode(movie, "UTF-8");
@@ -138,7 +138,7 @@ public class ReviewActivity extends Activity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    String query_result = "";
+                    String query_result;
                     try {
                         query_result = jsonObj.getString("query_result");
                         if (query_result.equals("SUCCESS")) {
@@ -153,7 +153,8 @@ public class ReviewActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
+                        Log.d("ReviewActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {
                     Log.d("ReviewActivity", "Some fatal error occurred");

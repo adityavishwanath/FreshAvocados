@@ -1,6 +1,8 @@
 package com.cs2340.officehours.freshavocados.model;
 
 
+import android.support.annotation.NonNull;
+
 import com.cs2340.officehours.freshavocados.controller.LoginActivity;
 
 import java.util.HashMap;
@@ -12,7 +14,7 @@ import java.util.Map;
  */
 public class Review implements Comparable<Review> {
 
-    public static Map<String, LinkedList<Review>> reviewMap= new HashMap<>();
+    public static final Map<String, LinkedList<Review>> reviewMap= new HashMap<>();
 
     private String username;
     private String major;
@@ -121,15 +123,15 @@ public class Review implements Comparable<Review> {
      * Sets the username of the reviewer
      * @param username username to be set
      */
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     /**
      * Sets the major of the reviewer
      * @param major major to be set
      */
-    public void setMajor(String major) {
+    private void setMajor(String major) {
         this.major = major;
     }
 
@@ -137,28 +139,28 @@ public class Review implements Comparable<Review> {
      * Sets the rating of the review
      * @param rating rating to be set
      */
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
+//    public void setRating(float rating) {
+//        this.rating = rating;
+//    }
 
     /**
      * Sets the review text of the review
      * @param review_text text to be set
      */
-    public void setReviewText(String review_text) {
-        this.review_text = review_text;
-    }
+//    public void setReviewText(String review_text) {
+//        this.review_text = review_text;
+//    }
 
     /**
      * Sets what movie was reviewed
-     * @param movie movie to be set
+//     * @param movie movie to be set
      */
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
+//    public void setMovie(Movie movie) {
+//        this.movie = movie;
+//    }
 
     @Override
-    public int compareTo(Review review) {
+    public int compareTo(@NonNull Review review) {
         return (int) review.getRating() - (int) this.getRating();
     }
 

@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
         try {
             encodedQuery = URLEncoder.encode(query, "utf-8");
         } catch(Exception e) {
-
+            Log.d("MainActivity", "Some major error occurred");
         }
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(QUERY_PARAM, encodedQuery)

@@ -38,7 +38,7 @@ import java.util.LinkedList;
 
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    String data;
+    private String data;
     private Movie m;
 
     @Override
@@ -189,7 +189,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      * Class that handles setting the tiny icon for an individual movie view
      */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
+        final ImageView bmImage;
 
         /**
          * Constructor for our class
@@ -246,7 +246,7 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
 
         String link;
         BufferedReader bufferedReader;
-        String result = "";
+        String result;
         try {
             data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
            link = "http://officehours.netau.net/getreviews.php" + data;

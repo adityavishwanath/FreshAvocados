@@ -214,7 +214,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     }
 
     /**
-     * An AsyncTask that grabes the usernames from the database
+     * An AsyncTask that grabs the usernames from the database
      */
     private class AdminTask extends AsyncTask<String, Void, String> {
 

@@ -13,8 +13,8 @@ import com.cs2340.officehours.freshavocados.R;
 
 public class ConfirmPasswordActivity extends Activity {
 
-    Toast wrongPasswordToast;
-    Toast correctPasswordToast;
+    private Toast wrongPasswordToast;
+    private Toast correctPasswordToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

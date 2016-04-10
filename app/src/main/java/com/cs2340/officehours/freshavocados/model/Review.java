@@ -65,7 +65,7 @@ public class Review implements Comparable<Review> {
      * @return the movie's overall rating
      */
     public static float getOverallRating(String movie) {
-        LinkedList<Review> temp = REVIEW_MAP.get(movie);
+        final LinkedList<Review> temp = REVIEW_MAP.get(movie);
         float rating = 0;
         if (temp == null) {
             return rating;
@@ -176,7 +176,7 @@ public class Review implements Comparable<Review> {
         if (!(o instanceof Review)) {
             return false;
         }
-        Review other = (Review) o;
+        final Review other = (Review) o;
         return this.username.equals(other.username);
     }
 

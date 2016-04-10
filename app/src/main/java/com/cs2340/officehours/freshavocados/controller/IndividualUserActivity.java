@@ -35,20 +35,20 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         setContentView(R.layout.activity_individual_user);
 
         //any relevant setup code here
-        boolean userLockedStatus = getIntent().getBooleanExtra("isLocked", true);
-        boolean userBanStatus = getIntent().getBooleanExtra("isBanned", true);
+        final boolean userLockedStatus = getIntent().getBooleanExtra("isLocked", true);
+        final boolean userBanStatus = getIntent().getBooleanExtra("isBanned", true);
         username = getIntent().getStringExtra("user");
 
-        CheckBox isLocked = (CheckBox) findViewById(R.id.isLockedCheck);
-        CheckBox isBanned = (CheckBox) findViewById(R.id.isBannedCheck);
-        TextView username_display = (TextView) findViewById(R.id.username_display);
+        final CheckBox isLocked = (CheckBox) findViewById(R.id.isLockedCheck);
+        final CheckBox isBanned = (CheckBox) findViewById(R.id.isBannedCheck);
+        final TextView username_display = (TextView) findViewById(R.id.username_display);
 
         isLocked.setChecked(userLockedStatus);
         isBanned.setChecked(userBanStatus);
         username_display.setText(username);
 
         //----------------------------
-        ListView listViewUserReviews = (ListView) findViewById(R.id.listViewUserReviews);
+        final ListView listViewUserReviews = (ListView) findViewById(R.id.listViewUserReviews);
         listViewUserReviews.setOnItemClickListener(this);
         listViewUserReviews.setAdapter(new MyAdapter(this, userReviews));
     }
@@ -70,11 +70,11 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
     }
 
     public void onClickSubmitChanges(View v) {
-        CheckBox newLockedStatus = (CheckBox) findViewById(R.id.isLockedCheck);
-        CheckBox newBanStatus = (CheckBox) findViewById(R.id.isBannedCheck);
+        final CheckBox newLockedStatus = (CheckBox) findViewById(R.id.isLockedCheck);
+        final CheckBox newBanStatus = (CheckBox) findViewById(R.id.isBannedCheck);
 
-        boolean updatedLockedStatus = newLockedStatus.isChecked();
-        boolean updatedBanStatus = newBanStatus.isChecked();
+        final boolean updatedLockedStatus = newLockedStatus.isChecked();
+        final boolean updatedBanStatus = newBanStatus.isChecked();
 
         String lock_status;
         String ban_status;
@@ -98,21 +98,21 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
+            final View view = super.getView(position, convertView, parent);
 
-            Review rev = getItem(position);
+            final Review rev = getItem(position);
             assert rev != null;
 
-            TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
+            final TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
             reviewer.setText(rev.getUsername());
 
-            TextView major = (TextView) view.findViewById(R.id.user_major);
+            final TextView major = (TextView) view.findViewById(R.id.user_major);
             major.setText(rev.getMajor());
 
-            RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
+            final RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
             rating.setRating(rev.getRating());
 
-            TextView review_text = (TextView) view.findViewById(R.id.review_text);
+            final TextView review_text = (TextView) view.findViewById(R.id.review_text);
             review_text.setText(rev.getReviewText());
 
             return view;
@@ -140,8 +140,8 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
                 data = data + "&isLocked=" + URLEncoder.encode(args[1], "UTF-8");
                 data = data + "&isBanned=" + URLEncoder.encode(args[2], "UTF-8");
                 link = "http://officehours.netau.net/updateuser.php?" + data;
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;

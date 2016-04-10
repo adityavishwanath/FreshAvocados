@@ -46,8 +46,8 @@ public class LoginActivity extends Activity {
     public void onClickConfirmLogin(View v) {
         Log.d(ACTIVITYNAME, "Login Button Pressed!");
 
-        String name = username.getText().toString().trim();
-        String pass = password.getText().toString();
+        final String name = username.getText().toString().trim();
+        final String pass = password.getText().toString();
 
         Log.d(ACTIVITYNAME, "Username text: " + name + " Password text: " + pass);
 
@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
             try {
                 data = "no data inputted yet";
                 new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
-                Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 a.vibrate(VIBRATE_TIME);
             } catch (Exception e) {
                 Log.v("EXCEPTION", e.getMessage());
@@ -77,7 +77,7 @@ public class LoginActivity extends Activity {
     public void onClickCancelLogin(View v) {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -97,8 +97,8 @@ public class LoginActivity extends Activity {
          */
         @Override
         protected String doInBackground(String... args) {
-            String name = args[0];
-            String pass = args[1];
+            final String name = args[0];
+            final String pass = args[1];
             String link;
             BufferedReader bufferedReader;
             String result;
@@ -106,8 +106,8 @@ public class LoginActivity extends Activity {
                 data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
                 link = "http://officehours.netau.net/login.php" + data;
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
@@ -132,7 +132,7 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(result);
+                    final JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d(ACTIVITYNAME, "Entry query_result exists");
@@ -147,17 +147,17 @@ public class LoginActivity extends Activity {
                         }
                     } catch (Exception e){
                         Log.d(ACTIVITYNAME, "Entry query_result does not exist");
-                        String usernamez = jsonObj.getString("Username");
-                        String passwordz = jsonObj.getString("Password");
-                        String email = jsonObj.getString("Email");
-                        String major = jsonObj.getString("Major");
-                        String firstName = jsonObj.getString("FirstName");
-                        String lastName = jsonObj.getString("LastName");
-                        String bio = jsonObj.getString("Bio");
-                        String isLocked = jsonObj.getString("isLocked");
-                        String isBanned = jsonObj.getString("isBanned");
-                        Integer adminStatus = Integer.parseInt(jsonObj.getString("IsAdmin"));
-                        boolean isAdmin = (adminStatus == 1);
+                        final String usernamez = jsonObj.getString("Username");
+                        final String passwordz = jsonObj.getString("Password");
+                        final String email = jsonObj.getString("Email");
+                        final String major = jsonObj.getString("Major");
+                        final String firstName = jsonObj.getString("FirstName");
+                        final String lastName = jsonObj.getString("LastName");
+                        final String bio = jsonObj.getString("Bio");
+                        final String isLocked = jsonObj.getString("isLocked");
+                        final String isBanned = jsonObj.getString("isBanned");
+                        final Integer adminStatus = Integer.parseInt(jsonObj.getString("IsAdmin"));
+                        final boolean isAdmin = (adminStatus == 1);
                         if ("1".equals(isBanned)) {
                             Toast.makeText(getApplicationContext(), "Account is banned.", Toast.LENGTH_SHORT).show();
                         } else if ("1".equals(isLocked)) {

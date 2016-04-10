@@ -38,13 +38,13 @@ public class RegistrationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 //        uM = new UserManager();
-        EditText bio = (EditText) findViewById(R.id.bio);
+        final EditText bio = (EditText) findViewById(R.id.bio);
         bio.setHorizontallyScrolling(false);
         bio.setMaxLines(MAX_LINES);
 
-        Spinner dropdown = (Spinner) findViewById(R.id.major);
-        String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies", "Applied Mathematics", "Applied Physics", "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction", "Business Administration", "Civil Engineering", "Chemical Engineering", "Chemistry", "Computational Media", "Computer Engineering", "Computer Science", "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics", "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society", "Industrial Design", "Industrial Engineering", "International Affairs", "International Affairs and Modern Language", "Literature, Media, and Communication", "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering", "Physics", "Psychology", "Public Policy"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        final Spinner dropdown = (Spinner) findViewById(R.id.major);
+        final String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies", "Applied Mathematics", "Applied Physics", "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction", "Business Administration", "Civil Engineering", "Chemical Engineering", "Chemistry", "Computational Media", "Computer Engineering", "Computer Science", "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics", "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society", "Industrial Design", "Industrial Engineering", "International Affairs", "International Affairs and Modern Language", "Literature, Media, and Communication", "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering", "Physics", "Psychology", "Public Policy"};
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
     }
 
@@ -57,16 +57,16 @@ public class RegistrationActivity extends Activity {
     public void createUser(View v) {
 
 
-        EditText fname = (EditText) findViewById(R.id.f_name);
-        EditText lname = (EditText) findViewById(R.id.l_name);
-        EditText uname = (EditText) findViewById(R.id.u_name);
-        EditText pass = (EditText) findViewById(R.id.pass);
-        EditText email = (EditText) findViewById(R.id.email);
-        EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
+        final EditText fname = (EditText) findViewById(R.id.f_name);
+        final EditText lname = (EditText) findViewById(R.id.l_name);
+        final EditText uname = (EditText) findViewById(R.id.u_name);
+        final EditText pass = (EditText) findViewById(R.id.pass);
+        final EditText email = (EditText) findViewById(R.id.email);
+        final EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
         //EditText major = (EditText) findViewById(R.id.major);
-        Spinner majorSpinner = (Spinner) findViewById(R.id.major);
-        String major = majorSpinner.getSelectedItem().toString();
-        EditText bio = (EditText) findViewById(R.id.bio);
+        final Spinner majorSpinner = (Spinner) findViewById(R.id.major);
+        final String major = majorSpinner.getSelectedItem().toString();
+        final EditText bio = (EditText) findViewById(R.id.bio);
 
 
         boolean passWasWrong = false;
@@ -85,7 +85,7 @@ public class RegistrationActivity extends Activity {
             }
             fieldIsEmpty = true;
             emptyField.show();
-            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
         }
         //Checks for valid email address
@@ -100,7 +100,7 @@ public class RegistrationActivity extends Activity {
             if (!fieldIsEmpty) {
                 invalidEmail.show();
             }
-            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
         }
         //Checks for matched passwords
@@ -110,14 +110,14 @@ public class RegistrationActivity extends Activity {
             }
             wrongPass.show();
             passWasWrong = true;
-            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
         }
         //Create new user
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
             try {
                 data = "no data inputted yet";
-                Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 a.vibrate(VIBRATE_TIME);
                 new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
                         email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
@@ -140,7 +140,7 @@ public class RegistrationActivity extends Activity {
     public void onClickCancelRegistration(View v) {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -155,7 +155,7 @@ public class RegistrationActivity extends Activity {
             easterEgg = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);
         }
         easterEgg.show();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
     /**
@@ -181,13 +181,13 @@ public class RegistrationActivity extends Activity {
             final int fnameIndex = 4;
             final int lnameIndex = 5;
             final int bioIndex = 6;
-            String name = args[nameIndex];
-            String pass = args[passIndex];
-            String email = args[emailIndex];
-            String major = args[majorIndex];
-            String fname = args[fnameIndex];
-            String lname = args[lnameIndex];
-            String bio = args[bioIndex];
+            final String name = args[nameIndex];
+            final String pass = args[passIndex];
+            final String email = args[emailIndex];
+            final String major = args[majorIndex];
+            final String fname = args[fnameIndex];
+            final String lname = args[lnameIndex];
+            final String bio = args[bioIndex];
 
             String link;
             BufferedReader bufferedReader;
@@ -201,8 +201,8 @@ public class RegistrationActivity extends Activity {
                 data += "&LastName=" + URLEncoder.encode(lname, "UTF-8");
                 data += "&bio=" + URLEncoder.encode(bio, "UTF-8");
                 link = "http://officehours.netau.net/signup.php" + data;
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
@@ -221,7 +221,7 @@ public class RegistrationActivity extends Activity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(result);
+                    final JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("RegistrationActivity", "Entry query_result exists");

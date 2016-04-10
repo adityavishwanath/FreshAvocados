@@ -45,7 +45,7 @@ public class SplashActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -61,7 +61,7 @@ public class SplashActivity extends Activity {
      */
     public void onClickLogin(View v) {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -71,7 +71,7 @@ public class SplashActivity extends Activity {
      */
     public void onClickRegister(View v) {
         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -86,7 +86,7 @@ public class SplashActivity extends Activity {
             toast = Toast.makeText(getApplicationContext(), "You found the easter egg!", Toast.LENGTH_SHORT);
         }
         toast.show();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 

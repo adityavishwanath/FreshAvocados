@@ -45,7 +45,7 @@ public class ReviewActivity extends Activity {
         reviewText.setMaxLines(MAX_LINES);
 
         m = (Movie) getIntent().getSerializableExtra("movie");
-        TextView title = (TextView) findViewById(R.id.movie_name);
+        final TextView title = (TextView) findViewById(R.id.movie_name);
         title.setText(m.getTitleYear());
 
         rating = (RatingBar) findViewById(R.id.ratingBar);
@@ -57,7 +57,7 @@ public class ReviewActivity extends Activity {
      * @param v default param for the app's View
      */
     public void onClickBackToIndiv(View v) {
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
         finish();
     }
@@ -78,7 +78,7 @@ public class ReviewActivity extends Activity {
 //            Review.addReview(m.getTitleYear(), review);
             rat = Float.toString(rating.getRating());
             new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), reviewText.getText().toString());
-            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
             finish();
         }
@@ -99,9 +99,9 @@ public class ReviewActivity extends Activity {
          */
         @Override
         protected String doInBackground(String... args) {
-            String username = args[0];
-            String movie = args[1];
-            String comment = args[2];
+            final String username = args[0];
+            final String movie = args[1];
+            final String comment = args[2];
             String link;
             BufferedReader bufferedReader;
             String result;
@@ -111,8 +111,8 @@ public class ReviewActivity extends Activity {
                 data += "&comment=" + URLEncoder.encode(comment, "UTF-8");
                 data += "&rating=" + URLEncoder.encode(rat, "UTF-8");
                 link = "http://officehours.netau.net/insertreview.php" + data;
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
@@ -137,15 +137,15 @@ public class ReviewActivity extends Activity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(result);
+                    final JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         query_result = jsonObj.getString("query_result");
                         if ("SUCCESS".equals(query_result)) {
-                            Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
+                            final Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
                                     rating.getRating(), reviewText.getText().toString(), m);
-                            Float f = rating.getRating();
-                            String s = f.toString();
+                            final Float f = rating.getRating();
+                            final String s = f.toString();
                             Log.d("Rating: ", s);
                             Review.addReview(m.getTitleYear(), review);
                         } else {

@@ -18,22 +18,22 @@ public class ViewProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
         //UserManager uM = new UserManager();
-        TextView viewusername = (TextView) findViewById(R.id.viewProfileShowUsername);
+        final TextView viewusername = (TextView) findViewById(R.id.viewProfileShowUsername);
         viewusername.setText(LoginActivity.currentUser.getUsername());
 
-        TextView viewFirstName = (TextView) findViewById(R.id.viewProfileShowFirstName);
+        final TextView viewFirstName = (TextView) findViewById(R.id.viewProfileShowFirstName);
         viewFirstName.setText(LoginActivity.currentUser.getFirstName());
 
-        TextView viewLastName = (TextView) findViewById(R.id.viewProfileShowLastName);
+        final TextView viewLastName = (TextView) findViewById(R.id.viewProfileShowLastName);
         viewLastName.setText(LoginActivity.currentUser.getLastName());
 
-        TextView viewEmailAddress = (TextView) findViewById(R.id.viewProfileShowEmailAddress);
+        final TextView viewEmailAddress = (TextView) findViewById(R.id.viewProfileShowEmailAddress);
         viewEmailAddress.setText(LoginActivity.currentUser.getEmailAddress());
 
-        TextView viewMajor = (TextView) findViewById(R.id.viewProfileShowMajor);
+        final TextView viewMajor = (TextView) findViewById(R.id.viewProfileShowMajor);
         viewMajor.setText(LoginActivity.currentUser.getMajor());
 
-        TextView viewBio = (TextView) findViewById(R.id.viewProfileShowBio);
+        final TextView viewBio = (TextView) findViewById(R.id.viewProfileShowBio);
         viewBio.setText(LoginActivity.currentUser.getBio());
     }
 
@@ -43,7 +43,7 @@ public class ViewProfileActivity extends Activity {
      */
     public void onClickCancelViewProfile(View v) {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -53,7 +53,7 @@ public class ViewProfileActivity extends Activity {
      */
     public void onClickEditProfile(View v) {
         startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
         finish();
     }
@@ -64,7 +64,7 @@ public class ViewProfileActivity extends Activity {
      */
     public void onClickChangePassword(View v) {
         startActivity(new Intent(getApplicationContext(), ConfirmPasswordActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 //

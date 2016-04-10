@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         queue = Volley.newRequestQueue(this);
-        Set<String> keys = Review.REVIEW_MAP.keySet();
+        final Set<String> keys = Review.REVIEW_MAP.keySet();
         for (String key : keys) {
             Log.d("ReviewCheck", Review.REVIEW_MAP.get(key).toString());
         }
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
      */
     public void onClickSearch(View v) {
         // check if corresponding text field R.id.searchField == null
-        EditText searchField = (EditText) findViewById(R.id.searchField);
+        final EditText searchField = (EditText) findViewById(R.id.searchField);
         searchField.setHorizontallyScrolling(false);
         searchField.setMaxLines(1);
         if ("".equals(searchField.getText().toString())) {
@@ -81,45 +81,45 @@ public class MainActivity extends Activity {
         final String apiKey = "yedukp76ffytfuy24zsqk7f5";
 
 
-        String query = searchField.getText().toString();
+        final String query = searchField.getText().toString();
         String encodedQuery = "";
         try {
             encodedQuery = URLEncoder.encode(query, "utf-8");
         } catch(Exception e) {
             Log.d("MainActivity", "Some major error occurred");
         }
-        Uri builtUri = Uri.parse(baseUrl).buildUpon()
+        final Uri builtUri = Uri.parse(baseUrl).buildUpon()
                 .appendQueryParameter(queryParam, encodedQuery)
                 .appendQueryParameter(pageLimitParam, pageLimit)
                 .appendQueryParameter(pageParam, page)
                 .appendQueryParameter(apiKeyParam, apiKey)
                 .build();
 
-        String url = builtUri.toString();
+        final String url = builtUri.toString();
         Log.d("MAINACTIVITY", url);
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject resp) {
                         //handle a valid response coming back.  Getting this string mainly for debug
-                        String response = resp.toString();
+                        final String response = resp.toString();
                         Log.d("MAINACTIVITY", response);
-                        JSONArray array = resp.optJSONArray("movies");
-                        ArrayList<Movie> movies = new ArrayList<>();
+                        final JSONArray array = resp.optJSONArray("movies");
+                        final ArrayList<Movie> movies = new ArrayList<>();
                         for(int i = 0; i < array.length(); i++) {
                             try {
                                 //for each array element, we have to create an object
-                                JSONObject jsonObject = array.getJSONObject(i);
-                                Movie m = new Movie();
+                                final JSONObject jsonObject = array.getJSONObject(i);
+                                final Movie m = new Movie();
                                 assert jsonObject != null;
-                                String title = jsonObject.optString("title");
-                                String year = jsonObject.optString("year");
-                                String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                String synopsis = jsonObject.optString("synopsis");
-                                JSONObject links = jsonObject.getJSONObject("posters");
-                                String thumbnailLink = links.getString("thumbnail");
+                                final String title = jsonObject.optString("title");
+                                final String year = jsonObject.optString("year");
+                                final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                                final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                                final String synopsis = jsonObject.optString("synopsis");
+                                final JSONObject links = jsonObject.getJSONObject("posters");
+                                final String thumbnailLink = links.getString("thumbnail");
 
                                 Log.d("MAINACTIVITY", title);
                                 Log.d("MAINACTIVITY", year);
@@ -139,7 +139,7 @@ public class MainActivity extends Activity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response = "JSON Request Failed!";
+                        final String response = "JSON Request Failed!";
                         if (jSONFailure == null) {
                             jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                         }
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
                 });
         //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
      * @param movies the list of Movie objects we created from the JSON response
      */
     private void changeView(ArrayList<Movie> movies, String title) {
-        Intent intent = new Intent(this, DisplayMovieListActivity.class);
+        final Intent intent = new Intent(this, DisplayMovieListActivity.class);
         intent.putExtra("movies", movies);
         intent.putExtra("title", title);
         /*
@@ -182,28 +182,28 @@ public class MainActivity extends Activity {
         try {
             Log.d("MAINACTIVITY", baseUrl);
 
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                     (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
-                            String response = resp.toString();
+                            final String response = resp.toString();
                             Log.d("MAINACTIVITY", response);
-                            JSONArray array = resp.optJSONArray("movies");
-                            ArrayList<Movie> movies = new ArrayList<>();
+                            final JSONArray array = resp.optJSONArray("movies");
+                            final ArrayList<Movie> movies = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 try {
                                     //for each array element, we have to create an object
-                                    JSONObject jsonObject = array.getJSONObject(i);
-                                    Movie m = new Movie();
+                                    final JSONObject jsonObject = array.getJSONObject(i);
+                                    final Movie m = new Movie();
                                     assert jsonObject != null;
-                                    String title = jsonObject.optString("title");
-                                    String year = jsonObject.optString("year");
-                                    String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    String synopsis = jsonObject.optString("synopsis");
-                                    JSONObject links = jsonObject.getJSONObject("posters");
-                                    String thumbnailLink = links.getString("thumbnail");
+                                    final String title = jsonObject.optString("title");
+                                    final String year = jsonObject.optString("year");
+                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                                    final String synopsis = jsonObject.optString("synopsis");
+                                    final JSONObject links = jsonObject.getJSONObject("posters");
+                                    final String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
@@ -224,7 +224,7 @@ public class MainActivity extends Activity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            String response = "JSON Request Failed!";
+                            final String response = "JSON Request Failed!";
                             if (jSONFailure == null) {
                                 jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
@@ -237,7 +237,7 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -250,28 +250,28 @@ public class MainActivity extends Activity {
         try {
             Log.d("MAINACTIVITY", baseUrl);
 
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                     (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
-                            String response = resp.toString();
+                            final String response = resp.toString();
                             Log.d("MAINACTIVITY", response);
-                            JSONArray array = resp.optJSONArray("movies");
-                            ArrayList<Movie> movies = new ArrayList<>();
+                            final JSONArray array = resp.optJSONArray("movies");
+                            final ArrayList<Movie> movies = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 try {
                                     //for each array element, we have to create an object
-                                    JSONObject jsonObject = array.getJSONObject(i);
-                                    Movie m = new Movie();
+                                    final JSONObject jsonObject = array.getJSONObject(i);
+                                    final Movie m = new Movie();
                                     assert jsonObject != null;
-                                    String title = jsonObject.optString("title");
-                                    String year = jsonObject.optString("year");
-                                    String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    String synopsis = jsonObject.optString("synopsis");
-                                    JSONObject links = jsonObject.getJSONObject("posters");
-                                    String thumbnailLink = links.getString("thumbnail");
+                                    final String title = jsonObject.optString("title");
+                                    final String year = jsonObject.optString("year");
+                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                                    final String synopsis = jsonObject.optString("synopsis");
+                                    final JSONObject links = jsonObject.getJSONObject("posters");
+                                    final String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
@@ -291,7 +291,7 @@ public class MainActivity extends Activity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            String response = "JSON Request Failed!";
+                            final String response = "JSON Request Failed!";
                             if (jSONFailure == null) {
                                 jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
@@ -304,7 +304,7 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -317,28 +317,28 @@ public class MainActivity extends Activity {
         try {
             Log.d("MAINACTIVITY", baseUrl);
 
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                     (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
-                            String response = resp.toString();
+                            final String response = resp.toString();
                             Log.d("MAINACTIVITY", response);
-                            JSONArray array = resp.optJSONArray("movies");
-                            ArrayList<Movie> movies = new ArrayList<>();
+                            final JSONArray array = resp.optJSONArray("movies");
+                            final ArrayList<Movie> movies = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 try {
                                     //for each array element, we have to create an object
-                                    JSONObject jsonObject = array.getJSONObject(i);
-                                    Movie m = new Movie();
+                                    final JSONObject jsonObject = array.getJSONObject(i);
+                                    final Movie m = new Movie();
                                     assert jsonObject != null;
-                                    String title = jsonObject.optString("title");
-                                    String year = jsonObject.optString("year");
-                                    String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    String synopsis = jsonObject.optString("synopsis");
-                                    JSONObject links = jsonObject.getJSONObject("posters");
-                                    String thumbnailLink = links.getString("thumbnail");
+                                    final String title = jsonObject.optString("title");
+                                    final String year = jsonObject.optString("year");
+                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                                    final String synopsis = jsonObject.optString("synopsis");
+                                    final JSONObject links = jsonObject.getJSONObject("posters");
+                                    final String thumbnailLink = links.getString("thumbnail");
                                     Log.d("MAINACTIVITY", title);
                                     Log.d("MAINACTIVITY", year);
                                     Log.d("MAINACTIVITY", actor1);
@@ -358,7 +358,7 @@ public class MainActivity extends Activity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            String response = "JSON Request Failed!";
+                            final String response = "JSON Request Failed!";
                             if (jSONFailure == null) {
                                 jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
@@ -371,7 +371,7 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.d("MainActivity", e.getMessage());
         }
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -381,11 +381,11 @@ public class MainActivity extends Activity {
      * @param v default param for an app's View
      */
     public void onClickRecommendedMajor(View v) {
-        Set<String> keys = Review.REVIEW_MAP.keySet();
-        ArrayList<Review> reviews = new ArrayList<>();
-        ArrayList<Movie> sorted_movies = new ArrayList<>();
+        final Set<String> keys = Review.REVIEW_MAP.keySet();
+        final ArrayList<Review> reviews = new ArrayList<>();
+        final ArrayList<Movie> sorted_movies = new ArrayList<>();
         for (String key : keys) {
-            LinkedList<Review> value = Review.REVIEW_MAP.get(key);
+            final LinkedList<Review> value = Review.REVIEW_MAP.get(key);
             for (Review r : value) {
                 if (r.getMajor().equals(LoginActivity.currentUser.getMajor())) {
                     reviews.add(r);
@@ -414,11 +414,11 @@ public class MainActivity extends Activity {
      * @param v default param for an app's View
      */
     public void onClickRecommendedAll(View v) {
-        Set<String> keys = Review.REVIEW_MAP.keySet();
-        ArrayList<Review> reviews = new ArrayList<>();
-        ArrayList<Movie> sorted_movies = new ArrayList<>();
+        final Set<String> keys = Review.REVIEW_MAP.keySet();
+        final ArrayList<Review> reviews = new ArrayList<>();
+        final ArrayList<Movie> sorted_movies = new ArrayList<>();
         for (String key : keys) {
-            LinkedList<Review> value = Review.REVIEW_MAP.get(key);
+            final LinkedList<Review> value = Review.REVIEW_MAP.get(key);
             for (Review r : value) {
                 reviews.add(r);
             }
@@ -445,10 +445,10 @@ public class MainActivity extends Activity {
      */
     public void onClickLogout(View v) {
         LoginActivity.currentUser = null;
-        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        final Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -458,7 +458,7 @@ public class MainActivity extends Activity {
      */
     public void onClickEdit(View v) {
         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 }

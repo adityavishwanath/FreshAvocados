@@ -47,23 +47,23 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         setContentView(R.layout.activity_individual_movie);
         //code for stuff concerning the movie
 
-        ArrayList<Movie> movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
-        int position = getIntent().getIntExtra("position", 1);
+        final ArrayList<Movie> movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
+        final int position = getIntent().getIntExtra("position", 1);
         m = movies.get(position);
 
-        TextView movie_title_year = (TextView) findViewById(R.id.movie_title_year);
+        final TextView movie_title_year = (TextView) findViewById(R.id.movie_title_year);
         movie_title_year.setText(m.getTitleYear());
 
-        TextView actor_actor = (TextView) findViewById(R.id.actor_actor);
+        final TextView actor_actor = (TextView) findViewById(R.id.actor_actor);
         actor_actor.setText(m.getActors());
 
-        TextView short_synop = (TextView) findViewById(R.id.short_synop);
+        final TextView short_synop = (TextView) findViewById(R.id.short_synop);
         short_synop.setText(m.getSynopsis());
 
         //RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
         //overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
-        String url = m.getThumbnailLink();
+        final String url = m.getThumbnailLink();
         new DownloadImageTask((ImageView) findViewById(R.id.movie_img)).execute(url);
 
         //populate the review list
@@ -92,10 +92,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      */
     public void onClickGenerateReviewList(View v) {
         //code for the reviews
-        ListView list_view = (ListView) findViewById(R.id.review_list);
+        final ListView list_view = (ListView) findViewById(R.id.review_list);
         list_view.setOnItemClickListener(this);
 
-        RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
+        final RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
         overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
         MyAdapter adapt;
@@ -106,7 +106,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             list_view.setAdapter(adapt);
         } else {
             Log.d("Reviews in movie?", "YES");
-            LinkedList<Review> rev = Review.REVIEW_MAP.get(m.getTitleYear());
+            final LinkedList<Review> rev = Review.REVIEW_MAP.get(m.getTitleYear());
             adapt = new MyAdapter(this, R.id.reviewer,
                     rev);
             list_view.setAdapter(adapt);
@@ -117,7 +117,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      * @param v default param for an app's View
      */
     public void onClickBack(View v) {
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
         finish();
     }
@@ -127,10 +127,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      * @param v default param for an app's View
      */
     public void onClickAddReview(View v) {
-        Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
+        final Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
         intent.putExtra("movie", m);
         startActivity(intent);
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -152,20 +152,20 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
+            final View view = super.getView(position, convertView, parent);
 
-            Review rev = getItem(position);
+            final Review rev = getItem(position);
 
-            TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
+            final TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
             reviewer.setText(rev.getUsername());
 
-            TextView major = (TextView) view.findViewById(R.id.user_major);
+            final TextView major = (TextView) view.findViewById(R.id.user_major);
             major.setText(rev.getMajor());
 
-            RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
+            final RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
             rating.setRating(rev.getRating());
 
-            TextView review_text = (TextView) view.findViewById(R.id.review_text);
+            final TextView review_text = (TextView) view.findViewById(R.id.review_text);
             review_text.setText(rev.getReviewText());
 
             return view;
@@ -204,10 +204,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
          * @return the resulting bitmap
          */
         protected Bitmap doInBackground(String ... urls) {
-            String urlDisplay = urls[0];
+            final String urlDisplay = urls[0];
             Bitmap mIcon = null;
             try {
-                InputStream in = new java.net.URL(urlDisplay).openStream();
+                final InputStream in = new java.net.URL(urlDisplay).openStream();
                 mIcon = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 Log.v("EXCEPTION", e.getMessage());
@@ -241,17 +241,17 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      */
         @Override
         protected String doInBackground(String... args) {
-            String movie = args[0];
+            final String movie = args[0];
 
             String link;
             BufferedReader bufferedReader;
             String result;
             try {
-                String data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
+                final String data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
                 link = "http://officehours.netau.net/getreviews.php" + data;
                 Log.d("DATA SENT", data);
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 result = result.substring(0, result.length() - 1);
@@ -277,16 +277,16 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
                     return;
                 }
                 try {
-                    JSONObject jsnObject = new JSONObject(result);
-                    JSONArray array = jsnObject.getJSONArray("Reviews");
+                    final JSONObject jsnObject = new JSONObject(result);
+                    final JSONArray array = jsnObject.getJSONArray("Reviews");
                     for (int i = 0; i < array.length(); i++) {
-                        JSONObject review = array.getJSONObject(i);
-                        String username = review.getString("Username");
-                        String comment = review.getString("Comment");
-                        String major = review.getString("Major");
-                        String ratS = review.getString("Rating");
-                        float rating = Float.parseFloat(ratS);
-                        Review r = new Review(username, major, rating, comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
+                        final JSONObject review = array.getJSONObject(i);
+                        final String username = review.getString("Username");
+                        final String comment = review.getString("Comment");
+                        final String major = review.getString("Major");
+                        final String ratS = review.getString("Rating");
+                        final float rating = Float.parseFloat(ratS);
+                        final Review r = new Review(username, major, rating, comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
                         Review.addReview(m.getTitleYear(), r);
                     }
                 } catch (JSONException e) {

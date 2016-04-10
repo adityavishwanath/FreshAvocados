@@ -38,10 +38,10 @@ public class NewPasswordActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickChangePass(View v) {
-        EditText newPass = (EditText) findViewById(R.id.new_pass);
-        EditText confirmPass = (EditText) findViewById(R.id.confirm_new_pass);
+        final EditText newPass = (EditText) findViewById(R.id.new_pass);
+        final EditText confirmPass = (EditText) findViewById(R.id.confirm_new_pass);
         if (newPass.getText().toString().equals(confirmPass.getText().toString())) {
-            String name = LoginActivity.currentUser.getUsername();
+            final String name = LoginActivity.currentUser.getUsername();
             password = newPass.getText().toString();
             new newPassTask().execute(name, password);
         } else {
@@ -51,7 +51,7 @@ public class NewPasswordActivity extends Activity {
             }
             passwordsNotMatched.show();
         }
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -62,7 +62,7 @@ public class NewPasswordActivity extends Activity {
     public void onClickCancelChangePassword(View v) {
         //startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         finish();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -82,8 +82,8 @@ public class NewPasswordActivity extends Activity {
          */
         @Override
         protected String doInBackground(String... args) {
-            String name = args[0];
-            String pass = args[1];
+            final String name = args[0];
+            final String pass = args[1];
 
             String link;
             BufferedReader bufferedReader;
@@ -92,8 +92,8 @@ public class NewPasswordActivity extends Activity {
                 String data = "?username=" + URLEncoder.encode(name, "UTF-8");
                 data += "&password=" + URLEncoder.encode(pass, "UTF-8");
                 link = "http://officehours.netau.net/newpass.php" + data;
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
@@ -112,7 +112,7 @@ public class NewPasswordActivity extends Activity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(result);
+                    final JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
                         Log.d("NewPasswordActivity", "Entry query_result exists");

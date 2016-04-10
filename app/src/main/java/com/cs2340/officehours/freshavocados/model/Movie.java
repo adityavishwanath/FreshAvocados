@@ -100,7 +100,7 @@ public class Movie implements Serializable {
         if (!(other instanceof Movie)) {
             return false;
         }
-        Movie that = (Movie) other;
+        final Movie that = (Movie) other;
         return this.getTitleYear().equals(that.getTitleYear());
     }
 

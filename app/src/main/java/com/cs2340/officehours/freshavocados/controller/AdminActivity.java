@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.cs2340.officehours.freshavocados.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -27,11 +28,31 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
 
+public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
+/**
+ * AdminActivity page for admins to
+ * edit user banned / locked statuses
+ *
+ * @author OfficeHours
+ * @version 1.0
+ */
+
+    /**
+     * ArrayList of admin usernames
+     */
     private final ArrayList<String> adminUsernames = new ArrayList<>();
+    /**
+     * String for whether or not user is banned
+     */
     private String isBanned = "";
+    /**
+     * String for whether or not user is locked
+     */
     private String isLocked = "";
+    /**
+     * Int for vibrate time for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override
@@ -60,9 +81,16 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         try {
             final AsyncTask uit = new UserInfoTask().execute(user);
             uit.get(timeMillis, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
+        } catch (java.lang.InterruptedException e) {
             Log.d("Uh oh", e.getMessage());
         }
+        catch (java.util.concurrent.ExecutionException e) {
+            Log.d("Oh no", e.getMessage());
+        }
+        catch (java.util.concurrent.TimeoutException e) {
+            Log.d("Oops", e.getMessage());
+        }
+
         Log.d("User", user);
         Log.d("isLocked", isLocked);
         Log.d("isBanned", isBanned);
@@ -164,12 +192,13 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
                         final JSONObject jsonObject = new JSONObject(result);
                         isLocked = jsonObject.getString("isLocked");
                         isBanned = jsonObject.getString("isBanned");
-                    } catch (Exception e) {
+                    }
+                    catch (JSONException e) {
                         Log.d("uh oh", e.getMessage());
                     }
                 }
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("UserInfoTask", e.getMessage());
                 return e.getMessage();
             }
@@ -234,7 +263,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
                 result = "{ Usernames: [" + result + "] }";
                 Log.d("Testing JSON result", result);
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("AdminActivity", e.getMessage());
                 return e.getMessage();
             }
@@ -251,7 +280,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
                         final String username = user.getString("Username");
                         adminUsernames.add(username);
                     }
-                } catch (Exception e) {
+                } catch (org.json.JSONException e) {
                     Log.d("woops", e.getMessage());
                 }
             } else {

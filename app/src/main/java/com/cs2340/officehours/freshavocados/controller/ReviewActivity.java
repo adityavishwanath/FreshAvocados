@@ -116,7 +116,7 @@ public class ReviewActivity extends Activity {
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("ReviewActivity", e.getMessage());
                 return e.getMessage();
             }
@@ -153,7 +153,7 @@ public class ReviewActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {
+                    } catch (org.json.JSONException e) {
                         Log.d("ReviewActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {

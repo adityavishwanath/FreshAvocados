@@ -24,11 +24,25 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class LoginActivity extends Activity {
+    /**
+     * User for the current user
+     */
     public static User currentUser;
+    /**
+     * String of the user's data
+     */
     private String data;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
+    /**
+     * String for the activity name
+     */
     private final static String ACTIVITYNAME = "LoginActivity";
-
+    /**
+     * EditTexts for the username and password
+     */
     private EditText username, password;
 
     @Override
@@ -53,14 +67,14 @@ public class LoginActivity extends Activity {
 
         //Try to log in if username and password are inputted
         if (!"".equals(name) && !"".equals(pass)) {
-            try {
-                data = "no data inputted yet";
-                new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
-                final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(VIBRATE_TIME);
-            } catch (Exception e) {
-                Log.v("EXCEPTION", e.getMessage());
-            }
+//         try {
+            data = "no data inputted yet";
+            new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(VIBRATE_TIME);
+//          } catch (Exception e) {
+//              Log.v("EXCEPTION", e.getMessage());
+//          }
         } else if ("".equals(name)) {
             Toast.makeText(getApplicationContext(),
                     "You left your username field blank!", Toast.LENGTH_LONG).show();
@@ -111,7 +125,7 @@ public class LoginActivity extends Activity {
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d(ACTIVITYNAME, e.getMessage());
                 return e.getMessage();
             }
@@ -145,7 +159,7 @@ public class LoginActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e){
+                    } catch (org.json.JSONException e){
                         Log.d(ACTIVITYNAME, "Entry query_result does not exist");
                         final String usernamez = jsonObj.getString("Username");
                         final String passwordz = jsonObj.getString("Password");

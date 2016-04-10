@@ -23,8 +23,17 @@ import java.net.URLEncoder;
 public class NewPasswordActivity extends Activity {
 
 //    Toast passwordChangedToast;
+    /**
+     * Toast for when passwords don't match
+     */
     private Toast passwordsNotMatched;
+    /**
+     * String with the user's password
+     */
     private String password;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override
@@ -97,7 +106,7 @@ public class NewPasswordActivity extends Activity {
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("NewPasswordActivity", e.getMessage());
                 return e.getMessage();
             }
@@ -128,7 +137,7 @@ public class NewPasswordActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {
+                    } catch (org.json.JSONException e) {
                         Log.d("NewPasswordActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {

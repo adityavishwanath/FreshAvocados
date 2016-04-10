@@ -33,12 +33,33 @@ import java.util.Set;
 
 public class MainActivity extends Activity {
 
+    /**
+     * RequestQueue representing the queue
+     */
     private RequestQueue queue;
+    /**
+     * Toast for empty search
+     */
     private Toast emptySearch;
+    /**
+     * Toast when there is a jSONFailure
+     */
     private Toast jSONFailure;
+    /**
+     * Toast when there are no recommended by all movies
+     */
     private Toast noRecommendedMoviesAll;
+    /**
+     * Toast when there are no recommended by major movies
+     */
     private Toast noRecommendedMoviesMajor;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
+    /**
+     * String with the activity name
+     */
     private final static String ACTIVITYNAME = "MainActivity";
 
     @Override
@@ -85,7 +106,7 @@ public class MainActivity extends Activity {
         String encodedQuery = "";
         try {
             encodedQuery = URLEncoder.encode(query, "utf-8");
-        } catch(Exception e) {
+        } catch(java.io.UnsupportedEncodingException e) {
             Log.d("MainActivity", "Some major error occurred");
         }
         final Uri builtUri = Uri.parse(baseUrl).buildUpon()
@@ -98,54 +119,52 @@ public class MainActivity extends Activity {
         final String url = builtUri.toString();
         Log.d("MAINACTIVITY", url);
 
-        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject resp) {
-                        //handle a valid response coming back.  Getting this string mainly for debug
-                        final String response = resp.toString();
-                        Log.d("MAINACTIVITY", response);
-                        final JSONArray array = resp.optJSONArray("movies");
-                        final ArrayList<Movie> movies = new ArrayList<>();
-                        for(int i = 0; i < array.length(); i++) {
-                            try {
-                                //for each array element, we have to create an object
-                                final JSONObject jsonObject = array.getJSONObject(i);
-                                final Movie m = new Movie();
-                                assert jsonObject != null;
-                                final String title = jsonObject.optString("title");
-                                final String year = jsonObject.optString("year");
-                                final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                final String synopsis = jsonObject.optString("synopsis");
-                                final JSONObject links = jsonObject.getJSONObject("posters");
-                                final String thumbnailLink = links.getString("thumbnail");
-
-                                Log.d("MAINACTIVITY", title);
-                                Log.d("MAINACTIVITY", year);
-                                Log.d("MAINACTIVITY", actor1);
-                                Log.d("MAINACTIVITY", actor2);
-                                Log.d("MAINACTIVITY", synopsis);
-                                m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
-                                movies.add(m);
-                            } catch (JSONException e) {
-                                Log.d("VolleyApp", "Failed to get JSON object");
-                                Log.v("EXCEPTION", e.getMessage());
-                            }
-                        }
-                        //once we have all data, then go to list screen
-                        changeView(movies, "Search Results");
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject resp) {
+                //handle a valid response coming back.  Getting this string mainly for debug
+                final String response = resp.toString();
+                Log.d("MAINACTIVITY", response);
+                final JSONArray array = resp.optJSONArray("movies");
+                final ArrayList<Movie> movies = new ArrayList<>();
+                for(int i = 0; i < array.length(); i++) {
+                    try {
+                        //for each array element, we have to create an object
+                        final JSONObject jsonObject = array.getJSONObject(i);
+                        final Movie m = new Movie();
+                        assert jsonObject != null;
+                        final String title = jsonObject.optString("title");
+                        final String year = jsonObject.optString("year");
+                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                        final String synopsis = jsonObject.optString("synopsis");
+                        final JSONObject links = jsonObject.getJSONObject("posters");
+                        final String thumbnailLink = links.getString("thumbnail");
+                        Log.d("MAINACTIVITY", title);
+                        Log.d("MAINACTIVITY", year);
+                        Log.d("MAINACTIVITY", actor1);
+                        Log.d("MAINACTIVITY", actor2);
+                        Log.d("MAINACTIVITY", synopsis);
+                        m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
+                        movies.add(m);
+                    } catch (JSONException e) {
+                        Log.d("VolleyApp", "Failed to get JSON object");
+                        Log.v("EXCEPTION", e.getMessage());
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        final String response = "JSON Request Failed!";
-                        if (jSONFailure == null) {
-                            jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
-                        }
-                        jSONFailure.show();
-                    }
-                });
+                }
+                //once we have all data, then go to list screen
+                changeView(movies, "Search Results");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                final String response = "JSON Request Failed!";
+                if (jSONFailure == null) {
+                    jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                }
+                jSONFailure.show();
+            }
+        });
         //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -157,6 +176,7 @@ public class MainActivity extends Activity {
      * state array into the intent so the new screen gets the data.
      *
      * @param movies the list of Movie objects we created from the JSON response
+     * @param title the title of the movie
      */
     private void changeView(ArrayList<Movie> movies, String title) {
         final Intent intent = new Intent(this, DisplayMovieListActivity.class);
@@ -179,64 +199,62 @@ public class MainActivity extends Activity {
      */
     public void onClickTopRentals(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
-        try {
-            Log.d("MAINACTIVITY", baseUrl);
+//      try {
+        Log.d("MAINACTIVITY", baseUrl);
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject resp) {
+                //handle a valid response coming back.  Getting this string mainly for debug
+                final String response = resp.toString();
+                Log.d("MAINACTIVITY", response);
+                final JSONArray array = resp.optJSONArray("movies");
+                final ArrayList<Movie> movies = new ArrayList<>();
+                for(int i = 0; i < array.length(); i++) {
+                    try {
+                        //for each array element, we have to create an object
+                        final JSONObject jsonObject = array.getJSONObject(i);
+                        final Movie m = new Movie();
+                        assert jsonObject != null;
+                        final String title = jsonObject.optString("title");
+                        final String year = jsonObject.optString("year");
+                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                        final String synopsis = jsonObject.optString("synopsis");
+                        final JSONObject links = jsonObject.getJSONObject("posters");
+                        final String thumbnailLink = links.getString("thumbnail");
+                        Log.d("MAINACTIVITY", title);
+                        Log.d("MAINACTIVITY", year);
+                        Log.d("MAINACTIVITY", actor1);
+                        Log.d("MAINACTIVITY", actor2);
+                        Log.d("MAINACTIVITY", synopsis);
+                        Log.d("MAINACTIVITY", thumbnailLink);
+                        m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
+                        movies.add(m);
+                    } catch (JSONException e) {
+                        Log.d("VolleyApp", "Failed to get JSON object");
+                        Log.v("EXCEPTION", e.getMessage());
+                    }
+                }
+                //once we have all data, then go to list screen
+                changeView(movies, "Top Rentals");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                final String response = "JSON Request Failed!";
+                if (jSONFailure == null) {
+                    jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                }
+                jSONFailure.show();
+            }
+        });
+        //this actually queues up the async response with Volley
+        queue.add(jsObjRequest);
 
-            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject resp) {
-                            //handle a valid response coming back.  Getting this string mainly for debug
-                            final String response = resp.toString();
-                            Log.d("MAINACTIVITY", response);
-                            final JSONArray array = resp.optJSONArray("movies");
-                            final ArrayList<Movie> movies = new ArrayList<>();
-                            for(int i = 0; i < array.length(); i++) {
-                                try {
-                                    //for each array element, we have to create an object
-                                    final JSONObject jsonObject = array.getJSONObject(i);
-                                    final Movie m = new Movie();
-                                    assert jsonObject != null;
-                                    final String title = jsonObject.optString("title");
-                                    final String year = jsonObject.optString("year");
-                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    final String synopsis = jsonObject.optString("synopsis");
-                                    final JSONObject links = jsonObject.getJSONObject("posters");
-                                    final String thumbnailLink = links.getString("thumbnail");
-                                    Log.d("MAINACTIVITY", title);
-                                    Log.d("MAINACTIVITY", year);
-                                    Log.d("MAINACTIVITY", actor1);
-                                    Log.d("MAINACTIVITY", actor2);
-                                    Log.d("MAINACTIVITY", synopsis);
-                                    Log.d("MAINACTIVITY", thumbnailLink);
-                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
-                                    movies.add(m);
-                                } catch (JSONException e) {
-                                    Log.d("VolleyApp", "Failed to get JSON object");
-                                    Log.v("EXCEPTION", e.getMessage());
-                                }
-                            }
-                            //once we have all data, then go to list screen
-                            changeView(movies, "Top Rentals");
-                        }
-                    }, new Response.ErrorListener() {
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            final String response = "JSON Request Failed!";
-                            if (jSONFailure == null) {
-                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
-                            }
-                            jSONFailure.show();
-                        }
-                    });
-            //this actually queues up the async response with Volley
-            queue.add(jsObjRequest);
-
-        } catch (Exception e) {
-            Log.d("MainActivity", e.getMessage());
-        }
+//        } catch (Exception e) {
+//            Log.d("MainActivity", e.getMessage());
+//        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
@@ -247,11 +265,10 @@ public class MainActivity extends Activity {
      */
     public void onClickNewTheatres(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
-        try {
-            Log.d("MAINACTIVITY", baseUrl);
-
-            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
+//        try {
+        Log.d("MAINACTIVITY", baseUrl);
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -299,11 +316,11 @@ public class MainActivity extends Activity {
                         }
                     });
             //this actually queues up the async response with Volley
-            queue.add(jsObjRequest);
+        queue.add(jsObjRequest);
 
-        } catch (Exception e) {
-            Log.d("MainActivity", e.getMessage());
-        }
+//        } catch (Exception e) {
+//            Log.d("MainActivity", e.getMessage());
+//        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
@@ -314,11 +331,11 @@ public class MainActivity extends Activity {
      */
     public void onClickNewDVD(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
-        try {
-            Log.d("MAINACTIVITY", baseUrl);
+//        try {
+        Log.d("MAINACTIVITY", baseUrl);
 
-            final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -366,11 +383,11 @@ public class MainActivity extends Activity {
                         }
                     });
             //this actually queues up the async response with Volley
-            queue.add(jsObjRequest);
+        queue.add(jsObjRequest);
 
-        } catch (Exception e) {
-            Log.d("MainActivity", e.getMessage());
-        }
+//        } catch (Exception e) {
+//            Log.d("MainActivity", e.getMessage());
+//        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }

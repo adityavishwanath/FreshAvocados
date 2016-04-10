@@ -136,7 +136,7 @@ public class Review implements Comparable<Review> {
         this.major = major1;
     }
 
-    /**
+    /*
      * Sets the rating of the review
      * @param rating rating to be set
      */
@@ -144,7 +144,7 @@ public class Review implements Comparable<Review> {
 //        this.rating = rating;
 //    }
 
-    /**
+    /*
      * Sets the review text of the review
      * @param review_text text to be set
      */
@@ -152,7 +152,7 @@ public class Review implements Comparable<Review> {
 //        this.review_text = review_text;
 //    }
 
-    /**
+    /*
      * Sets what movie was reviewed
 //     * @param movie movie to be set
      */

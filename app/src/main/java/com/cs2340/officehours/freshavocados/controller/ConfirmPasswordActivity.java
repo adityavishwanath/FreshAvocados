@@ -13,8 +13,17 @@ import com.cs2340.officehours.freshavocados.R;
 
 public class ConfirmPasswordActivity extends Activity {
 
+    /**
+     * Toast for wrong password
+     */
     private Toast wrongPasswordToast;
+    /**
+     * Toast for correct password
+     */
     private Toast correctPasswordToast;
+    /**
+     * Int for time for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override

@@ -25,10 +25,25 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 
 public class EditProfileActivity extends Activity {
+    /**
+     * String for the user's new major
+     */
     private String newMajor;
+    /**
+     * String for the user's new bio
+     */
     private EditText newBio;
+    /**
+     * Int for the timer for the vibrator
+     */
     private final static int VIBRATE_TIME = 50;
+    /**
+     * Int for max number of lines on bio
+     */
     private final static int MAX_LINES = 6;
+    /**
+     * Int for name of activity
+     */
     private final static String ACTIVITYNAME = "EditProfileActivity";
 
     @Override
@@ -115,7 +130,7 @@ public class EditProfileActivity extends Activity {
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("NewPasswordActivity", e.getMessage());
                 return e.getMessage();
             }
@@ -148,7 +163,7 @@ public class EditProfileActivity extends Activity {
                                     "Couldn't connect to remote database.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e ){
+                    } catch (org.json.JSONException e ){
                         Log.d(ACTIVITYNAME, "Some major error occurred");
                     }
                 } catch (JSONException e) {

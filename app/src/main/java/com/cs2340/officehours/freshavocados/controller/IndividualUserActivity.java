@@ -26,7 +26,13 @@ import java.util.LinkedList;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
 
+    /**
+     * LinkedList for user reviews
+     */
     private final LinkedList<Review> userReviews = new LinkedList<>();
+    /**
+     * String for username of the review(s)
+     */
     private String username;
 
     @Override
@@ -65,10 +71,20 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         //not sure yet what we'll do here.
     }
 
+    /**
+     * Method for going back
+     *
+     * @param v the default param for onClick methods
+     */
     public void onClickBackAdmin(View v) {
         finish();
     }
 
+    /**
+     * Method for button press that submits changes
+     *
+     * @param v the default param for onClick methods
+     */
     public void onClickSubmitChanges(View v) {
         final CheckBox newLockedStatus = (CheckBox) findViewById(R.id.isLockedCheck);
         final CheckBox newBanStatus = (CheckBox) findViewById(R.id.isBannedCheck);
@@ -145,12 +161,20 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.UnsupportedEncodingException e) {
                 Log.d("UpdateTask", e.getMessage());
+                return e.getMessage();
+            } catch (java.io.IOException e) {
+                Log.d("IOException", e.getMessage());
                 return e.getMessage();
             }
         }
 
+        /**
+         * onPostExecute method that is unused for our implementation
+         *
+         * @param result the result of the postExecute
+         */
         protected void onPostExecute(String result) {
             //does not need to do anything
         }

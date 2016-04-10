@@ -38,7 +38,13 @@ import java.util.LinkedList;
 
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
+    /**
+     * Movie that will be displayed
+     */
     private Movie m;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override
@@ -188,6 +194,9 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      * Class that handles setting the tiny icon for an individual movie view
      */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        /**
+         * ImageView for bitmap image that will be shown
+         */
         private final ImageView bmImage;
 
         /**
@@ -209,8 +218,10 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             try {
                 final InputStream in = new java.net.URL(urlDisplay).openStream();
                 mIcon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
+            } catch (java.net.MalformedURLException e) {
                 Log.v("EXCEPTION", e.getMessage());
+            } catch (java.io.IOException e) {
+                Log.v("AN EXCEPTION OCCURRED", e.getMessage());
             }
             return mIcon;
         }
@@ -258,7 +269,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
                 result = "{ Reviews: [" + result + "] }";
                 Log.d("RESULT", result);
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("IndividualMovieActivity", e.getMessage());
                 return e.getMessage();
             }

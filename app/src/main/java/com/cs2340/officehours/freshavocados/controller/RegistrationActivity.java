@@ -25,11 +25,29 @@ import java.net.URLEncoder;
 
 public class RegistrationActivity extends Activity {
 
+    /**
+     * Toast for when field is empty
+     */
     private Toast emptyField;
+    /**
+     * Toast for when password is wrong
+     */
     private Toast wrongPass;
+    /**
+     * Toast for when email is invalid
+     */
     private Toast invalidEmail;
+    /**
+     * String with user's data
+     */
     private String data;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
+    /**
+     * Int for max lines for bio
+     */
     private final static int MAX_LINES = 6;
 //    private UserManager uM;
 
@@ -115,16 +133,16 @@ public class RegistrationActivity extends Activity {
         }
         //Create new user
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
-            try {
-                data = "no data inputted yet";
-                final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(VIBRATE_TIME);
-                new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
-                        email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
-                        lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
-            } catch (Exception e) {
-                Log.v("EXCEPTION", e.getMessage());
-            }
+//          try {
+            data = "no data inputted yet";
+            final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            a.vibrate(VIBRATE_TIME);
+            new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
+                    email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
+                    lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
+//            } catch (Exception e) {
+//                Log.v("EXCEPTION", e.getMessage());
+//            }
         }
     }
 
@@ -206,7 +224,7 @@ public class RegistrationActivity extends Activity {
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 return result;
-            } catch (Exception e) {
+            } catch (java.io.IOException e) {
                 Log.d("RegistrationActivity", e.getMessage());
                 return e.getMessage();
             }
@@ -239,7 +257,7 @@ public class RegistrationActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {
+                    } catch (org.json.JSONException e) {
                         Log.d("RegistrationActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {

@@ -20,7 +20,13 @@ import java.util.ArrayList;
 
 public class DisplayMovieListActivity extends Activity implements AdapterView.OnItemClickListener {
 
+    /**
+     * ArrayList of movies
+     */
     private ArrayList<Movie> movies;
+    /**
+     * Int with time for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override

@@ -10,12 +10,21 @@ import java.util.Map;
  */
 public final class Movies {
 
+    /**
+     * Super call for constructor
+     */
     private Movies() {
         super();
     }
 
+    /**
+     * ArrayList with all of the movies
+     */
     private static final ArrayList<Movie> MOVIES = new ArrayList<>();
 
+    /**
+     * Map from movie title/year to the Movie object
+     */
     private static final Map<String, Movie> MOVIE_MAP = new HashMap<>();
 
     /**

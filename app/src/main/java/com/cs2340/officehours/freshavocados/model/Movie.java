@@ -8,9 +8,21 @@ import java.io.Serializable;
  */
 public class Movie implements Serializable {
 
+    /**
+     * String with movie's title and year
+     */
     private String titleYear;
+    /**
+     * String with actors in the movie
+     */
     private String actors;
+    /**
+     * String with synopsis of the movie
+     */
     private String synopsis;
+    /**
+     * String with a link to the movie's image thumbnail
+     */
     private String thumbnailLink;
 //    private Drawable thumbnail;
 
@@ -81,8 +93,9 @@ public class Movie implements Serializable {
         return synopsis;
     }
 
-    /*
+    /**
      * Getter method
+     *
      * @return thumbnailLink
      */
     public String getThumbnailLink() {

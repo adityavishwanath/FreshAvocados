@@ -42,7 +42,7 @@ public class EditProfileActivity extends Activity {
      */
     private final static int MAX_LINES = 6;
     /**
-     * Int for name of activity
+     * String for name of activity
      */
     private final static String ACTIVITYNAME = "EditProfileActivity";
 

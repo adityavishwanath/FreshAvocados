@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.cs2340.officehours.freshavocados.R;
 
 public class ViewProfileActivity extends Activity {
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override

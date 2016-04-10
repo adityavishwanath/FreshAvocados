@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
         try {
             encodedQuery = URLEncoder.encode(query, "utf-8");
         } catch(java.io.UnsupportedEncodingException e) {
-            Log.d("MainActivity", "Some major error occurred");
+            Log.d(ACTIVITYNAME, "Some major error occurred");
         }
         final Uri builtUri = Uri.parse(baseUrl).buildUpon()
                 .appendQueryParameter(queryParam, encodedQuery)
@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
                 .build();
 
         final String url = builtUri.toString();
-        Log.d("MAINACTIVITY", url);
+        Log.d(ACTIVITYNAME, url);
 
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override

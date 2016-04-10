@@ -162,6 +162,9 @@ public class RegistrationActivity extends Activity {
         a.vibrate(VIBRATE_TIME);
     }
 
+    /**
+     * Toast for easter egg when you tap logo
+     */
     private Toast easterEgg;
 
     /**

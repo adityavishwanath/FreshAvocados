@@ -14,6 +14,9 @@ import com.cs2340.officehours.freshavocados.R;
 
 
 public class SplashActivity extends Activity {
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override
@@ -75,6 +78,9 @@ public class SplashActivity extends Activity {
         a.vibrate(VIBRATE_TIME);
     }
 
+    /**
+     * Toast for easter egg when you tap logo
+     */
     private Toast toast;
 
     /**

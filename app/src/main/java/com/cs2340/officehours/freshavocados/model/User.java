@@ -8,12 +8,33 @@ package com.cs2340.officehours.freshavocados.model;
  * Contains information about a User.
  */
 public class User {
+    /**
+     * String for user's first name
+     */
     private final String firstName;
+    /**
+     * String for user's last name
+     */
     private final String lastName;
+    /**
+     * String for user's username
+     */
     private final String username;
+    /**
+     * String for user's password
+     */
     private String password;
+    /**
+     * String for user's email address
+     */
     private final String email;
+    /**
+     * String for user's major
+     */
     private String major;
+    /**
+     * String for user's bio
+     */
     private String bio;
     //private boolean isAdmin;
     //private boolean isLocked;

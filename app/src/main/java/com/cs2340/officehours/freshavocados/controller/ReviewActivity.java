@@ -27,12 +27,33 @@ import java.net.URLEncoder;
 
 public class ReviewActivity extends Activity {
 
+    /**
+     * EditText with review text
+     */
     private EditText reviewText;
+    /**
+     * RatingBar for movie's rating in stars out of 5
+     */
     private RatingBar rating;
+    /**
+     * Movie for the movie being reviewed
+     */
     private Movie m;
+    /**
+     * Toast with message when making review
+     */
     private Toast t;
+    /**
+     * String for rating text
+     */
     private String rat;
+    /**
+     * Int with max number of lines for review
+     */
     private final static int MAX_LINES = 8;
+    /**
+     * Int for vibrator
+     */
     private final static int VIBRATE_TIME = 50;
 
     @Override

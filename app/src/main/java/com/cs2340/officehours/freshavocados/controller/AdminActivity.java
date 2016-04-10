@@ -83,11 +83,9 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             uit.get(timeMillis, TimeUnit.MILLISECONDS);
         } catch (java.lang.InterruptedException e) {
             Log.d("Uh oh", e.getMessage());
-        }
-        catch (java.util.concurrent.ExecutionException e) {
+        } catch (java.util.concurrent.ExecutionException e) {
             Log.d("Oh no", e.getMessage());
-        }
-        catch (java.util.concurrent.TimeoutException e) {
+        } catch (java.util.concurrent.TimeoutException e) {
             Log.d("Oops", e.getMessage());
         }
 
@@ -192,8 +190,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
                         final JSONObject jsonObject = new JSONObject(result);
                         isLocked = jsonObject.getString("isLocked");
                         isBanned = jsonObject.getString("isBanned");
-                    }
-                    catch (JSONException e) {
+                    } catch (JSONException e) {
                         Log.d("uh oh", e.getMessage());
                     }
                 }

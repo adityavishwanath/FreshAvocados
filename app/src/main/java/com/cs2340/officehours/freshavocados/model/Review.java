@@ -15,12 +15,31 @@ import java.util.Map;
  */
 public class Review implements Comparable<Review> {
 
+    /**
+     * Map from Strings (movie title/year) to
+     * LinkedList of Reviews
+     */
     public static final Map<String, LinkedList<Review>> REVIEW_MAP = new HashMap<>();
 
+    /**
+     * String for username
+     */
     private final String username;
+    /**
+     * String for major
+     */
     private String major;
+    /**
+     * Float for rating
+     */
     private final float rating;
+    /**
+     * String with review text
+     */
     private final String reviewText;
+    /**
+     * Movie for movie being reviewed
+     */
     private final Movie movie;
 
     /**

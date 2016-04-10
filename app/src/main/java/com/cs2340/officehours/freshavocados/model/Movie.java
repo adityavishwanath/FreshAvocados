@@ -119,6 +119,6 @@ public class Movie implements Serializable {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + titleYear.hashCode() * 157;
+        return super.hashCode() + titleYear.hashCode();
     }
 }

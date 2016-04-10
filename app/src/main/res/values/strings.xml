@@ -42,5 +42,6 @@
     <string name="title_activity_review">ReviewActivity</string>
     <string name="title_activity_admin">AdminActivity</string>
     <string name="title_activity_individual_user">IndividualUserActivity</string>
+    <string name="username_here">  Username here</string>
 
 </resources>

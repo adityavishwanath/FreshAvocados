@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="  Username here"
+        android:text="@string/username_here"
         android:id="@+id/listing_users"
         android:clickable="false" />
 

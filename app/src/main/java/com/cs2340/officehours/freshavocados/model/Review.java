@@ -20,23 +20,23 @@ public class Review implements Comparable<Review> {
     private final String username;
     private String major;
     private final float rating;
-    private final String review_text;
+    private final String reviewText;
     private final Movie movie;
 
     /**
      * Constructor for an instance of a Review
-     * @param username username of the reviewer
-     * @param major major of the reviewer
-     * @param rating given to the movie
-     * @param reviewText the text written about the movie
-     * @param movie the reviewed movie
+     * @param usernamez username of the reviewer
+     * @param major1 major of the reviewer
+     * @param rating1 given to the movie
+     * @param reviewText1 the text written about the movie
+     * @param movie1 the reviewed movie
      */
-    public Review(String username, String major, float rating, String reviewText, Movie movie) {
-        this.username = username;
-        this.major = major;
-        this.rating = rating;
-        this.review_text = reviewText;
-        this.movie = movie;
+    public Review(String usernamez, String major1, float rating1, String reviewText1, Movie movie1) {
+        this.username = usernamez;
+        this.major = major1;
+        this.rating = rating1;
+        this.reviewText = reviewText1;
+        this.movie = movie1;
     }
 
     /**
@@ -107,7 +107,7 @@ public class Review implements Comparable<Review> {
      * @return review_text the review text given
      */
     public String getReviewText() {
-        return review_text;
+        return reviewText;
     }
 
     /**
@@ -130,10 +130,10 @@ public class Review implements Comparable<Review> {
 
     /**
      * Sets the major of the reviewer
-     * @param major major to be set
+     * @param major1 major to be set
      */
-    private void setMajor(String major) {
-        this.major = major;
+    private void setMajor(String major1) {
+        this.major = major1;
     }
 
     /**
@@ -185,7 +185,7 @@ public class Review implements Comparable<Review> {
         final int num1 = 43;
         final int num2 = 19;
         final int num3 = 17;
-        return username.hashCode() * num1 * review_text.hashCode() * num2 * major.hashCode() * num3;
+        return username.hashCode() * num1 * reviewText.hashCode() * num2 * major.hashCode() * num3;
     }
 
     @Override

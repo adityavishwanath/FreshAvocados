@@ -30,7 +30,7 @@ public class ConfirmPasswordActivity extends Activity {
     public void onClickCancelEditProfile(View v) {
 //        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         finish();
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 
@@ -40,7 +40,7 @@ public class ConfirmPasswordActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickConfirmPassword(View v) {
-        EditText password = (EditText) findViewById(R.id.passwordConfirm);
+        final EditText password = (EditText) findViewById(R.id.passwordConfirm);
 
         if (!(password.getText().toString().equals(LoginActivity.currentUser.getPassword()))) {
             if (wrongPasswordToast == null) {
@@ -55,7 +55,7 @@ public class ConfirmPasswordActivity extends Activity {
             startActivity(new Intent(getApplicationContext(), NewPasswordActivity.class));
             finish();
         }
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
     }
 

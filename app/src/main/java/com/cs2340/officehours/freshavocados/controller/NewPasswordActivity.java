@@ -117,11 +117,11 @@ public class NewPasswordActivity extends Activity {
                     try {
                         Log.d("NewPasswordActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
-                        if (query_result.equals("SUCCESS")) {
+                        if ("SUCCESS".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Password changed successfully!", Toast.LENGTH_SHORT).show();
                             LoginActivity.currentUser.setPass(password);
                             finish();
-                        } else if (query_result.equals("FAILURE")) {
+                        } else if ("FAILURE".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Password failed to change.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),

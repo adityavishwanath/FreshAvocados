@@ -135,6 +135,17 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     }
 
     /**
+     * Handles clicking an individual review so that it can be viewed in its entirety
+     * @param parent the adapter used
+     * @param view the system View
+     * @param position the position in the list that the user tapped
+     * @param id the id of the review
+     */
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("Clicking indiv reviews", "success");
+    }
+
+    /**
      * The adapter used to display all reviews for the currently displayed movie
      */
     private class MyAdapter extends ArrayAdapter<Review> {
@@ -174,28 +185,17 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     }
 
     /**
-     * Handles clicking an individual review so that it can be viewed in its entirety
-     * @param parent the adapter used
-     * @param view the system View
-     * @param position the position in the list that the user tapped
-     * @param id the id of the review
-     */
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("Clicking indiv reviews", "success");
-    }
-
-    /**
      * Class that handles setting the tiny icon for an individual movie view
      */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        final ImageView bmImage;
+        private final ImageView bmImage;
 
         /**
          * Constructor for our class
-         * @param bmImage the image to be set on the screen
+         * @param bmImage1 the image to be set on the screen
          */
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
+        public DownloadImageTask(ImageView bmImage1) {
+            this.bmImage = bmImage1;
         }
 
         /**
@@ -225,12 +225,12 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     }
 
 
-/**
- * Asynchronous call to GetReviewsTask.
- * Takes in inputs: movie
- * Connects to remote database to retrieve reviews and display them accordingly.
- */
-private class GetReviewsTask extends AsyncTask<String, Void, String> {
+    /**
+    * Asynchronous call to GetReviewsTask.
+    * Takes in inputs: movie
+    * Connects to remote database to retrieve reviews and display them accordingly.
+    */
+    private class GetReviewsTask extends AsyncTask<String, Void, String> {
 
     /**
      * This process immediately starts running when execute() is called.
@@ -239,66 +239,66 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
      * @param args movie
      * @return sql database query in json format
      */
-    @Override
-    protected String doInBackground(String... args) {
-        String movie = args[0];
+        @Override
+        protected String doInBackground(String... args) {
+            String movie = args[0];
 
-        String link;
-        BufferedReader bufferedReader;
-        String result;
-        try {
-            String data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
-           link = "http://officehours.netau.net/getreviews.php" + data;
-            Log.d("DATA SENT", data);
-            URL url = new URL(link);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            result = bufferedReader.readLine();
-            result = result.substring(0, result.length() - 1);
-            result = "{ Reviews: [" + result + "] }";
-            Log.d("RESULT", result);
-            return result;
-        } catch (Exception e) {
-            Log.d("IndividualMovieActivity", e.getMessage());
-            return e.getMessage();
-        }
-    }
-
-    /**
-     *This method runs after doInBackground.
-     * It will process the JSON result to determine any errors or if it was successful.
-     * @param result JSON object retrieved from php response
-     */
-    @Override
-    protected void onPostExecute(String result) {
-        Log.d("JSONSTR", result);
-        if (result != null) {
-            if (result.contains("EMPTY") && result.contains("query_result")) {
-                return;
-            }
+            String link;
+            BufferedReader bufferedReader;
+            String result;
             try {
-                JSONObject jsnObject = new JSONObject(result);
-                JSONArray array = jsnObject.getJSONArray("Reviews");
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject review = array.getJSONObject(i);
-                    String username = review.getString("Username");
-                    String comment = review.getString("Comment");
-                    String major = review.getString("Major");
-                    String ratS = review.getString("Rating");
-                    float rating = Float.parseFloat(ratS);
-                    Review r = new Review(username, major, rating, comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
-                    Review.addReview(m.getTitleYear(), r);
+                String data = "?movie=" + URLEncoder.encode(movie, "UTF-8");
+                link = "http://officehours.netau.net/getreviews.php" + data;
+                Log.d("DATA SENT", data);
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                result = bufferedReader.readLine();
+                result = result.substring(0, result.length() - 1);
+                result = "{ Reviews: [" + result + "] }";
+                Log.d("RESULT", result);
+                return result;
+            } catch (Exception e) {
+                Log.d("IndividualMovieActivity", e.getMessage());
+                return e.getMessage();
+            }
+        }
+
+        /**
+         *This method runs after doInBackground.
+         * It will process the JSON result to determine any errors or if it was successful.
+         * @param result JSON object retrieved from php response
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("JSONSTR", result);
+            if (result != null) {
+                if (result.contains("EMPTY") && result.contains("query_result")) {
+                    return;
                 }
-            } catch (JSONException e) {
-                Log.d("IndividualMovieActivity", "Some fatal error occurred");
-                Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
+                try {
+                    JSONObject jsnObject = new JSONObject(result);
+                    JSONArray array = jsnObject.getJSONArray("Reviews");
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject review = array.getJSONObject(i);
+                        String username = review.getString("Username");
+                        String comment = review.getString("Comment");
+                        String major = review.getString("Major");
+                        String ratS = review.getString("Rating");
+                        float rating = Float.parseFloat(ratS);
+                        Review r = new Review(username, major, rating, comment, m); //RATING BAR IS WRONG! (Not sure how to pass RatingBar value into database)
+                        Review.addReview(m.getTitleYear(), r);
+                    }
+                } catch (JSONException e) {
+                    Log.d("IndividualMovieActivity", "Some fatal error occurred");
+                    Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
+                        Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
-                    Toast.LENGTH_SHORT).show();
         }
     }
-}
 
 }

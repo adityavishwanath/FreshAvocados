@@ -35,10 +35,11 @@ public class MainActivity extends Activity {
 
     private RequestQueue queue;
     private Toast emptySearch;
-    private Toast JSONFailure;
+    private Toast jSONFailure;
     private Toast noRecommendedMoviesAll;
     private Toast noRecommendedMoviesMajor;
     private final static int VIBRATE_TIME = 50;
+    private final static String ACTIVITYNAME = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
         EditText searchField = (EditText) findViewById(R.id.searchField);
         searchField.setHorizontallyScrolling(false);
         searchField.setMaxLines(1);
-        if (searchField.getText().toString().equals("")) {
+        if ("".equals(searchField.getText().toString())) {
             if (emptySearch == null) {
                 emptySearch = Toast.makeText(getApplicationContext(),
                         "The search field is empty", Toast.LENGTH_SHORT);
@@ -139,10 +140,10 @@ public class MainActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         String response = "JSON Request Failed!";
-                        if (JSONFailure == null) {
-                            JSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                        if (jSONFailure == null) {
+                            jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                         }
-                        JSONFailure.show();
+                        jSONFailure.show();
                     }
                 });
         //this actually queues up the async response with Volley
@@ -224,10 +225,10 @@ public class MainActivity extends Activity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             String response = "JSON Request Failed!";
-                            if (JSONFailure == null) {
-                                JSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                            if (jSONFailure == null) {
+                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
-                            JSONFailure.show();
+                            jSONFailure.show();
                         }
                     });
             //this actually queues up the async response with Volley
@@ -291,10 +292,10 @@ public class MainActivity extends Activity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             String response = "JSON Request Failed!";
-                            if (JSONFailure == null) {
-                                JSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                            if (jSONFailure == null) {
+                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
-                            JSONFailure.show();
+                            jSONFailure.show();
                         }
                     });
             //this actually queues up the async response with Volley
@@ -358,10 +359,10 @@ public class MainActivity extends Activity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             String response = "JSON Request Failed!";
-                            if (JSONFailure == null) {
-                                JSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                            if (jSONFailure == null) {
+                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                             }
-                            JSONFailure.show();
+                            jSONFailure.show();
                         }
                     });
             //this actually queues up the async response with Volley

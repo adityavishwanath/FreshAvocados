@@ -53,35 +53,13 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         listViewUserReviews.setAdapter(new MyAdapter(this, userReviews));
     }
 
-    private class MyAdapter extends ArrayAdapter<Review> {
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
-
-            Review rev = getItem(position);
-            assert rev != null;
-
-            TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
-            reviewer.setText(rev.getUsername());
-
-            TextView major = (TextView) view.findViewById(R.id.user_major);
-            major.setText(rev.getMajor());
-
-            RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
-            rating.setRating(rev.getRating());
-
-            TextView review_text = (TextView) view.findViewById(R.id.review_text);
-            review_text.setText(rev.getReviewText());
-
-            return view;
-        }
-
-        public MyAdapter(Context context, LinkedList<Review> objects) {
-            super(context, R.layout.review_item, objects);
-        }
-    }
-
+    /**
+     * Represents clicking an individual review. Currently does nothing.
+     * @param parent the adapterview
+     * @param view the standard view
+     * @param position where to index into the list
+     * @param id the id of the given item
+     */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("Clicking indiv reviews", "success");
         //not sure yet what we'll do here.
@@ -114,6 +92,40 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         new UpdateTask().execute(username, lock_status, ban_status);
         finish();
 
+    }
+
+    private class MyAdapter extends ArrayAdapter<Review> {
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+
+            Review rev = getItem(position);
+            assert rev != null;
+
+            TextView reviewer = (TextView) view.findViewById(R.id.reviewer);
+            reviewer.setText(rev.getUsername());
+
+            TextView major = (TextView) view.findViewById(R.id.user_major);
+            major.setText(rev.getMajor());
+
+            RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
+            rating.setRating(rev.getRating());
+
+            TextView review_text = (TextView) view.findViewById(R.id.review_text);
+            review_text.setText(rev.getReviewText());
+
+            return view;
+        }
+
+        /**
+         * Constructor for the custom adapter
+         * @param context the context in which the adapter is being used
+         * @param objects the list of things being displayed
+         */
+        public MyAdapter(Context context, LinkedList<Review> objects) {
+            super(context, R.layout.review_item, objects);
+        }
     }
 
     private class UpdateTask extends AsyncTask<String, Void, String> {

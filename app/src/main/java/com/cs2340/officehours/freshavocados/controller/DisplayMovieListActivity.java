@@ -27,17 +27,17 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_movie_list);
-        ListView list_view = (ListView) findViewById(R.id.list_view);
-        list_view.setOnItemClickListener(this);
+        final ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setOnItemClickListener(this);
 
-        String pageTitle = (String) getIntent().getSerializableExtra("title");
-        TextView titleText = (TextView) findViewById(R.id.pageTitle);
+        final String pageTitle = (String) getIntent().getSerializableExtra("title");
+        final TextView titleText = (TextView) findViewById(R.id.pageTitle);
         titleText.setText(pageTitle);
         movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
         for (Movie m : movies) {
             Movies.addItem(m);
         }
-        list_view.setAdapter(new MyAdapter(this, movies));
+        listView.setAdapter(new MyAdapter(this, movies));
 
         /*
         Bundle extras = getIntent().getExtras();
@@ -55,46 +55,6 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
     }
 
     /**
-     * Class that sets our custom adapter for the listview of movies
-     */
-    private class MyAdapter extends ArrayAdapter<Movie> {
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
-
-            Movie mov = getItem(position);
-            assert mov != null;
-
-            TextView title_year = (TextView) view.findViewById(R.id.title_year);
-            title_year.setText(mov.getTitleYear());
-
-            TextView actors = (TextView) view.findViewById(R.id.actors);
-            actors.setText(mov.getActors());
-
-//            String url = mov.getThumbnailLink();
-//            ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
-//            new DownloadImageTask(thumbnail).execute(url);
-
-            return view;
-        }
-
-        /**
-         * Constructor for our custom adapter
-         * @param context the system's current context
-         * @param objects the list of movies to be displayed
-         */
-        public MyAdapter(Context context, ArrayList<Movie> objects) {
-            super(context, R.layout.list_item, R.id.title_year, objects);
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            return true;
-        }
-    }
-
-    /**
      * Allows clicking an individual movie in the list, loading a new screen with more info
      * on that movie.
      * @param parent the adapter used for the list
@@ -104,7 +64,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent i = new Intent(DisplayMovieListActivity.this, IndividualMovieActivity.class);
+        final Intent i = new Intent(DisplayMovieListActivity.this, IndividualMovieActivity.class);
 
         i.putExtra("position", position);
         i.putExtra("movies", movies);
@@ -145,9 +105,49 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
      * @param v default param for an app's View
      */
     public void onClickBackButton(View v) {
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
         finish();
+    }
+
+    /**
+     * Class that sets our custom adapter for the listview of movies
+     */
+    private class MyAdapter extends ArrayAdapter<Movie> {
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final View view = super.getView(position, convertView, parent);
+
+            final Movie mov = getItem(position);
+            assert mov != null;
+
+            final TextView titleYear = (TextView) view.findViewById(R.id.title_year);
+            titleYear.setText(mov.getTitleYear());
+
+            final TextView actors = (TextView) view.findViewById(R.id.actors);
+            actors.setText(mov.getActors());
+
+//            String url = mov.getThumbnailLink();
+//            ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
+//            new DownloadImageTask(thumbnail).execute(url);
+
+            return view;
+        }
+
+        /**
+         * Constructor for our custom adapter
+         * @param context the system's current context
+         * @param objects the list of movies to be displayed
+         */
+        public MyAdapter(Context context, ArrayList<Movie> objects) {
+            super(context, R.layout.list_item, R.id.title_year, objects);
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return true;
+        }
     }
 
 }

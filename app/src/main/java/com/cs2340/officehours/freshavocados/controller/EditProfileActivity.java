@@ -29,6 +29,7 @@ public class EditProfileActivity extends Activity {
     private EditText newBio;
     private final static int VIBRATE_TIME = 50;
     private final static int MAX_LINES = 6;
+    private final static String ACTIVITYNAME = "EditProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +40,7 @@ public class EditProfileActivity extends Activity {
         bio.setMaxLines(MAX_LINES);
         bio.setText(LoginActivity.currentUser.getBio());
         Spinner dropdown = (Spinner) findViewById(R.id.majorEdit);
-        String[] items = new String[]{"Aerospace Engineering", "Applied Language and Cultural Studies",
-                "Applied Mathematics", "Applied Physics",
-                "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction",
-                "Business Administration", "Civil Engineering", "Chemical Engineering",
-                "Chemistry", "Computational Media", "Computer Engineering", "Computer Science",
-                "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics",
-                "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society",
-                "Industrial Design", "Industrial Engineering", "International Affairs",
-                "International Affairs and Modern Language", "Literature, Media, and Communication",
-                "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering",
-                "Physics", "Psychology", "Public Policy"
-        };
+        String[] items = new String[] {"Aerospace Engineering", "Applied Language and Cultural Studies", "Applied Mathematics", "Applied Physics", "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction", "Business Administration", "Civil Engineering", "Chemical Engineering", "Chemistry", "Computational Media", "Computer Engineering", "Computer Science", "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics", "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society", "Industrial Design", "Industrial Engineering", "International Affairs", "International Affairs and Modern Language", "Literature, Media, and Communication", "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering", "Physics", "Psychology", "Public Policy"};
         String userMajor = LoginActivity.currentUser.getMajor();
         int pos = Arrays.asList(items).indexOf(userMajor);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -143,15 +133,15 @@ public class EditProfileActivity extends Activity {
                     JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
-                        Log.d("EditProfileActivity", "Entry query_result exists");
+                        Log.d(ACTIVITYNAME, "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
-                        if (query_result.equals("SUCCESS")) {
+                        if ("SUCCESS".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Profile edited successfully!", Toast.LENGTH_SHORT).show();
                             LoginActivity.currentUser.setMajor(newMajor);
                             LoginActivity.currentUser.setBio(newBio.getText().toString());
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                             finish();
-                        } else if (query_result.equals("FAILURE")) {
+                        } else if ("FAILURE".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Profile failed to change.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),
@@ -159,16 +149,16 @@ public class EditProfileActivity extends Activity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e ){
-                        Log.d("EditProfileActivity", "Some major error occurred");
+                        Log.d(ACTIVITYNAME, "Some major error occurred");
                     }
                 } catch (JSONException e) {
-                    Log.d("EditProfileActivity", "Some fatal error occurred");
-                    Log.d("EditProfileActivity", "Exception: " + e.getMessage());
+                    Log.d(ACTIVITYNAME, "Some fatal error occurred");
+                    Log.d(ACTIVITYNAME, "Exception: " + e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("EditProfileActivity", "Some major error occurred");
+                Log.d(ACTIVITYNAME, "Some major error occurred");
                 Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }

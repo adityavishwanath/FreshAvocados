@@ -27,6 +27,7 @@ public class LoginActivity extends Activity {
     public static User currentUser;
     private String data;
     private final static int VIBRATE_TIME = 50;
+    private final static String ACTIVITYNAME = "LoginActivity";
 
     private EditText username, password;
 
@@ -43,15 +44,15 @@ public class LoginActivity extends Activity {
      * @param v the default param for onClick methods
      */
     public void onClickConfirmLogin(View v) {
-        Log.d("LoginActivity", "Login Button Pressed!");
+        Log.d(ACTIVITYNAME, "Login Button Pressed!");
 
         String name = username.getText().toString().trim();
         String pass = password.getText().toString();
 
-        Log.d("LoginActivity", "Username text: " + name + " Password text: " + pass);
+        Log.d(ACTIVITYNAME, "Username text: " + name + " Password text: " + pass);
 
         //Try to log in if username and password are inputted
-        if (!name.equals("") && !pass.equals("")) {
+        if (!"".equals(name) && !"".equals(pass)) {
             try {
                 data = "no data inputted yet";
                 new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
@@ -60,7 +61,7 @@ public class LoginActivity extends Activity {
             } catch (Exception e) {
                 Log.v("EXCEPTION", e.getMessage());
             }
-        } else if (name.equals("")) {
+        } else if ("".equals(name)) {
             Toast.makeText(getApplicationContext(),
                     "You left your username field blank!", Toast.LENGTH_LONG).show();
         } else {
@@ -111,7 +112,7 @@ public class LoginActivity extends Activity {
                 result = bufferedReader.readLine();
                 return result;
             } catch (Exception e) {
-                Log.d("LoginActivity", e.getMessage());
+                Log.d(ACTIVITYNAME, e.getMessage());
                 return e.getMessage();
             }
         }
@@ -134,9 +135,9 @@ public class LoginActivity extends Activity {
                     JSONObject jsonObj = new JSONObject(result);
                     String query_result;
                     try {
-                        Log.d("LoginActivity", "Entry query_result exists");
+                        Log.d(ACTIVITYNAME, "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
-                        if (query_result.equals("DENIED")) {
+                        if ("DENIED".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Login failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
@@ -145,9 +146,9 @@ public class LoginActivity extends Activity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e){
-                        Log.d("LoginActivity", "Entry query_result does not exist");
-                        String username = jsonObj.getString("Username");
-                        String password = jsonObj.getString("Password");
+                        Log.d(ACTIVITYNAME, "Entry query_result does not exist");
+                        String usernamez = jsonObj.getString("Username");
+                        String passwordz = jsonObj.getString("Password");
                         String email = jsonObj.getString("Email");
                         String major = jsonObj.getString("Major");
                         String firstName = jsonObj.getString("FirstName");
@@ -157,12 +158,12 @@ public class LoginActivity extends Activity {
                         String isBanned = jsonObj.getString("isBanned");
                         Integer adminStatus = Integer.parseInt(jsonObj.getString("IsAdmin"));
                         boolean isAdmin = (adminStatus == 1);
-                        if (isBanned.equals("1")) {
+                        if ("1".equals(isBanned)) {
                             Toast.makeText(getApplicationContext(), "Account is banned.", Toast.LENGTH_SHORT).show();
-                        } else if (isLocked.equals("1")) {
+                        } else if ("1".equals(isLocked)) {
                             Toast.makeText(getApplicationContext(), "Account is locked. Please contact an admin for help.", Toast.LENGTH_SHORT).show();
                         } else {
-                            currentUser = new User(firstName, lastName, username, password, email,
+                            currentUser = new User(firstName, lastName, usernamez, passwordz, email,
                                     major, bio);
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
                             if (!isAdmin) {
@@ -175,14 +176,14 @@ public class LoginActivity extends Activity {
                         }
                     }
                 } catch (JSONException e) {
-                    Log.d("LoginActivity", "Some fatal error occurred");
-                    Log.d("LoginActivity", "Exception: " + e.getMessage());
+                    Log.d(ACTIVITYNAME, "Some fatal error occurred");
+                    Log.d(ACTIVITYNAME, "Exception: " + e.getMessage());
                     Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("LoginActivity", "Some major error occurred");
+                Log.d(ACTIVITYNAME, "Some major error occurred");
                 Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }

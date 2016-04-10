@@ -43,18 +43,7 @@ public class RegistrationActivity extends Activity {
         bio.setMaxLines(MAX_LINES);
 
         Spinner dropdown = (Spinner) findViewById(R.id.major);
-        String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies",
-                "Applied Mathematics", "Applied Physics",
-                "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction",
-                "Business Administration", "Civil Engineering", "Chemical Engineering",
-                "Chemistry", "Computational Media", "Computer Engineering", "Computer Science",
-                "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics",
-                "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society",
-                "Industrial Design", "Industrial Engineering", "International Affairs",
-                "International Affairs and Modern Language", "Literature, Media, and Communication",
-                "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering",
-                "Physics", "Psychology", "Public Policy"
-        };
+        String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies", "Applied Mathematics", "Applied Physics", "Architecture", "Biochemistry", "Biology", "Biomedical Engineering", "Building Construction", "Business Administration", "Civil Engineering", "Chemical Engineering", "Chemistry", "Computational Media", "Computer Engineering", "Computer Science", "Discrete Mathematics", "Earth and Atmospheric Sciences", "Economics", "Economics and International Affairs", "Electrical Engineering", "History, Technology, and Society", "Industrial Design", "Industrial Engineering", "International Affairs", "International Affairs and Modern Language", "Literature, Media, and Communication", "Materials Science and Engineering", "Mechanical Engineering", "Nuclear and Radiological Engineering", "Physics", "Psychology", "Public Policy"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
     }
@@ -86,7 +75,7 @@ public class RegistrationActivity extends Activity {
         //Checks for no empty fields
         if (pass.getText().toString().length() == 0 || fname.getText().toString().length() == 0
                 || lname.getText().toString().length() == 0 || uname.getText().toString().length() == 0
-                || email.getText().toString().length() == 0 || major.equals("Major")
+                || email.getText().toString().length() == 0 || "Major".equals(major)
                 /*
                 major.getText().toString().length() == 0
                 */
@@ -237,15 +226,15 @@ public class RegistrationActivity extends Activity {
                     try {
                         Log.d("RegistrationActivity", "Entry query_result exists");
                         query_result = jsonObj.getString("query_result");
-                        if (query_result.equals("SUCCESS")) {
+                        if ("SUCCESS".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             finish();
-                        } else if (query_result.equals("EXISTING")) {
+                        } else if ("EXISTING".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
-                        } else if (query_result.equals("EMAIL")) {
+                        } else if ("EMAIL".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Email is already used!", Toast.LENGTH_SHORT).show();
-                        } else if (query_result.equals("FAILURE")) {
+                        } else if ("FAILURE".equals(query_result)) {
                             Toast.makeText(getApplicationContext(), "Registration failed.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();

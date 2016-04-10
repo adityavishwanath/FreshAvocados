@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Movie implements Serializable {
 
-    private String title_year;
+    private String titleYear;
     private String actors;
     private String synopsis;
     private String thumbnailLink;
@@ -20,7 +20,7 @@ public class Movie implements Serializable {
      * @param year the year to be set
      */
     private void setTitleAndYear(String title, String year) {
-        title_year = title + " (" + year + ")";
+        titleYear = title + " (" + year + ")";
     }
 
     /**
@@ -46,15 +46,15 @@ public class Movie implements Serializable {
      * @param year year of movie
      * @param actor1 primary actor
      * @param actor2 secondary actor
-     * @param synopsis short description of movie
-     * @param thumbnailLink link to thumbnail
+     * @param synopsis1 short description of movie
+     * @param thumbnailLink1 link to thumbnail
      */
-    public void setData(String title, String year, String actor1, String actor2, String synopsis,
-                        String thumbnailLink) {
+    public void setData(String title, String year, String actor1, String actor2, String synopsis1,
+                        String thumbnailLink1) {
         setTitleAndYear(title, year);
         setActors(actor1, actor2);
-        this.synopsis = synopsis;
-        this.thumbnailLink = thumbnailLink;
+        this.synopsis = synopsis1;
+        this.thumbnailLink = thumbnailLink1;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Movie implements Serializable {
      * @return title_year
      */
     public String getTitleYear() {
-        return title_year;
+        return titleYear;
     }
 
     /**
@@ -106,6 +106,6 @@ public class Movie implements Serializable {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + title_year.hashCode() * 157;
+        return super.hashCode() + titleYear.hashCode() * 157;
     }
 }

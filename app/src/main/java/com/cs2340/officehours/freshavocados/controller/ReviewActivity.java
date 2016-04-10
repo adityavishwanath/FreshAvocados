@@ -27,7 +27,7 @@ import java.net.URLEncoder;
 
 public class ReviewActivity extends Activity {
 
-    private EditText review_text;
+    private EditText reviewText;
     private RatingBar rating;
     private Movie m;
     private Toast t;
@@ -40,9 +40,9 @@ public class ReviewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        review_text = (EditText) findViewById(R.id.review_text);
-        review_text.setHorizontallyScrolling(false);
-        review_text.setMaxLines(MAX_LINES);
+        reviewText = (EditText) findViewById(R.id.review_text);
+        reviewText.setHorizontallyScrolling(false);
+        reviewText.setMaxLines(MAX_LINES);
 
         m = (Movie) getIntent().getSerializableExtra("movie");
         TextView title = (TextView) findViewById(R.id.movie_name);
@@ -67,7 +67,7 @@ public class ReviewActivity extends Activity {
      * @param v default param for the app's View
      */
     public void onClickSubmitReview(View v) {
-        if (review_text.getText().toString().equals("")) {
+        if ("".equals(reviewText.getText().toString())) {
             if (t == null) {
                 t = Toast.makeText(getApplicationContext(), "Review text cannot be empty.", Toast.LENGTH_SHORT);
                 t.show();
@@ -77,7 +77,7 @@ public class ReviewActivity extends Activity {
 //                    rating, review_text.getText().toString(), m);
 //            Review.addReview(m.getTitleYear(), review);
             rat = Float.toString(rating.getRating());
-            new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), review_text.getText().toString());
+            new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), reviewText.getText().toString());
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
             finish();
@@ -141,9 +141,9 @@ public class ReviewActivity extends Activity {
                     String query_result;
                     try {
                         query_result = jsonObj.getString("query_result");
-                        if (query_result.equals("SUCCESS")) {
+                        if ("SUCCESS".equals(query_result)) {
                             Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
-                                    rating.getRating(), review_text.getText().toString(), m);
+                                    rating.getRating(), reviewText.getText().toString(), m);
                             Float f = rating.getRating();
                             String s = f.toString();
                             Log.d("Rating: ", s);

@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AdminActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private final ArrayList<String> admin_usernames = new ArrayList<>();
+    private final ArrayList<String> adminUsernames = new ArrayList<>();
     private String isBanned = "";
     private String isLocked = "";
     private final static int VIBRATE_TIME = 50;
@@ -43,13 +43,70 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
         //--------------------------------------
         new AdminTask().execute();
-        Integer i = admin_usernames.size();
+        final Integer i = adminUsernames.size();
         Log.d("List size", i.toString());
 
 //        ListView listView = (ListView) findViewById(R.id.listView);
 //        listView.setOnItemClickListener(this);
 //        adapter = new MyAdapter(this, R.layout.list_item_user, R.id.adminTitle, admin_usernames);
 //        listView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
+        final String user = adminUsernames.get(position);
+        final int timeMillis = 10000;
+        try {
+            final AsyncTask uit = new UserInfoTask().execute(user);
+            uit.get(timeMillis, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            Log.d("Uh oh", e.getMessage());
+        }
+        Log.d("User", user);
+        Log.d("isLocked", isLocked);
+        Log.d("isBanned", isBanned);
+        final boolean userLockStatus = "1".equals(isLocked);
+        final boolean userBanStatus = "1".equals(isBanned);
+        i.putExtra("isLocked", userLockStatus);
+        i.putExtra("isBanned", userBanStatus);
+        i.putExtra("user", user);
+
+
+        //add extras to the intent
+
+        //------------------------
+        startActivity(i);
+    }
+
+    /**
+     * Defines the logout process for an admin
+     * @param v the current view
+     */
+    public void onClickLogoutAdmin(View v) {
+        LoginActivity.currentUser = null;
+        final Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        a.vibrate(VIBRATE_TIME);
+    }
+
+    /**
+     * Generates the list of users onto the screen
+     * @param v the current view
+     */
+    public void onClickGenerateUserList(View v) {
+        final Integer i = adminUsernames.size();
+        Log.d("List size", i.toString());
+        for (String s : adminUsernames) {
+            Log.d("User", s);
+        }
+        final ListView listView = (ListView) findViewById(R.id.list_view_admin);
+        listView.setOnItemClickListener(this);
+        final MyAdapter adapter = new MyAdapter(this, adminUsernames);
+        listView.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
     }
 
     /**
@@ -59,13 +116,13 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
+            final View view = super.getView(position, convertView, parent);
 
-            String u = getItem(position);
+            final String u = getItem(position);
             assert u != null;
 
-            TextView username_list_item = (TextView) view.findViewById(R.id.listing_users);
-            username_list_item.setText(u);
+            final TextView usernameListItem = (TextView) view.findViewById(R.id.listing_users);
+            usernameListItem.setText(u);
 
             return view;
         }
@@ -85,63 +142,6 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
-        String user = admin_usernames.get(position);
-        final int timeMillis = 10000;
-        try {
-            AsyncTask uit = new UserInfoTask().execute(user);
-            uit.get(timeMillis, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            Log.d("Uh oh", e.getMessage());
-        }
-        Log.d("User", user);
-        Log.d("isLocked", isLocked);
-        Log.d("isBanned", isBanned);
-        boolean userLockStatus = isLocked.equals("1");
-        boolean userBanStatus = isBanned.equals("1");
-        i.putExtra("isLocked", userLockStatus);
-        i.putExtra("isBanned", userBanStatus);
-        i.putExtra("user", user);
-
-
-        //add extras to the intent
-
-        //------------------------
-        startActivity(i);
-    }
-
-    /**
-     * Defines the logout process for an admin
-     * @param v the current view
-     */
-    public void onClickLogoutAdmin(View v) {
-        LoginActivity.currentUser = null;
-        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(VIBRATE_TIME);
-    }
-
-    /**
-     * Generates the list of users onto the screen
-     * @param v the current view
-     */
-    public void onClickGenerateUserList(View v) {
-        Integer i = admin_usernames.size();
-        Log.d("List size", i.toString());
-        for (String s : admin_usernames) {
-            Log.d("User", s);
-        }
-        ListView listView = (ListView) findViewById(R.id.list_view_admin);
-        listView.setOnItemClickListener(this);
-        MyAdapter adapter = new MyAdapter(this, admin_usernames);
-        listView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
-    }
-
     /**
      * An AsyncTask that grabs the user information from the database
      */
@@ -155,13 +155,13 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             try {
                 link = "http://officehours.netau.net/getuserstatus.php?username=";
                 link = link + URLEncoder.encode(args[0], "UTF-8");
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 if (result != null) {
                     try {
-                        JSONObject jsonObject = new JSONObject(result);
+                        final JSONObject jsonObject = new JSONObject(result);
                         isLocked = jsonObject.getString("isLocked");
                         isBanned = jsonObject.getString("isBanned");
                     } catch (Exception e) {
@@ -226,8 +226,8 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
             String result;
             try {
                 link = "http://officehours.netau.net/getusernames.php";
-                URL url = new URL(link);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(link);
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 result = bufferedReader.readLine();
                 result = result.substring(0, result.length() - 2);
@@ -244,12 +244,12 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
-                    JSONObject jsnObject = new JSONObject(result);
-                    JSONArray array = jsnObject.getJSONArray("Usernames");
+                    final JSONObject jsnObject = new JSONObject(result);
+                    final JSONArray array = jsnObject.getJSONArray("Usernames");
                     for (int i = 0; i < array.length(); i++) {
-                        JSONObject user = array.getJSONObject(i);
-                        String username = user.getString("Username");
-                        admin_usernames.add(username);
+                        final JSONObject user = array.getJSONObject(i);
+                        final String username = user.getString("Username");
+                        adminUsernames.add(username);
                     }
                 } catch (Exception e) {
                     Log.d("woops", e.getMessage());

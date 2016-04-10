@@ -8,7 +8,11 @@ import java.util.Map;
  * Created by brodyjohnstone on 2/21/16.
  * Potentially useless class ayylmao
  */
-public class Movies {
+public final class Movies {
+
+    private Movies() {
+        super();
+    }
 
     private static final ArrayList<Movie> MOVIES = new ArrayList<>();
 

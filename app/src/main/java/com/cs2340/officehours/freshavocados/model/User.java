@@ -19,28 +19,28 @@ public class User {
     //private boolean isLocked;
     //private boolean isBanned;
 //    private int loginAttempts;
-    private static int userNumber;
+    //private static int userNumber;
 
     /**
      *
-     * @param firstName the user's first name
-     * @param lastName the user's last name
-     * @param username the user's username
-     * @param password the user's password
-     * @param email the user's email address
-     * @param major the user's major
-     * @param bio the user's bio
+     * @param firstName1 the user's first name
+     * @param lastName1 the user's last name
+     * @param username1 the user's username
+     * @param password1 the user's password
+     * @param email1 the user's email address
+     * @param major1 the user's major
+     * @param bio1 the user's bio
      */
-    public User(String firstName, String lastName, String username, String password, String email,
-                String major, String bio) {
-        userNumber++;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.major = major;
-        this.bio = bio;
+    public User(String firstName1, String lastName1, String username1, String password1, String email1,
+                String major1, String bio1) {
+        //userNumber++;
+        this.firstName = firstName1;
+        this.lastName = lastName1;
+        this.username = username1;
+        this.password = password1;
+        this.email = email1;
+        this.major = major1;
+        this.bio = bio1;
     }
 
     /**
@@ -53,15 +53,15 @@ public class User {
 
     /**
      * Sets the user's major
-     * @param major the major to be used
+     * @param major1 the major to be used
      */
-    public void setMajor(String major) { this.major = major; }
+    public void setMajor(String major1) { this.major = major1; }
 
     /**
      * Sets the user's bio
-     * @param bio the bio to be used
+     * @param bio1 the bio to be used
      */
-    public void setBio(String bio) { this.bio = bio; }
+    public void setBio(String bio1) { this.bio = bio1; }
 
     /**
      * Sets the admin status of a user

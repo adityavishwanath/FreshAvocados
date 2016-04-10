@@ -9,7 +9,8 @@
         android:id="@+id/thumbnail"
         android:minHeight="50dp"
         android:minWidth="50dp"
-        android:src="@drawable/avocado_logo" />
+        android:src="@drawable/avocado_logo"
+        android:contentDescription="@string/logo" />
 
     <LinearLayout
         android:orientation="vertical"

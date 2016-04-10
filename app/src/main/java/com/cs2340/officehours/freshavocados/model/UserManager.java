@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Aditya Vishwanath on 02-06-2016.
  * Edited by Brandon Manuel on 15-02-2016.
  */
-public class UserManager implements AuthenticationFacade, UserManagementFacade {
+class UserManager implements AuthenticationFacade, UserManagementFacade {
     private static final Map<String, User> USERS = new HashMap<>();
 
     /**
@@ -15,7 +15,7 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
      * @param id the ID to be found
      * @return User the associated user
      */
-    public User findUserById(String id) {
+    private User findUserById(String id) {
         return USERS.get(id);
     }
 
@@ -52,11 +52,13 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
         return u != null && u.checkPassword(pass);
     }
 
-    /**
-     * No-arg constructor for a UserManager
-     */
-    public UserManager() {
-        //Empty Constructor.
-    }
+// --Commented out by Inspection START (4/10/16, 12:41 PM):
+//    /**
+//     * No-arg constructor for a UserManager
+//     */
+//    public UserManager() {
+//        //Empty Constructor.
+//    }
+// --Commented out by Inspection STOP (4/10/16, 12:41 PM)
 
 }

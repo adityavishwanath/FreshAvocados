@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Admin Page"
+        android:text="@string/admin_page"
         android:id="@+id/adminTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -36,7 +36,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout"
         android:id="@+id/admin_logout"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -45,7 +45,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate"
+        android:text="@string/generate"
         android:id="@+id/generateUserlist"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"

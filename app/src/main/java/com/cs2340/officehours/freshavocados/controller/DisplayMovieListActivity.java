@@ -37,7 +37,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         for (Movie m : movies) {
             Movies.addItem(m);
         }
-        list_view.setAdapter(new MyAdapter(this, R.layout.list_item, R.id.title_year, movies));
+        list_view.setAdapter(new MyAdapter(this, movies));
 
         /*
         Bundle extras = getIntent().getExtras();
@@ -82,12 +82,10 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         /**
          * Constructor for our custom adapter
          * @param context the system's current context
-         * @param resource the indexing location of the movies
-         * @param textViewResourceId one of the on-screen widgets to be set
          * @param objects the list of movies to be displayed
          */
-        public MyAdapter(Context context, int resource, int textViewResourceId, ArrayList<Movie> objects) {
-            super(context, resource, textViewResourceId, objects);
+        public MyAdapter(Context context, ArrayList<Movie> objects) {
+            super(context, R.layout.list_item, R.id.title_year, objects);
         }
 
         @Override

@@ -50,7 +50,7 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         //----------------------------
         ListView listViewUserReviews = (ListView) findViewById(R.id.listViewUserReviews);
         listViewUserReviews.setOnItemClickListener(this);
-        listViewUserReviews.setAdapter(new MyAdapter(this, R.layout.review_item, userReviews));
+        listViewUserReviews.setAdapter(new MyAdapter(this, userReviews));
     }
 
     private class MyAdapter extends ArrayAdapter<Review> {
@@ -77,8 +77,8 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
             return view;
         }
 
-        public MyAdapter(Context context, int resource, LinkedList<Review> objects) {
-            super(context, resource, objects);
+        public MyAdapter(Context context, LinkedList<Review> objects) {
+            super(context, R.layout.review_item, objects);
         }
     }
 
@@ -124,9 +124,9 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
             BufferedReader bufferedReader;
             String result;
             try {
-                String data = "username=" + URLEncoder.encode(args[0]);
-                data = data + "&isLocked=" + URLEncoder.encode(args[1]);
-                data = data + "&isBanned=" + URLEncoder.encode(args[2]);
+                String data = "username=" + URLEncoder.encode(args[0], "UTF-8");
+                data = data + "&isLocked=" + URLEncoder.encode(args[1], "UTF-8");
+                data = data + "&isBanned=" + URLEncoder.encode(args[2], "UTF-8");
                 link = "http://officehours.netau.net/updateuser.php?" + data;
                 URL url = new URL(link);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();

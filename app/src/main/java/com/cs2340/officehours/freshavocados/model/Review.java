@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Created by brodyjohnstone on 2/23/16.
+ * Represents a Review of a Movie
  */
 public class Review implements Comparable<Review> {
 

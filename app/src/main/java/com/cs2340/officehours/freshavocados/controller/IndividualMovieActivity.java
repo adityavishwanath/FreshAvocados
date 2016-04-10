@@ -101,13 +101,13 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         MyAdapter adapt;
         if (Review.REVIEW_MAP.get(m.getTitleYear()) == null) {
             Log.d("Reviews in movie?", "NO");
-            adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
+            adapt = new MyAdapter(this, R.id.movie_title_year,
                     new LinkedList<Review>());
             list_view.setAdapter(adapt);
         } else {
             Log.d("Reviews in movie?", "YES");
             LinkedList<Review> rev = Review.REVIEW_MAP.get(m.getTitleYear());
-            adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
+            adapt = new MyAdapter(this, R.id.reviewer,
                     rev);
             list_view.setAdapter(adapt);
         }
@@ -164,13 +164,12 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         /**
          * Constructor for our custom adapter
          * @param context the system context
-         * @param resource the indexing location of our list
          * @param textViewResourceId one of the on-screen widgets to be edited
          * @param objects the list of Reviews to be displayed
          */
-        public MyAdapter(Context context, int resource, int textViewResourceId,
+        public MyAdapter(Context context, int textViewResourceId,
                          LinkedList<Review> objects) {
-            super(context, resource, textViewResourceId, objects);
+            super(context, R.layout.review_item, textViewResourceId, objects);
         }
     }
 

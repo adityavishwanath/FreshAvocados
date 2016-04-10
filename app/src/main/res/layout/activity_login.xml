@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:id="@+id/textView"
-        android:textSize="35dp"
+        android:textSize="35sp"
         android:layout_marginTop="88dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -78,13 +78,14 @@
         android:adjustViewBounds="false"
         android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/textView3"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="A Movie Recommendation App"
+        android:text="@string/app_descrip"
         android:id="@+id/textView3"
         android:textStyle="italic"
         android:layout_below="@+id/textView"

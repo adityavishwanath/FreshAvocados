@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="User Name Here"
+        android:text="@string/username_here"
         android:id="@+id/username_display"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,23 +22,23 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Banned"
+        android:text="@string/banned"
         android:id="@+id/isBannedCheck"
         android:layout_marginTop="41dp"
         android:layout_below="@+id/username_display"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="40dp"
-        android:textSize="20dp" />
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="40dp"
+        android:textSize="20sp" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Locked"
+        android:text="@string/locked"
         android:id="@+id/isLockedCheck"
         android:layout_alignTop="@+id/isBannedCheck"
         android:layout_toEndOf="@+id/isBannedCheck"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -52,7 +52,7 @@
 
         <ListView
             android:layout_width="wrap_content"
-            android:layout_height="304dp"
+            android:layout_height="0dp"
             android:id="@+id/listViewUserReviews"
             android:layout_marginBottom="40dp"
             android:layout_weight="1" />
@@ -61,7 +61,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back"
         android:id="@+id/back"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
@@ -70,7 +70,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Changes"
+        android:text="@string/submit_changes"
         android:id="@+id/submitAdminChanges"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"

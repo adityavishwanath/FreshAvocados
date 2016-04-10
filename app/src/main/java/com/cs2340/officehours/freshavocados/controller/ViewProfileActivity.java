@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cs2340.officehours.freshavocados.R;
-import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class ViewProfileActivity extends Activity {
     private final static int VIBRATE_TIME = 50;
@@ -18,7 +17,7 @@ public class ViewProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        UserManager uM = new UserManager();
+        //UserManager uM = new UserManager();
         TextView viewusername = (TextView) findViewById(R.id.viewProfileShowUsername);
         viewusername.setText(LoginActivity.currentUser.getUsername());
 

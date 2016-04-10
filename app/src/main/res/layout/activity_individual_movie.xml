@@ -18,35 +18,36 @@
         android:minHeight="100dp"
         android:minWidth="100dp"
         android:maxHeight="100dp"
-        android:maxWidth="100dp" />
+        android:maxWidth="100dp"
+        android:contentDescription="@string/thumbnail" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Movie Title (Year)"
+        android:text="@string/movie_title_year"
         android:id="@+id/movie_title_year"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/movie_img"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginStart="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Actor 1, Actor 2"
+        android:text="@string/actors"
         android:id="@+id/actor_actor"
         android:layout_toEndOf="@+id/movie_img"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_below="@+id/movie_title_year" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="This is a short synopsis of the movie "
+        android:text="@string/short_synop"
         android:id="@+id/short_synop"
         android:layout_below="@+id/movie_img"
         android:layout_centerHorizontal="true"
@@ -79,7 +80,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back"
         android:id="@+id/back"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
@@ -90,7 +91,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Review"
+        android:text="@string/add_review"
         android:id="@+id/add_review"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
@@ -101,10 +102,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Reviews"
+        android:text="@string/reviews"
         android:id="@+id/review_header"
         android:textStyle="bold|italic"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_alignTop="@+id/linearLayout"
         android:layout_toStartOf="@+id/actor_actor" />
 
@@ -118,24 +119,24 @@
         android:stepSize=".1"
         android:isIndicator="true"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Overall Rating"
+        android:text="@string/overall_rating"
         android:id="@+id/textView4"
         android:textStyle="bold|italic"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_alignTop="@+id/linearLayout"
         android:layout_alignStart="@+id/actor_actor" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Reviews"
+        android:text="@string/show_reviews"
         android:id="@+id/generateReviewlist"
         android:nestedScrollingEnabled="false"
         android:onClick="onClickGenerateReviewList"

@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cs2340.officehours.freshavocados.R;
-import com.cs2340.officehours.freshavocados.model.UserManagementFacade;
-import com.cs2340.officehours.freshavocados.model.UserManager;
 
 
 public class SplashActivity extends Activity {

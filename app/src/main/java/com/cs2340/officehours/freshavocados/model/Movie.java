@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by Aditya Vishwanath on 19-02-2016.
+ * Represents a Movie
  */
 public class Movie implements Serializable {
 
@@ -105,6 +106,6 @@ public class Movie implements Serializable {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return super.hashCode() + title_year.hashCode() * 157;
     }
 }

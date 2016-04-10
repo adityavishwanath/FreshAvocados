@@ -43,5 +43,36 @@
     <string name="title_activity_admin">AdminActivity</string>
     <string name="title_activity_individual_user">IndividualUserActivity</string>
     <string name="username_here">  Username here</string>
+    <string name="moviename_here">Movie Name Here</string>
+    <string name="placeholder_title">Placeholder Title</string>
+    <string name="admin_page">Admin Page</string>
+    <string name="reviewer">Reviewer</string>
+    <string name="banned">Banned</string>
+    <string name="add_a_review">Add a Review!</string>
+    <string name="movie_title_year">Movie Title (Year)</string>
+    <string name="search">Search</string>
+    <string name="locked">Locked</string>
+    <string name="actors">Actor 1, Actor 2</string>
+    <string name="review_text">Review Text</string>
+    <string name="generate">Generate</string>
+    <string name="short_synop">This is a short synopsis of the movie</string>
+    <string name="type_review_here">Type review here!</string>
+    <string name="back">Back</string>
+    <string name="top_rentals">Top Rentals</string>
+    <string name="app_descrip">A Movie Recommendation App</string>
+    <string name="submit_review">Submit Review</string>
+    <string name="new_to_theaters">New to Theatres</string>
+    <string name="submit_changes">Submit Changes</string>
+    <string name="new_dvd">New to DVD</string>
+    <string name="add_review">Add Review</string>
+    <string name="recommend_major">Recommended by Major</string>
+    <string name="reviews">Reviews</string>
+    <string name="recommend_all">Recommended by All</string>
+    <string name="or">Or...</string>
+    <string name="overall_rating">Overall Rating</string>
+    <string name="show_reviews">Show Reviews</string>
+    <string name="logo">Our Logo</string>
+    <string name="thumbnail">Movie Thumbnail</string>
+
 
 </resources>

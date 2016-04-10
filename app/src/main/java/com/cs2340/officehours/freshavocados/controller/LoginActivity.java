@@ -26,7 +26,7 @@ import java.net.URLEncoder;
 public class LoginActivity extends Activity {
     public static User currentUser;
     private String data;
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     private EditText username, password;
 
@@ -55,11 +55,10 @@ public class LoginActivity extends Activity {
             try {
                 data = "no data inputted yet";
                 new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
-                System.out.println("Result is: " + data);
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(vibrateTime);
+                a.vibrate(VIBRATE_TIME);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v("EXCEPTION", e.getMessage());
             }
         } else if (name.equals("")) {
             Toast.makeText(getApplicationContext(),
@@ -78,7 +77,7 @@ public class LoginActivity extends Activity {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -178,7 +177,7 @@ public class LoginActivity extends Activity {
                 } catch (JSONException e) {
                     Log.d("LoginActivity", "Some fatal error occurred");
                     Log.d("LoginActivity", "Exception: " + e.getMessage());
-                    e.printStackTrace();
+                    Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }

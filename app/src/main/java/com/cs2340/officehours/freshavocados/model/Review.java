@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Review implements Comparable<Review> {
 
-    public static final Map<String, LinkedList<Review>> reviewMap= new HashMap<>();
+    public static final Map<String, LinkedList<Review>> REVIEW_MAP = new HashMap<>();
 
     private final String username;
     private String major;
@@ -27,24 +27,24 @@ public class Review implements Comparable<Review> {
      * @param username username of the reviewer
      * @param major major of the reviewer
      * @param rating given to the movie
-     * @param review_text the text written about the movie
+     * @param reviewText the text written about the movie
      * @param movie the reviewed movie
      */
-    public Review(String username, String major, float rating, String review_text, Movie movie) {
+    public Review(String username, String major, float rating, String reviewText, Movie movie) {
         this.username = username;
         this.major = major;
         this.rating = rating;
-        this.review_text = review_text;
+        this.review_text = reviewText;
         this.movie = movie;
     }
 
     /**
-     * Adds a review to the reviewMap
+     * Adds a review to the REVIEW_MAP
      * @param movie the name of the movie
      * @param review the corresponding review
      */
     public static void addReview(String movie, Review review) {
-        LinkedList<Review> reviews = reviewMap.get(movie);
+        LinkedList<Review> reviews = REVIEW_MAP.get(movie);
         if (reviews == null) {
             reviews = new LinkedList<>();
         }
@@ -55,7 +55,7 @@ public class Review implements Comparable<Review> {
             review.setMajor(LoginActivity.currentUser.getMajor());
             reviews.add(review);
         }
-        reviewMap.put(movie, reviews);
+        REVIEW_MAP.put(movie, reviews);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Review implements Comparable<Review> {
      * @return the movie's overall rating
      */
     public static float getOverallRating(String movie) {
-        LinkedList<Review> temp = reviewMap.get(movie);
+        LinkedList<Review> temp = REVIEW_MAP.get(movie);
         float rating = 0;
         if (temp == null) {
             return rating;

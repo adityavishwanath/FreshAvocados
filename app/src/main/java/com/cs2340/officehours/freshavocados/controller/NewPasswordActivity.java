@@ -25,7 +25,7 @@ public class NewPasswordActivity extends Activity {
 //    Toast passwordChangedToast;
     private Toast passwordsNotMatched;
     private String password;
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class NewPasswordActivity extends Activity {
             passwordsNotMatched.show();
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -63,7 +63,7 @@ public class NewPasswordActivity extends Activity {
         //startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -120,7 +120,6 @@ public class NewPasswordActivity extends Activity {
                         if (query_result.equals("SUCCESS")) {
                             Toast.makeText(getApplicationContext(), "Password changed successfully!", Toast.LENGTH_SHORT).show();
                             LoginActivity.currentUser.setPass(password);
-                            System.out.println("PASS CHANGED");
                             finish();
                         } else if (query_result.equals("FAILURE")) {
                             Toast.makeText(getApplicationContext(), "Password failed to change.", Toast.LENGTH_SHORT).show();
@@ -135,7 +134,7 @@ public class NewPasswordActivity extends Activity {
                 } catch (JSONException e) {
                     Log.d("RegistrationActivity", "Some fatal error occurred");
                     Log.d("RegistrationActivity", "Exception: " + e.getMessage());
-                    e.printStackTrace();
+                    Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }

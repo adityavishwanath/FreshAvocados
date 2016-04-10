@@ -16,7 +16,7 @@ import com.cs2340.officehours.freshavocados.model.UserManager;
 
 
 public class SplashActivity extends Activity {
-    private final int vibrateValue = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class SplashActivity extends Activity {
     public void onClickLogin(View v) {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateValue);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -74,7 +74,7 @@ public class SplashActivity extends Activity {
     public void onClickRegister(View v) {
         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateValue);
+        a.vibrate(VIBRATE_TIME);
     }
 
     private Toast toast;
@@ -89,7 +89,7 @@ public class SplashActivity extends Activity {
         }
         toast.show();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateValue);
+        a.vibrate(VIBRATE_TIME);
     }
 
 }

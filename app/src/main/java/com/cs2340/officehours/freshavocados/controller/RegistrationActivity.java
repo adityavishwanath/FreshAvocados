@@ -29,8 +29,8 @@ public class RegistrationActivity extends Activity {
     private Toast wrongPass;
     private Toast invalidEmail;
     private String data;
-    private final int vibrateTime = 50;
-    private final int maxLines = 6;
+    private final static int VIBRATE_TIME = 50;
+    private final static int MAX_LINES = 6;
 //    private UserManager uM;
 
     @Override
@@ -40,7 +40,7 @@ public class RegistrationActivity extends Activity {
 //        uM = new UserManager();
         EditText bio = (EditText) findViewById(R.id.bio);
         bio.setHorizontallyScrolling(false);
-        bio.setMaxLines(maxLines);
+        bio.setMaxLines(MAX_LINES);
 
         Spinner dropdown = (Spinner) findViewById(R.id.major);
         String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies",
@@ -97,7 +97,7 @@ public class RegistrationActivity extends Activity {
             fieldIsEmpty = true;
             emptyField.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(vibrateTime);
+            a.vibrate(VIBRATE_TIME);
         }
         //Checks for valid email address
         if (!email.getText().toString().contains("@") || !(email.getText().toString().contains(".com")
@@ -112,7 +112,7 @@ public class RegistrationActivity extends Activity {
                 invalidEmail.show();
             }
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(vibrateTime);
+            a.vibrate(VIBRATE_TIME);
         }
         //Checks for matched passwords
         if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
@@ -122,20 +122,19 @@ public class RegistrationActivity extends Activity {
             wrongPass.show();
             passWasWrong = true;
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(vibrateTime);
+            a.vibrate(VIBRATE_TIME);
         }
         //Create new user
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
             try {
                 data = "no data inputted yet";
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(vibrateTime);
+                a.vibrate(VIBRATE_TIME);
                 new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
                         email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
                         lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
-                System.out.println("Result is: " + data);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v("EXCEPTION", e.getMessage());
             }
         }
     }
@@ -153,7 +152,7 @@ public class RegistrationActivity extends Activity {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     private Toast easterEgg;
@@ -168,7 +167,7 @@ public class RegistrationActivity extends Activity {
         }
         easterEgg.show();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
     /**
      * Asynchronous call to RegisterTask.
@@ -186,20 +185,20 @@ public class RegistrationActivity extends Activity {
          */
         @Override
         protected String doInBackground(String... args) {
-            final int NAME_INDEX = 0;
-            final int PASS_INDEX = 1;
-            final int EMAIL_INDEX = 2;
-            final int MAJOR_INDEX = 3;
-            final int FNAME_INDEX = 4;
-            final int LNAME_INDEX = 5;
-            final int BIO_INDEX = 6;
-            String name = args[NAME_INDEX];
-            String pass = args[PASS_INDEX];
-            String email = args[EMAIL_INDEX];
-            String major = args[MAJOR_INDEX];
-            String fname = args[FNAME_INDEX];
-            String lname = args[LNAME_INDEX];
-            String bio = args[BIO_INDEX];
+            final int nameIndex = 0;
+            final int passIndex = 1;
+            final int emailIndex = 2;
+            final int majorIndex = 3;
+            final int fnameIndex = 4;
+            final int lnameIndex = 5;
+            final int bioIndex = 6;
+            String name = args[nameIndex];
+            String pass = args[passIndex];
+            String email = args[emailIndex];
+            String major = args[majorIndex];
+            String fname = args[fnameIndex];
+            String lname = args[lnameIndex];
+            String bio = args[bioIndex];
 
             String link;
             BufferedReader bufferedReader;
@@ -257,7 +256,7 @@ public class RegistrationActivity extends Activity {
                 } catch (JSONException e) {
                     Log.d("RegistrationActivity", "Some fatal error occurred");
                     Log.d("RegistrationActivity", "Exception: " + e.getMessage());
-                    e.printStackTrace();
+                    Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }

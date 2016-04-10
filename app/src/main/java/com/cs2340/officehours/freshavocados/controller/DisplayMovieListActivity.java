@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class DisplayMovieListActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Movie> movies;
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +148,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
      */
     public void onClickBackButton(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
         finish();
     }
 

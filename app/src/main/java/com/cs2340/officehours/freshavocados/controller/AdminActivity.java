@@ -32,7 +32,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     private final ArrayList<String> admin_usernames = new ArrayList<>();
     private String isBanned = "";
     private String isLocked = "";
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**

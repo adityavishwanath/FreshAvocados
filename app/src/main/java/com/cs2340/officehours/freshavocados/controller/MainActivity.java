@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
     private Toast JSONFailure;
     private Toast noRecommendedMoviesAll;
     private Toast noRecommendedMoviesMajor;
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         queue = Volley.newRequestQueue(this);
-        Set<String> keys = Review.reviewMap.keySet();
+        Set<String> keys = Review.REVIEW_MAP.keySet();
         for (String key : keys) {
-            Log.d("ReviewCheck", Review.reviewMap.get(key).toString());
+            Log.d("ReviewCheck", Review.REVIEW_MAP.get(key).toString());
         }
     }
 
@@ -69,15 +69,15 @@ public class MainActivity extends Activity {
             emptySearch.show();
             return;
         }
-        final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?";
-        final String QUERY_PARAM = "q";
-        final String PAGE_LIMIT_PARAM = "page_limit";
-        final String PAGE_PARAM = "page";
-        final String API_KEY_PARAM = "apikey";
+        final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?";
+        final String queryParam = "q";
+        final String pageLimitParam = "page_limit";
+        final String pageParam = "page";
+        final String apiKeyParam = "apikey";
 
-        final String PAGE_LIMIT = "25";
-        final String PAGE = "1";
-        final String API_KEY = "yedukp76ffytfuy24zsqk7f5";
+        final String pageLimit = "25";
+        final String page = "1";
+        final String apiKey = "yedukp76ffytfuy24zsqk7f5";
 
 
         String query = searchField.getText().toString();
@@ -87,11 +87,11 @@ public class MainActivity extends Activity {
         } catch(Exception e) {
             Log.d("MainActivity", "Some major error occurred");
         }
-        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(QUERY_PARAM, encodedQuery)
-                .appendQueryParameter(PAGE_LIMIT_PARAM, PAGE_LIMIT)
-                .appendQueryParameter(PAGE_PARAM, PAGE)
-                .appendQueryParameter(API_KEY_PARAM, API_KEY)
+        Uri builtUri = Uri.parse(baseUrl).buildUpon()
+                .appendQueryParameter(queryParam, encodedQuery)
+                .appendQueryParameter(pageLimitParam, pageLimit)
+                .appendQueryParameter(pageParam, page)
+                .appendQueryParameter(apiKeyParam, apiKey)
                 .build();
 
         String url = builtUri.toString();
@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
                                 movies.add(m);
                             } catch (JSONException e) {
                                 Log.d("VolleyApp", "Failed to get JSON object");
-                                e.printStackTrace();
+                                Log.v("EXCEPTION", e.getMessage());
                             }
                         }
                         //once we have all data, then go to list screen
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
         //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -173,15 +173,15 @@ public class MainActivity extends Activity {
 
     /**
      * Method that handles the clicking of "Top Rentals" after entering the search query.
-     * @param V the view
+     * @param v the v
      */
-    public void onClickTopRentals(View V) {
-        final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
+    public void onClickTopRentals(View v) {
+        final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            Log.d("MAINACTIVITY", BASE_URL);
+            Log.d("MAINACTIVITY", baseUrl);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -212,7 +212,7 @@ public class MainActivity extends Activity {
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");
-                                    e.printStackTrace();
+                                    Log.v("EXCEPTION", e.getMessage());
                                 }
                             }
                             //once we have all data, then go to list screen
@@ -236,7 +236,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -244,12 +244,12 @@ public class MainActivity extends Activity {
      * @param v the view
      */
     public void onClickNewTheatres(View v) {
-        final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
+        final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            Log.d("MAINACTIVITY", BASE_URL);
+            Log.d("MAINACTIVITY", baseUrl);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -279,7 +279,7 @@ public class MainActivity extends Activity {
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");
-                                    e.printStackTrace();
+                                    Log.v("EXCEPTION", e.getMessage());
                                 }
                             }
                             //once we have all data, then go to list screen
@@ -303,7 +303,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -311,12 +311,12 @@ public class MainActivity extends Activity {
      * @param v the view
      */
     public void onClickNewDVD(View v) {
-        final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
+        final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
         try {
-            Log.d("MAINACTIVITY", BASE_URL);
+            Log.d("MAINACTIVITY", baseUrl);
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
+                    (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
@@ -346,7 +346,7 @@ public class MainActivity extends Activity {
                                     movies.add(m);
                                 } catch (JSONException e) {
                                     Log.d("VolleyApp", "Failed to get JSON object");
-                                    e.printStackTrace();
+                                    Log.v("EXCEPTION", e.getMessage());
                                 }
                             }
                             //once we have all data, then go to list screen
@@ -370,7 +370,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -379,11 +379,11 @@ public class MainActivity extends Activity {
      * @param v default param for an app's View
      */
     public void onClickRecommendedMajor(View v) {
-        Set<String> keys = Review.reviewMap.keySet();
+        Set<String> keys = Review.REVIEW_MAP.keySet();
         ArrayList<Review> reviews = new ArrayList<>();
         ArrayList<Movie> sorted_movies = new ArrayList<>();
         for (String key : keys) {
-            LinkedList<Review> value = Review.reviewMap.get(key);
+            LinkedList<Review> value = Review.REVIEW_MAP.get(key);
             for (Review r : value) {
                 if (r.getMajor().equals(LoginActivity.currentUser.getMajor())) {
                     reviews.add(r);
@@ -412,11 +412,11 @@ public class MainActivity extends Activity {
      * @param v default param for an app's View
      */
     public void onClickRecommendedAll(View v) {
-        Set<String> keys = Review.reviewMap.keySet();
+        Set<String> keys = Review.REVIEW_MAP.keySet();
         ArrayList<Review> reviews = new ArrayList<>();
         ArrayList<Movie> sorted_movies = new ArrayList<>();
         for (String key : keys) {
-            LinkedList<Review> value = Review.reviewMap.get(key);
+            LinkedList<Review> value = Review.REVIEW_MAP.get(key);
             for (Review r : value) {
                 reviews.add(r);
             }
@@ -447,7 +447,7 @@ public class MainActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -457,6 +457,6 @@ public class MainActivity extends Activity {
     public void onClickEdit(View v) {
         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 }

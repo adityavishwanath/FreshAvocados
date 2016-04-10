@@ -39,7 +39,7 @@ import java.util.LinkedList;
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private Movie m;
-    private final int vibrateTime = 50;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +74,12 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
 //        ListView list_view = (ListView) findViewById(R.id.review_list);
 //        list_view.setOnItemClickListener(this);
 //
-//        if (Review.reviewMap.get(m.getTitleYear()) == null) {
+//        if (Review.REVIEW_MAP.get(m.getTitleYear()) == null) {
 //            adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
 //                    new LinkedList<Review>());
 //            list_view.setAdapter(adapt);
 //        } else {
-//            rev = Review.reviewMap.get(m.getTitleYear());
+//            rev = Review.REVIEW_MAP.get(m.getTitleYear());
 //            adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
 //                    rev);
 //            list_view.setAdapter(adapt);
@@ -99,14 +99,14 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
 
         MyAdapter adapt;
-        if (Review.reviewMap.get(m.getTitleYear()) == null) {
+        if (Review.REVIEW_MAP.get(m.getTitleYear()) == null) {
             Log.d("Reviews in movie?", "NO");
             adapt = new MyAdapter(this, R.layout.review_item, R.id.movie_title_year,
                     new LinkedList<Review>());
             list_view.setAdapter(adapt);
         } else {
             Log.d("Reviews in movie?", "YES");
-            LinkedList<Review> rev = Review.reviewMap.get(m.getTitleYear());
+            LinkedList<Review> rev = Review.REVIEW_MAP.get(m.getTitleYear());
             adapt = new MyAdapter(this, R.layout.review_item, R.id.reviewer,
                     rev);
             list_view.setAdapter(adapt);
@@ -118,7 +118,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      */
     public void onClickBack(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
         finish();
     }
 
@@ -131,7 +131,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         intent.putExtra("movie", m);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -211,7 +211,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
                 InputStream in = new java.net.URL(urlDisplay).openStream();
                 mIcon = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v("EXCEPTION", e.getMessage());
             }
             return mIcon;
         }
@@ -274,7 +274,9 @@ private class GetReviewsTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         Log.d("JSONSTR", result);
         if (result != null) {
-            if (result.contains("EMPTY") && result.contains("query_result")) return;
+            if (result.contains("EMPTY") && result.contains("query_result")) {
+                return;
+            }
             try {
                 JSONObject jsnObject = new JSONObject(result);
                 JSONArray array = jsnObject.getJSONArray("Reviews");

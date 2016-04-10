@@ -8,7 +8,7 @@ import java.util.Map;
  * Edited by Brandon Manuel on 15-02-2016.
  */
 public class UserManager implements AuthenticationFacade, UserManagementFacade {
-    private static final Map<String, User> users = new HashMap<>();
+    private static final Map<String, User> USERS = new HashMap<>();
 
     /**
      * Returns the user by id
@@ -16,7 +16,7 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
      * @return User the associated user
      */
     public User findUserById(String id) {
-        return users.get(id);
+        return USERS.get(id);
     }
 
     /**
@@ -32,11 +32,11 @@ public class UserManager implements AuthenticationFacade, UserManagementFacade {
      */
     public boolean addUser(String firstName, String lastName, String userName, String pass,
                            String email, String major, String bio) {
-        if (users.containsKey(userName)) {
+        if (USERS.containsKey(userName)) {
            return false;
         } else {
             User user = new User(firstName, lastName, userName, pass, email, major, bio);
-            users.put(userName, user);
+            USERS.put(userName, user);
             return true;
         }
     }

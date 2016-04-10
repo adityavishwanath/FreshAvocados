@@ -27,8 +27,8 @@ import java.util.Arrays;
 public class EditProfileActivity extends Activity {
     private String newMajor;
     private EditText newBio;
-    private final int vibrateTime = 50;
-    private final int maxLines = 6;
+    private final static int VIBRATE_TIME = 50;
+    private final static int MAX_LINES = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class EditProfileActivity extends Activity {
         setContentView(R.layout.activity_edit_profile);
         EditText bio = (EditText) findViewById(R.id.bioEdit);
         bio.setHorizontallyScrolling(false);
-        bio.setMaxLines(maxLines);
+        bio.setMaxLines(MAX_LINES);
         bio.setText(LoginActivity.currentUser.getBio());
         Spinner dropdown = (Spinner) findViewById(R.id.majorEdit);
         String[] items = new String[]{"Aerospace Engineering", "Applied Language and Cultural Studies",
@@ -53,7 +53,6 @@ public class EditProfileActivity extends Activity {
         };
         String userMajor = LoginActivity.currentUser.getMajor();
         int pos = Arrays.asList(items).indexOf(userMajor);
-        System.out.println("POSITION OF CURRENT MAJOR IS " + pos);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.requestFocusFromTouch();
@@ -72,7 +71,7 @@ public class EditProfileActivity extends Activity {
         String username = LoginActivity.currentUser.getUsername();
 
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
 
         if (newBio.getText().toString().length() != 0) {
             new editProfileTask().execute(username, newMajor,
@@ -90,7 +89,7 @@ public class EditProfileActivity extends Activity {
     public void onClickCancelEditProfile(View v) {
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateTime);
+        a.vibrate(VIBRATE_TIME);
     }
 
     /**
@@ -148,7 +147,6 @@ public class EditProfileActivity extends Activity {
                         query_result = jsonObj.getString("query_result");
                         if (query_result.equals("SUCCESS")) {
                             Toast.makeText(getApplicationContext(), "Profile edited successfully!", Toast.LENGTH_SHORT).show();
-                            System.out.println("PROFILE EDITED");
                             LoginActivity.currentUser.setMajor(newMajor);
                             LoginActivity.currentUser.setBio(newBio.getText().toString());
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
@@ -166,7 +164,6 @@ public class EditProfileActivity extends Activity {
                 } catch (JSONException e) {
                     Log.d("EditProfileActivity", "Some fatal error occurred");
                     Log.d("EditProfileActivity", "Exception: " + e.getMessage());
-                    e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }

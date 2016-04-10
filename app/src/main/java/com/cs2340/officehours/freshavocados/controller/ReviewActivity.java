@@ -32,8 +32,8 @@ public class ReviewActivity extends Activity {
     private Movie m;
     private Toast t;
     private String rat;
-    private final int maxLines = 8;
-    private final int vibrateValue = 50;
+    private final static int MAX_LINES = 8;
+    private final static int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class ReviewActivity extends Activity {
 
         review_text = (EditText) findViewById(R.id.review_text);
         review_text.setHorizontallyScrolling(false);
-        review_text.setMaxLines(maxLines);
+        review_text.setMaxLines(MAX_LINES);
 
         m = (Movie) getIntent().getSerializableExtra("movie");
         TextView title = (TextView) findViewById(R.id.movie_name);
@@ -58,7 +58,7 @@ public class ReviewActivity extends Activity {
      */
     public void onClickBackToIndiv(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(vibrateValue);
+        a.vibrate(VIBRATE_TIME);
         finish();
     }
 
@@ -79,7 +79,7 @@ public class ReviewActivity extends Activity {
             rat = Float.toString(rating.getRating());
             new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), review_text.getText().toString());
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(vibrateValue);
+            a.vibrate(VIBRATE_TIME);
             finish();
         }
 
@@ -159,7 +159,7 @@ public class ReviewActivity extends Activity {
                 } catch (JSONException e) {
                     Log.d("ReviewActivity", "Some fatal error occurred");
                     Log.d("ReviewActivity", "Exception: " + e.getMessage());
-                    e.printStackTrace();
+                    Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }

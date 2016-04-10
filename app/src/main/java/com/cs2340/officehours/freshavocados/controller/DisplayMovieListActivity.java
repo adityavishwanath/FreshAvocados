@@ -47,8 +47,8 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
 
         /*
         Bundle extras = getIntent().getExtras();
-        movies = (ArrayList<Movie>) extras.get("movies");
-        pageTitle = (String) extras.get("title");
+        movies = (ArrayList<Movie>) extras.get(MOVIESTRING);
+        pageTitle = (String) extras.get(TITLESTRING);
         ArrayList<String> movieTitles = new ArrayList<>();
         for (Movie movie: movies) {
             movieTitles.add(movie.getTitleYear());

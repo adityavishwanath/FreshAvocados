@@ -56,11 +56,21 @@ public class MainActivity extends Activity {
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
     /**
      * String with the activity name
      */
-    private final static String ACTIVITYNAME = "MainActivity";
+    private static final String ACTIVITYNAME = "MainActivity";
+
+    /**
+     * String that says "movies"
+     */
+    private static final String MOVIESTRING = "movies";
+
+    /**
+     * String that says "title"
+     */
+    private static final String TITLESTRING = "title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +134,8 @@ public class MainActivity extends Activity {
             public void onResponse(JSONObject resp) {
                 //handle a valid response coming back.  Getting this string mainly for debug
                 final String response = resp.toString();
-                Log.d("MAINACTIVITY", response);
-                final JSONArray array = resp.optJSONArray("movies");
+                Log.d(ACTIVITYNAME, response);
+                final JSONArray array = resp.optJSONArray(MOVIESTRING);
                 final ArrayList<Movie> movies = new ArrayList<>();
                 for(int i = 0; i < array.length(); i++) {
                     try {
@@ -133,18 +143,18 @@ public class MainActivity extends Activity {
                         final JSONObject jsonObject = array.getJSONObject(i);
                         final Movie m = new Movie();
                         assert jsonObject != null;
-                        final String title = jsonObject.optString("title");
+                        final String title = jsonObject.optString(TITLESTRING);
                         final String year = jsonObject.optString("year");
                         final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                         final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                         final String synopsis = jsonObject.optString("synopsis");
                         final JSONObject links = jsonObject.getJSONObject("posters");
                         final String thumbnailLink = links.getString("thumbnail");
-                        Log.d("MAINACTIVITY", title);
-                        Log.d("MAINACTIVITY", year);
-                        Log.d("MAINACTIVITY", actor1);
-                        Log.d("MAINACTIVITY", actor2);
-                        Log.d("MAINACTIVITY", synopsis);
+                        Log.d(ACTIVITYNAME, title);
+                        Log.d(ACTIVITYNAME, year);
+                        Log.d(ACTIVITYNAME, actor1);
+                        Log.d(ACTIVITYNAME, actor2);
+                        Log.d(ACTIVITYNAME, synopsis);
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
@@ -180,12 +190,12 @@ public class MainActivity extends Activity {
      */
     private void changeView(ArrayList<Movie> movies, String title) {
         final Intent intent = new Intent(this, DisplayMovieListActivity.class);
-        intent.putExtra("movies", movies);
-        intent.putExtra("title", title);
+        intent.putExtra(MOVIESTRING, movies);
+        intent.putExtra(TITLESTRING, title);
         /*
         Bundle extras = new Bundle();
-        extras.putSerializable("MOVIES", movies);
-        extras.putString("TITLE", title);
+        extras.putSerializable(MOVIESTRING, movies);
+        extras.putString(TITLESTRING, title);
         intent.putExtras(extras);
         */
         startActivity(intent);
@@ -200,15 +210,15 @@ public class MainActivity extends Activity {
     public void onClickTopRentals(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=25&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
 //      try {
-        Log.d("MAINACTIVITY", baseUrl);
+        Log.d(ACTIVITYNAME, baseUrl);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject resp) {
                 //handle a valid response coming back.  Getting this string mainly for debug
                 final String response = resp.toString();
-                Log.d("MAINACTIVITY", response);
-                final JSONArray array = resp.optJSONArray("movies");
+                Log.d(ACTIVITYNAME, response);
+                final JSONArray array = resp.optJSONArray(MOVIESTRING);
                 final ArrayList<Movie> movies = new ArrayList<>();
                 for(int i = 0; i < array.length(); i++) {
                     try {
@@ -216,19 +226,19 @@ public class MainActivity extends Activity {
                         final JSONObject jsonObject = array.getJSONObject(i);
                         final Movie m = new Movie();
                         assert jsonObject != null;
-                        final String title = jsonObject.optString("title");
+                        final String title = jsonObject.optString(TITLESTRING);
                         final String year = jsonObject.optString("year");
                         final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                         final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                         final String synopsis = jsonObject.optString("synopsis");
                         final JSONObject links = jsonObject.getJSONObject("posters");
                         final String thumbnailLink = links.getString("thumbnail");
-                        Log.d("MAINACTIVITY", title);
-                        Log.d("MAINACTIVITY", year);
-                        Log.d("MAINACTIVITY", actor1);
-                        Log.d("MAINACTIVITY", actor2);
-                        Log.d("MAINACTIVITY", synopsis);
-                        Log.d("MAINACTIVITY", thumbnailLink);
+                        Log.d(ACTIVITYNAME, title);
+                        Log.d(ACTIVITYNAME, year);
+                        Log.d(ACTIVITYNAME, actor1);
+                        Log.d(ACTIVITYNAME, actor2);
+                        Log.d(ACTIVITYNAME, synopsis);
+                        Log.d(ACTIVITYNAME, thumbnailLink);
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
@@ -253,7 +263,7 @@ public class MainActivity extends Activity {
         queue.add(jsObjRequest);
 
 //        } catch (Exception e) {
-//            Log.d("MainActivity", e.getMessage());
+//            Log.d(ACTIVITYNAME, e.getMessage());
 //        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
@@ -266,15 +276,15 @@ public class MainActivity extends Activity {
     public void onClickNewTheatres(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
 //        try {
-        Log.d("MAINACTIVITY", baseUrl);
+        Log.d(ACTIVITYNAME, baseUrl);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
                             final String response = resp.toString();
-                            Log.d("MAINACTIVITY", response);
-                            final JSONArray array = resp.optJSONArray("movies");
+                            Log.d(ACTIVITYNAME, response);
+                            final JSONArray array = resp.optJSONArray(MOVIESTRING);
                             final ArrayList<Movie> movies = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 try {
@@ -282,18 +292,18 @@ public class MainActivity extends Activity {
                                     final JSONObject jsonObject = array.getJSONObject(i);
                                     final Movie m = new Movie();
                                     assert jsonObject != null;
-                                    final String title = jsonObject.optString("title");
+                                    final String title = jsonObject.optString(TITLESTRING);
                                     final String year = jsonObject.optString("year");
                                     final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                     final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                     final String synopsis = jsonObject.optString("synopsis");
                                     final JSONObject links = jsonObject.getJSONObject("posters");
                                     final String thumbnailLink = links.getString("thumbnail");
-                                    Log.d("MAINACTIVITY", title);
-                                    Log.d("MAINACTIVITY", year);
-                                    Log.d("MAINACTIVITY", actor1);
-                                    Log.d("MAINACTIVITY", actor2);
-                                    Log.d("MAINACTIVITY", synopsis);
+                                    Log.d(ACTIVITYNAME, title);
+                                    Log.d(ACTIVITYNAME, year);
+                                    Log.d(ACTIVITYNAME, actor1);
+                                    Log.d(ACTIVITYNAME, actor2);
+                                    Log.d(ACTIVITYNAME, synopsis);
                                     m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                     movies.add(m);
                                 } catch (JSONException e) {
@@ -319,7 +329,7 @@ public class MainActivity extends Activity {
         queue.add(jsObjRequest);
 
 //        } catch (Exception e) {
-//            Log.d("MainActivity", e.getMessage());
+//            Log.d(ACTIVITYNAME, e.getMessage());
 //        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);
@@ -332,7 +342,7 @@ public class MainActivity extends Activity {
     public void onClickNewDVD(View v) {
         final String baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?page_limit=25&page=1&country=us&apikey=yedukp76ffytfuy24zsqk7f5";
 //        try {
-        Log.d("MAINACTIVITY", baseUrl);
+        Log.d(ACTIVITYNAME, baseUrl);
 
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
@@ -340,8 +350,8 @@ public class MainActivity extends Activity {
                         public void onResponse(JSONObject resp) {
                             //handle a valid response coming back.  Getting this string mainly for debug
                             final String response = resp.toString();
-                            Log.d("MAINACTIVITY", response);
-                            final JSONArray array = resp.optJSONArray("movies");
+                            Log.d(ACTIVITYNAME, response);
+                            final JSONArray array = resp.optJSONArray(MOVIESTRING);
                             final ArrayList<Movie> movies = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 try {
@@ -349,18 +359,18 @@ public class MainActivity extends Activity {
                                     final JSONObject jsonObject = array.getJSONObject(i);
                                     final Movie m = new Movie();
                                     assert jsonObject != null;
-                                    final String title = jsonObject.optString("title");
+                                    final String title = jsonObject.optString(TITLESTRING);
                                     final String year = jsonObject.optString("year");
                                     final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
                                     final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
                                     final String synopsis = jsonObject.optString("synopsis");
                                     final JSONObject links = jsonObject.getJSONObject("posters");
                                     final String thumbnailLink = links.getString("thumbnail");
-                                    Log.d("MAINACTIVITY", title);
-                                    Log.d("MAINACTIVITY", year);
-                                    Log.d("MAINACTIVITY", actor1);
-                                    Log.d("MAINACTIVITY", actor2);
-                                    Log.d("MAINACTIVITY", synopsis);
+                                    Log.d(ACTIVITYNAME, title);
+                                    Log.d(ACTIVITYNAME, year);
+                                    Log.d(ACTIVITYNAME, actor1);
+                                    Log.d(ACTIVITYNAME, actor2);
+                                    Log.d(ACTIVITYNAME, synopsis);
                                     m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                                     movies.add(m);
                                 } catch (JSONException e) {
@@ -386,7 +396,7 @@ public class MainActivity extends Activity {
         queue.add(jsObjRequest);
 
 //        } catch (Exception e) {
-//            Log.d("MainActivity", e.getMessage());
+//            Log.d(ACTIVITYNAME, e.getMessage());
 //        }
         final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         a.vibrate(VIBRATE_TIME);

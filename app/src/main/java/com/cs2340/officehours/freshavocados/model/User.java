@@ -15,9 +15,9 @@ public class User {
     private final String email;
     private String major;
     private String bio;
-    private boolean isAdmin;
-    private boolean isLocked;
-    private boolean isBanned;
+    //private boolean isAdmin;
+    //private boolean isLocked;
+    //private boolean isBanned;
 //    private int loginAttempts;
     private static int userNumber;
 
@@ -186,7 +186,7 @@ public class User {
      * @param pass password to be checked
      * @return true or false depending on if they are equal or not
      */
-    public boolean checkPassword(String pass) {
-        return password.equals(pass);
-    }
+//    public boolean checkPassword(String pass) {
+//        return password.equals(pass);
+//    }
 }

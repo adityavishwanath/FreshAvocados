@@ -32,6 +32,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     private final ArrayList<String> admin_usernames = new ArrayList<>();
     private String isBanned = "";
     private String isLocked = "";
+    private final int vibrateTime = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +89,10 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(AdminActivity.this, IndividualUserActivity.class);
         String user = admin_usernames.get(position);
+        final int timeMillis = 10000;
         try {
             AsyncTask uit = new UserInfoTask().execute(user);
-            uit.get(10000, TimeUnit.MILLISECONDS);
+            uit.get(timeMillis, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             Log.d("Uh oh", e.getMessage());
         }
@@ -120,7 +122,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**

@@ -181,7 +181,10 @@ public class Review implements Comparable<Review> {
 
     @Override
     public int hashCode() {
-        return username.hashCode() * 43 * review_text.hashCode() * 19 * major.hashCode() * 17;
+        final int num1 = 43;
+        final int num2 = 19;
+        final int num3 = 17;
+        return username.hashCode() * num1 * review_text.hashCode() * num2 * major.hashCode() * num3;
     }
 
     @Override

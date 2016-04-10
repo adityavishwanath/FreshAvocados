@@ -26,6 +26,7 @@ import java.net.URLEncoder;
 public class LoginActivity extends Activity {
     public static User currentUser;
     private String data;
+    private final int vibrateTime = 50;
 
     private EditText username, password;
 
@@ -56,7 +57,7 @@ public class LoginActivity extends Activity {
                 new LoginTask().execute(name, pass); //login task is private inner ASyncTask class
                 System.out.println("Result is: " + data);
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(50);
+                a.vibrate(vibrateTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,7 +78,7 @@ public class LoginActivity extends Activity {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**

@@ -12,6 +12,7 @@ import com.cs2340.officehours.freshavocados.R;
 import com.cs2340.officehours.freshavocados.model.UserManager;
 
 public class ViewProfileActivity extends Activity {
+    private final int vibrateValue = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class ViewProfileActivity extends Activity {
     public void onClickCancelViewProfile(View v) {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateValue);
     }
 
     /**
@@ -54,7 +55,7 @@ public class ViewProfileActivity extends Activity {
     public void onClickEditProfile(View v) {
         startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateValue);
         finish();
     }
 
@@ -65,7 +66,7 @@ public class ViewProfileActivity extends Activity {
     public void onClickChangePassword(View v) {
         startActivity(new Intent(getApplicationContext(), ConfirmPasswordActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateValue);
     }
 //
 //    public void editPassword(View view) {

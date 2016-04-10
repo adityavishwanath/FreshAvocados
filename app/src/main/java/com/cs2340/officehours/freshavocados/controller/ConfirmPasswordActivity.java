@@ -15,6 +15,7 @@ public class ConfirmPasswordActivity extends Activity {
 
     private Toast wrongPasswordToast;
     private Toast correctPasswordToast;
+    private final int vibrateTime = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class ConfirmPasswordActivity extends Activity {
 //        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -55,7 +56,7 @@ public class ConfirmPasswordActivity extends Activity {
             finish();
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
 }

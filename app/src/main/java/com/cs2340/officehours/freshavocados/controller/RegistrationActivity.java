@@ -29,6 +29,8 @@ public class RegistrationActivity extends Activity {
     private Toast wrongPass;
     private Toast invalidEmail;
     private String data;
+    private final int vibrateTime = 50;
+    private final int maxLines = 6;
 //    private UserManager uM;
 
     @Override
@@ -38,7 +40,7 @@ public class RegistrationActivity extends Activity {
 //        uM = new UserManager();
         EditText bio = (EditText) findViewById(R.id.bio);
         bio.setHorizontallyScrolling(false);
-        bio.setMaxLines(6);
+        bio.setMaxLines(maxLines);
 
         Spinner dropdown = (Spinner) findViewById(R.id.major);
         String[] items = new String[]{"Major", "Aerospace Engineering", "Applied Language and Cultural Studies",
@@ -95,7 +97,7 @@ public class RegistrationActivity extends Activity {
             fieldIsEmpty = true;
             emptyField.show();
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(50);
+            a.vibrate(vibrateTime);
         }
         //Checks for valid email address
         if (!email.getText().toString().contains("@") || !(email.getText().toString().contains(".com")
@@ -110,7 +112,7 @@ public class RegistrationActivity extends Activity {
                 invalidEmail.show();
             }
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(50);
+            a.vibrate(vibrateTime);
         }
         //Checks for matched passwords
         if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
@@ -120,14 +122,14 @@ public class RegistrationActivity extends Activity {
             wrongPass.show();
             passWasWrong = true;
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(50);
+            a.vibrate(vibrateTime);
         }
         //Create new user
         if (!fieldIsEmpty && !badEmail && !passWasWrong) {
             try {
                 data = "no data inputted yet";
                 Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                a.vibrate(50);
+                a.vibrate(vibrateTime);
                 new RegisterTask().execute(uname.getText().toString().trim(), pass.getText().toString(),
                         email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
                         lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
@@ -151,7 +153,7 @@ public class RegistrationActivity extends Activity {
 //        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     private Toast easterEgg;
@@ -166,7 +168,7 @@ public class RegistrationActivity extends Activity {
         }
         easterEgg.show();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
     /**
      * Asynchronous call to RegisterTask.
@@ -184,13 +186,20 @@ public class RegistrationActivity extends Activity {
          */
         @Override
         protected String doInBackground(String... args) {
-            String name = args[0];
-            String pass = args[1];
-            String email = args[2];
-            String major = args[3];
-            String fname = args[4];
-            String lname = args[5];
-            String bio = args[6];
+            final int NAME_INDEX = 0;
+            final int PASS_INDEX = 1;
+            final int EMAIL_INDEX = 2;
+            final int MAJOR_INDEX = 3;
+            final int FNAME_INDEX = 4;
+            final int LNAME_INDEX = 5;
+            final int BIO_INDEX = 6;
+            String name = args[NAME_INDEX];
+            String pass = args[PASS_INDEX];
+            String email = args[EMAIL_INDEX];
+            String major = args[MAJOR_INDEX];
+            String fname = args[FNAME_INDEX];
+            String lname = args[LNAME_INDEX];
+            String bio = args[BIO_INDEX];
 
             String link;
             BufferedReader bufferedReader;

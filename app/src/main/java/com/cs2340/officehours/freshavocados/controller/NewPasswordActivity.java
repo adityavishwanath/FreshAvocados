@@ -25,6 +25,7 @@ public class NewPasswordActivity extends Activity {
 //    Toast passwordChangedToast;
     private Toast passwordsNotMatched;
     private String password;
+    private final int vibrateTime = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class NewPasswordActivity extends Activity {
             passwordsNotMatched.show();
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -62,7 +63,7 @@ public class NewPasswordActivity extends Activity {
         //startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**

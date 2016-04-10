@@ -32,6 +32,8 @@ public class ReviewActivity extends Activity {
     private Movie m;
     private Toast t;
     private String rat;
+    private final int maxLines = 8;
+    private final int vibrateValue = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class ReviewActivity extends Activity {
 
         review_text = (EditText) findViewById(R.id.review_text);
         review_text.setHorizontallyScrolling(false);
-        review_text.setMaxLines(8);
+        review_text.setMaxLines(maxLines);
 
         m = (Movie) getIntent().getSerializableExtra("movie");
         TextView title = (TextView) findViewById(R.id.movie_name);
@@ -56,7 +58,7 @@ public class ReviewActivity extends Activity {
      */
     public void onClickBackToIndiv(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateValue);
         finish();
     }
 
@@ -77,7 +79,7 @@ public class ReviewActivity extends Activity {
             rat = Float.toString(rating.getRating());
             new AddReviewTask().execute(LoginActivity.currentUser.getUsername(), m.getTitleYear(), review_text.getText().toString());
             Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            a.vibrate(50);
+            a.vibrate(vibrateValue);
             finish();
         }
 

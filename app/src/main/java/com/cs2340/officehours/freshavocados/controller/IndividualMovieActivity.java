@@ -39,6 +39,7 @@ import java.util.LinkedList;
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private Movie m;
+    private final int vibrateTime = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +118,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      */
     public void onClickBack(View v) {
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
         finish();
     }
 
@@ -130,7 +131,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         intent.putExtra("movie", m);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**

@@ -27,6 +27,8 @@ import java.util.Arrays;
 public class EditProfileActivity extends Activity {
     private String newMajor;
     private EditText newBio;
+    private final int vibrateTime = 50;
+    private final int maxLines = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class EditProfileActivity extends Activity {
         setContentView(R.layout.activity_edit_profile);
         EditText bio = (EditText) findViewById(R.id.bioEdit);
         bio.setHorizontallyScrolling(false);
-        bio.setMaxLines(6);
+        bio.setMaxLines(maxLines);
         bio.setText(LoginActivity.currentUser.getBio());
         Spinner dropdown = (Spinner) findViewById(R.id.majorEdit);
         String[] items = new String[]{"Aerospace Engineering", "Applied Language and Cultural Studies",
@@ -70,7 +72,7 @@ public class EditProfileActivity extends Activity {
         String username = LoginActivity.currentUser.getUsername();
 
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
 
         if (newBio.getText().toString().length() != 0) {
             new editProfileTask().execute(username, newMajor,
@@ -88,7 +90,7 @@ public class EditProfileActivity extends Activity {
     public void onClickCancelEditProfile(View v) {
         finish();
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**

@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     private Toast JSONFailure;
     private Toast noRecommendedMoviesAll;
     private Toast noRecommendedMoviesMajor;
+    private final int vibrateTime = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public class MainActivity extends Activity {
         //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -235,7 +236,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -302,7 +303,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -369,7 +370,7 @@ public class MainActivity extends Activity {
             Log.d("MainActivity", e.getMessage());
         }
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -446,7 +447,7 @@ public class MainActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 
     /**
@@ -456,6 +457,6 @@ public class MainActivity extends Activity {
     public void onClickEdit(View v) {
         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
         Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        a.vibrate(50);
+        a.vibrate(vibrateTime);
     }
 }

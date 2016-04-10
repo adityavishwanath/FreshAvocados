@@ -102,4 +102,9 @@ public class Movie implements Serializable {
         Movie that = (Movie) other;
         return this.getTitleYear().equals(that.getTitleYear());
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

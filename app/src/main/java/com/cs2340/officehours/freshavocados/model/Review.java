@@ -89,7 +89,7 @@ public class Review implements Comparable<Review> {
         if (temp == null) {
             return rating;
         }
-        for (Review r : temp) {
+        for (final Review r : temp) {
             rating = rating + r.getRating();
         }
         return rating / temp.size();

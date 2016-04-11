@@ -23,13 +23,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.LinkedList;
+import java.util.List;
 
 public class IndividualUserActivity extends Activity implements AdapterView.OnItemClickListener {
 
     /**
      * LinkedList for user reviews
      */
-    private final LinkedList<Review> userReviews = new LinkedList<>();
+    private final List<Review> userReviews = new LinkedList<>();
     /**
      * String for username of the review(s)
      */
@@ -47,11 +48,11 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
 
         final CheckBox isLocked = (CheckBox) findViewById(R.id.isLockedCheck);
         final CheckBox isBanned = (CheckBox) findViewById(R.id.isBannedCheck);
-        final TextView username_display = (TextView) findViewById(R.id.username_display);
+        final TextView usernameDisplay = (TextView) findViewById(R.id.username_display);
 
         isLocked.setChecked(userLockedStatus);
         isBanned.setChecked(userBanStatus);
-        username_display.setText(username);
+        usernameDisplay.setText(username);
 
         //----------------------------
         final ListView listViewUserReviews = (ListView) findViewById(R.id.listViewUserReviews);
@@ -92,20 +93,20 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
         final boolean updatedLockedStatus = newLockedStatus.isChecked();
         final boolean updatedBanStatus = newBanStatus.isChecked();
 
-        String lock_status;
-        String ban_status;
+        String lockStatus;
+        String banStatus;
         if (updatedLockedStatus) {
-            lock_status = "1";
+            lockStatus = "1";
         } else {
-            lock_status = "0";
+            lockStatus = "0";
         }
         if (updatedBanStatus) {
-            ban_status = "1";
+            banStatus = "1";
         } else {
-            ban_status = "0";
+            banStatus = "0";
         }
 
-        new UpdateTask().execute(username, lock_status, ban_status);
+        new UpdateTask().execute(username, lockStatus, banStatus);
         finish();
 
     }
@@ -128,8 +129,8 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
             final RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
             rating.setRating(rev.getRating());
 
-            final TextView review_text = (TextView) view.findViewById(R.id.review_text);
-            review_text.setText(rev.getReviewText());
+            final TextView reviewText = (TextView) view.findViewById(R.id.review_text);
+            reviewText.setText(rev.getReviewText());
 
             return view;
         }
@@ -139,7 +140,7 @@ public class IndividualUserActivity extends Activity implements AdapterView.OnIt
          * @param context the context in which the adapter is being used
          * @param objects the list of things being displayed
          */
-        public MyAdapter(Context context, LinkedList<Review> objects) {
+        public MyAdapter(Context context, List<Review> objects) {
             super(context, R.layout.review_item, objects);
         }
     }

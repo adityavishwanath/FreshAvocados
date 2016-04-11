@@ -29,6 +29,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends Activity {
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
 
         queue = Volley.newRequestQueue(this);
         final Set<String> keys = Review.REVIEW_MAP.keySet();
-        for (String key : keys) {
+        for (final String key : keys) {
             Log.d("ReviewCheck", Review.REVIEW_MAP.get(key).toString());
         }
     }
@@ -188,9 +189,9 @@ public class MainActivity extends Activity {
      * @param movies the list of Movie objects we created from the JSON response
      * @param title the title of the movie
      */
-    private void changeView(ArrayList<Movie> movies, String title) {
+    private void changeView(List<Movie> movies, String title) {
         final Intent intent = new Intent(this, DisplayMovieListActivity.class);
-        intent.putExtra(MOVIESTRING, movies);
+        intent.putExtra(MOVIESTRING, (ArrayList<Movie>)movies);
         intent.putExtra(TITLESTRING, title);
         /*
         Bundle extras = new Bundle();
@@ -279,52 +280,52 @@ public class MainActivity extends Activity {
         Log.d(ACTIVITYNAME, baseUrl);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject resp) {
-                            //handle a valid response coming back.  Getting this string mainly for debug
-                            final String response = resp.toString();
-                            Log.d(ACTIVITYNAME, response);
-                            final JSONArray array = resp.optJSONArray(MOVIESTRING);
-                            final ArrayList<Movie> movies = new ArrayList<>();
-                            for(int i = 0; i < array.length(); i++) {
-                                try {
-                                    //for each array element, we have to create an object
-                                    final JSONObject jsonObject = array.getJSONObject(i);
-                                    final Movie m = new Movie();
-                                    assert jsonObject != null;
-                                    final String title = jsonObject.optString(TITLESTRING);
-                                    final String year = jsonObject.optString("year");
-                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    final String synopsis = jsonObject.optString("synopsis");
-                                    final JSONObject links = jsonObject.getJSONObject("posters");
-                                    final String thumbnailLink = links.getString("thumbnail");
-                                    Log.d(ACTIVITYNAME, title);
-                                    Log.d(ACTIVITYNAME, year);
-                                    Log.d(ACTIVITYNAME, actor1);
-                                    Log.d(ACTIVITYNAME, actor2);
-                                    Log.d(ACTIVITYNAME, synopsis);
-                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
-                                    movies.add(m);
-                                } catch (JSONException e) {
-                                    Log.d("VolleyApp", "Failed to get JSON object");
-                                    Log.v("EXCEPTION", e.getMessage());
-                                }
-                            }
-                            //once we have all data, then go to list screen
-                            changeView(movies, "In Theatres Now");
-                        }
-                    }, new Response.ErrorListener() {
+            @Override
+            public void onResponse(JSONObject resp) {
+                //handle a valid response coming back.  Getting this string mainly for debug
+                final String response = resp.toString();
+                Log.d(ACTIVITYNAME, response);
+                final JSONArray array = resp.optJSONArray(MOVIESTRING);
+                final ArrayList<Movie> movies = new ArrayList<>();
+                for(int i = 0; i < array.length(); i++) {
+                    try {
+                        //for each array element, we have to create an object
+                        final JSONObject jsonObject = array.getJSONObject(i);
+                        final Movie m = new Movie();
+                        assert jsonObject != null;
+                        final String title = jsonObject.optString(TITLESTRING);
+                        final String year = jsonObject.optString("year");
+                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                        final String synopsis = jsonObject.optString("synopsis");
+                        final JSONObject links = jsonObject.getJSONObject("posters");
+                        final String thumbnailLink = links.getString("thumbnail");
+                        Log.d(ACTIVITYNAME, title);
+                        Log.d(ACTIVITYNAME, year);
+                        Log.d(ACTIVITYNAME, actor1);
+                        Log.d(ACTIVITYNAME, actor2);
+                        Log.d(ACTIVITYNAME, synopsis);
+                        m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
+                        movies.add(m);
+                    } catch (JSONException e) {
+                        Log.d("VolleyApp", "Failed to get JSON object");
+                        Log.v("EXCEPTION", e.getMessage());
+                    }
+                }
+                //once we have all data, then go to list screen
+                changeView(movies, "In Theatres Now");
+            }
+        }, new Response.ErrorListener() {
 
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            final String response = "JSON Request Failed!";
-                            if (jSONFailure == null) {
-                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
-                            }
-                            jSONFailure.show();
-                        }
-                    });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                final String response = "JSON Request Failed!";
+                if (jSONFailure == null) {
+                    jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                }
+                jSONFailure.show();
+            }
+        });
             //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
 
@@ -346,52 +347,52 @@ public class MainActivity extends Activity {
 
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject resp) {
-                            //handle a valid response coming back.  Getting this string mainly for debug
-                            final String response = resp.toString();
-                            Log.d(ACTIVITYNAME, response);
-                            final JSONArray array = resp.optJSONArray(MOVIESTRING);
-                            final ArrayList<Movie> movies = new ArrayList<>();
-                            for(int i = 0; i < array.length(); i++) {
-                                try {
-                                    //for each array element, we have to create an object
-                                    final JSONObject jsonObject = array.getJSONObject(i);
-                                    final Movie m = new Movie();
-                                    assert jsonObject != null;
-                                    final String title = jsonObject.optString(TITLESTRING);
-                                    final String year = jsonObject.optString("year");
-                                    final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                                    final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                                    final String synopsis = jsonObject.optString("synopsis");
-                                    final JSONObject links = jsonObject.getJSONObject("posters");
-                                    final String thumbnailLink = links.getString("thumbnail");
-                                    Log.d(ACTIVITYNAME, title);
-                                    Log.d(ACTIVITYNAME, year);
-                                    Log.d(ACTIVITYNAME, actor1);
-                                    Log.d(ACTIVITYNAME, actor2);
-                                    Log.d(ACTIVITYNAME, synopsis);
-                                    m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
-                                    movies.add(m);
-                                } catch (JSONException e) {
-                                    Log.d("VolleyApp", "Failed to get JSON object");
-                                    Log.v("EXCEPTION", e.getMessage());
-                                }
-                            }
-                            //once we have all data, then go to list screen
-                            changeView(movies, "New DVD Releases");
-                        }
-                    }, new Response.ErrorListener() {
+            @Override
+            public void onResponse(JSONObject resp) {
+                //handle a valid response coming back.  Getting this string mainly for debug
+                final String response = resp.toString();
+                Log.d(ACTIVITYNAME, response);
+                final JSONArray array = resp.optJSONArray(MOVIESTRING);
+                final ArrayList<Movie> movies = new ArrayList<>();
+                for(int i = 0; i < array.length(); i++) {
+                    try {
+                        //for each array element, we have to create an object
+                        final JSONObject jsonObject = array.getJSONObject(i);
+                        final Movie m = new Movie();
+                        assert jsonObject != null;
+                        final String title = jsonObject.optString(TITLESTRING);
+                        final String year = jsonObject.optString("year");
+                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
+                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
+                        final String synopsis = jsonObject.optString("synopsis");
+                        final JSONObject links = jsonObject.getJSONObject("posters");
+                        final String thumbnailLink = links.getString("thumbnail");
+                        Log.d(ACTIVITYNAME, title);
+                        Log.d(ACTIVITYNAME, year);
+                        Log.d(ACTIVITYNAME, actor1);
+                        Log.d(ACTIVITYNAME, actor2);
+                        Log.d(ACTIVITYNAME, synopsis);
+                        m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
+                        movies.add(m);
+                    } catch (JSONException e) {
+                        Log.d("VolleyApp", "Failed to get JSON object");
+                        Log.v("EXCEPTION", e.getMessage());
+                    }
+                }
+                //once we have all data, then go to list screen
+                changeView(movies, "New DVD Releases");
+            }
+        }, new Response.ErrorListener() {
 
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            final String response = "JSON Request Failed!";
-                            if (jSONFailure == null) {
-                                jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
-                            }
-                            jSONFailure.show();
-                        }
-                    });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                final String response = "JSON Request Failed!";
+                if (jSONFailure == null) {
+                    jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                }
+                jSONFailure.show();
+            }
+        });
             //this actually queues up the async response with Volley
         queue.add(jsObjRequest);
 
@@ -410,10 +411,10 @@ public class MainActivity extends Activity {
     public void onClickRecommendedMajor(View v) {
         final Set<String> keys = Review.REVIEW_MAP.keySet();
         final ArrayList<Review> reviews = new ArrayList<>();
-        final ArrayList<Movie> sorted_movies = new ArrayList<>();
-        for (String key : keys) {
+        final ArrayList<Movie> sortedMovies = new ArrayList<>();
+        for (final String key : keys) {
             final LinkedList<Review> value = Review.REVIEW_MAP.get(key);
-            for (Review r : value) {
+            for (final Review r : value) {
                 if (r.getMajor().equals(LoginActivity.currentUser.getMajor())) {
                     reviews.add(r);
                 }
@@ -421,12 +422,12 @@ public class MainActivity extends Activity {
         }
         if (!(reviews.isEmpty())) {
             Collections.sort(reviews);
-            for (Review rev : reviews) {
-                if (!(sorted_movies.contains(rev.getMovie()))) {
-                    sorted_movies.add(rev.getMovie());
+            for (final Review rev : reviews) {
+                if (!(sortedMovies.contains(rev.getMovie()))) {
+                    sortedMovies.add(rev.getMovie());
                 }
             }
-            changeView(sorted_movies, "Recommended by Major");
+            changeView(sortedMovies, "Recommended by Major");
         } else {
             if (noRecommendedMoviesMajor == null) {
                 noRecommendedMoviesMajor = Toast.makeText(getApplicationContext(), "No movies to recommend", Toast.LENGTH_SHORT);
@@ -443,21 +444,21 @@ public class MainActivity extends Activity {
     public void onClickRecommendedAll(View v) {
         final Set<String> keys = Review.REVIEW_MAP.keySet();
         final ArrayList<Review> reviews = new ArrayList<>();
-        final ArrayList<Movie> sorted_movies = new ArrayList<>();
-        for (String key : keys) {
+        final ArrayList<Movie> sortedMovies = new ArrayList<>();
+        for (final String key : keys) {
             final LinkedList<Review> value = Review.REVIEW_MAP.get(key);
-            for (Review r : value) {
+            for (final Review r : value) {
                 reviews.add(r);
             }
         }
         if (!(reviews.isEmpty())) {
             Collections.sort(reviews);
-            for (Review rev : reviews) {
-                if (!(sorted_movies.contains(rev.getMovie()))) {
-                    sorted_movies.add(rev.getMovie());
+            for (final Review rev : reviews) {
+                if (!(sortedMovies.contains(rev.getMovie()))) {
+                    sortedMovies.add(rev.getMovie());
                 }
             }
-            changeView(sorted_movies, "Recommended by All");
+            changeView(sortedMovies, "Recommended by All");
         } else {
             if (noRecommendedMoviesAll == null) {
                 noRecommendedMoviesAll = Toast.makeText(getApplicationContext(), "No movies to recommend", Toast.LENGTH_SHORT);

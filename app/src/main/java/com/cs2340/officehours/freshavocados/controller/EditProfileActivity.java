@@ -36,15 +36,15 @@ public class EditProfileActivity extends Activity {
     /**
      * Int for the timer for the vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
     /**
      * Int for max number of lines on bio
      */
-    private final static int MAX_LINES = 6;
+    private static final int MAX_LINES = 6;
     /**
      * String for name of activity
      */
-    private final static String ACTIVITYNAME = "EditProfileActivity";
+    private static final String ACTIVITYNAME = "EditProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,17 +146,17 @@ public class EditProfileActivity extends Activity {
             if (result != null) {
                 try {
                     final JSONObject jsonObj = new JSONObject(result);
-                    String query_result;
+                    String queryResult;
                     try {
                         Log.d(ACTIVITYNAME, "Entry query_result exists");
-                        query_result = jsonObj.getString("query_result");
-                        if ("SUCCESS".equals(query_result)) {
+                        queryResult = jsonObj.getString("query_result");
+                        if ("SUCCESS".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Profile edited successfully!", Toast.LENGTH_SHORT).show();
                             LoginActivity.currentUser.setMajor(newMajor);
                             LoginActivity.currentUser.setBio(newBio.getText().toString());
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                             finish();
-                        } else if ("FAILURE".equals(query_result)) {
+                        } else if ("FAILURE".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Profile failed to change.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),

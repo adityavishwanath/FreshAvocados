@@ -34,7 +34,7 @@ public class NewPasswordActivity extends Activity {
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,15 +122,15 @@ public class NewPasswordActivity extends Activity {
             if (result != null) {
                 try {
                     final JSONObject jsonObj = new JSONObject(result);
-                    String query_result;
+                    String queryResult;
                     try {
                         Log.d("NewPasswordActivity", "Entry query_result exists");
-                        query_result = jsonObj.getString("query_result");
-                        if ("SUCCESS".equals(query_result)) {
+                        queryResult = jsonObj.getString("query_result");
+                        if ("SUCCESS".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Password changed successfully!", Toast.LENGTH_SHORT).show();
                             LoginActivity.currentUser.setPass(password);
                             finish();
-                        } else if ("FAILURE".equals(query_result)) {
+                        } else if ("FAILURE".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Password failed to change.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),

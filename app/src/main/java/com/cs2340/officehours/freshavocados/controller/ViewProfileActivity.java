@@ -14,7 +14,7 @@ public class ViewProfileActivity extends Activity {
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

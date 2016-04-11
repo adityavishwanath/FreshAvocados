@@ -17,17 +17,18 @@ import com.cs2340.officehours.freshavocados.model.Movie;
 import com.cs2340.officehours.freshavocados.model.Movies;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayMovieListActivity extends Activity implements AdapterView.OnItemClickListener {
 
     /**
      * ArrayList of movies
      */
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
     /**
      * Int with time for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         final TextView titleText = (TextView) findViewById(R.id.pageTitle);
         titleText.setText(pageTitle);
         movies = (ArrayList<Movie>) getIntent().getSerializableExtra("movies");
-        for (Movie m : movies) {
+        for (final Movie m : movies) {
             Movies.addItem(m);
         }
         listView.setAdapter(new MyAdapter(this, movies));
@@ -73,7 +74,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
         final Intent i = new Intent(DisplayMovieListActivity.this, IndividualMovieActivity.class);
 
         i.putExtra("position", position);
-        i.putExtra("movies", movies);
+        i.putExtra("movies", (ArrayList<Movie>)movies);
         startActivity(i);
     }
 
@@ -146,7 +147,7 @@ public class DisplayMovieListActivity extends Activity implements AdapterView.On
          * @param context the system's current context
          * @param objects the list of movies to be displayed
          */
-        public MyAdapter(Context context, ArrayList<Movie> objects) {
+        public MyAdapter(Context context, List<Movie> objects) {
             super(context, R.layout.list_item, R.id.title_year, objects);
         }
 

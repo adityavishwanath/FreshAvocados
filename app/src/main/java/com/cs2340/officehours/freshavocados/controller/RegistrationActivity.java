@@ -44,11 +44,11 @@ public class RegistrationActivity extends Activity {
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
     /**
      * Int for max lines for bio
      */
-    private final static int MAX_LINES = 6;
+    private static final int MAX_LINES = 6;
 //    private UserManager uM;
 
     @Override
@@ -80,7 +80,7 @@ public class RegistrationActivity extends Activity {
         final EditText uname = (EditText) findViewById(R.id.u_name);
         final EditText pass = (EditText) findViewById(R.id.pass);
         final EditText email = (EditText) findViewById(R.id.email);
-        final EditText confirm_password = (EditText) findViewById(R.id.confirm_password);
+        final EditText confirmPassword = (EditText) findViewById(R.id.confirm_password);
         //EditText major = (EditText) findViewById(R.id.major);
         final Spinner majorSpinner = (Spinner) findViewById(R.id.major);
         final String major = majorSpinner.getSelectedItem().toString();
@@ -122,7 +122,7 @@ public class RegistrationActivity extends Activity {
             a.vibrate(VIBRATE_TIME);
         }
         //Checks for matched passwords
-        if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirm_password.getText().toString()))) {
+        if (!fieldIsEmpty && !badEmail && !(pass.getText().toString().equals(confirmPassword.getText().toString()))) {
             if (wrongPass == null) {
                 wrongPass = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
             }
@@ -243,19 +243,19 @@ public class RegistrationActivity extends Activity {
             if (result != null) {
                 try {
                     final JSONObject jsonObj = new JSONObject(result);
-                    String query_result;
+                    String queryResult;
                     try {
                         Log.d("RegistrationActivity", "Entry query_result exists");
-                        query_result = jsonObj.getString("query_result");
-                        if ("SUCCESS".equals(query_result)) {
+                        queryResult = jsonObj.getString("query_result");
+                        if ("SUCCESS".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             finish();
-                        } else if ("EXISTING".equals(query_result)) {
+                        } else if ("EXISTING".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
-                        } else if ("EMAIL".equals(query_result)) {
+                        } else if ("EMAIL".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Email is already used!", Toast.LENGTH_SHORT).show();
-                        } else if ("FAILURE".equals(query_result)) {
+                        } else if ("FAILURE".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Registration failed.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.cs2340.officehours.freshavocados.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +21,7 @@ public final class Movies {
     /**
      * ArrayList with all of the movies
      */
-    private static final ArrayList<Movie> MOVIES = new ArrayList<>();
+    private static final List<Movie> MOVIES = new ArrayList<>();
 
     /**
      * Map from movie title/year to the Movie object

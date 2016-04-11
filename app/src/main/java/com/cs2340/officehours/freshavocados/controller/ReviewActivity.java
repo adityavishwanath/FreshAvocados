@@ -50,11 +50,11 @@ public class ReviewActivity extends Activity {
     /**
      * Int with max number of lines for review
      */
-    private final static int MAX_LINES = 8;
+    private static final int MAX_LINES = 8;
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,10 +159,10 @@ public class ReviewActivity extends Activity {
             if (result != null) {
                 try {
                     final JSONObject jsonObj = new JSONObject(result);
-                    String query_result;
+                    String queryResult;
                     try {
-                        query_result = jsonObj.getString("query_result");
-                        if ("SUCCESS".equals(query_result)) {
+                        queryResult = jsonObj.getString("query_result");
+                        if ("SUCCESS".equals(queryResult)) {
                             final Review review = new Review(LoginActivity.currentUser.getUsername(), LoginActivity.currentUser.getMajor(),
                                     rating.getRating(), reviewText.getText().toString(), m);
                             final Float f = rating.getRating();

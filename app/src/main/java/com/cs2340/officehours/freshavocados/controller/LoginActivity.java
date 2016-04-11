@@ -35,11 +35,11 @@ public class LoginActivity extends Activity {
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
     /**
      * String for the activity name
      */
-    private final static String ACTIVITYNAME = "LoginActivity";
+    private static final String ACTIVITYNAME = "LoginActivity";
     /**
      * EditTexts for the username and password
      */
@@ -147,11 +147,11 @@ public class LoginActivity extends Activity {
             if (result != null) {
                 try {
                     final JSONObject jsonObj = new JSONObject(result);
-                    String query_result;
+                    String queryResult;
                     try {
                         Log.d(ACTIVITYNAME, "Entry query_result exists");
-                        query_result = jsonObj.getString("query_result");
-                        if ("DENIED".equals(query_result)) {
+                        queryResult = jsonObj.getString("query_result");
+                        if ("DENIED".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Login failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {

@@ -35,6 +35,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class IndividualMovieActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -45,7 +46,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
     /**
      * Int for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +58,14 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
         final int position = getIntent().getIntExtra("position", 1);
         m = movies.get(position);
 
-        final TextView movie_title_year = (TextView) findViewById(R.id.movie_title_year);
-        movie_title_year.setText(m.getTitleYear());
+        final TextView movieTitleYear = (TextView) findViewById(R.id.movie_title_year);
+        movieTitleYear.setText(m.getTitleYear());
 
-        final TextView actor_actor = (TextView) findViewById(R.id.actor_actor);
-        actor_actor.setText(m.getActors());
+        final TextView actorActor = (TextView) findViewById(R.id.actor_actor);
+        actorActor.setText(m.getActors());
 
-        final TextView short_synop = (TextView) findViewById(R.id.short_synop);
-        short_synop.setText(m.getSynopsis());
+        final TextView shortSynop = (TextView) findViewById(R.id.short_synop);
+        shortSynop.setText(m.getSynopsis());
 
         //RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
         //overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
@@ -98,8 +99,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
      */
     public void onClickGenerateReviewList(View v) {
         //code for the reviews
-        final ListView list_view = (ListView) findViewById(R.id.review_list);
-        list_view.setOnItemClickListener(this);
+        final ListView listView = (ListView) findViewById(R.id.review_list);
+        listView.setOnItemClickListener(this);
 
         final RatingBar overallRating = (RatingBar) findViewById(R.id.overallRating);
         overallRating.setRating(Review.getOverallRating(m.getTitleYear()));
@@ -109,13 +110,13 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             Log.d("Reviews in movie?", "NO");
             adapt = new MyAdapter(this, R.id.movie_title_year,
                     new LinkedList<Review>());
-            list_view.setAdapter(adapt);
+            listView.setAdapter(adapt);
         } else {
             Log.d("Reviews in movie?", "YES");
             final LinkedList<Review> rev = Review.REVIEW_MAP.get(m.getTitleYear());
             adapt = new MyAdapter(this, R.id.reviewer,
                     rev);
-            list_view.setAdapter(adapt);
+            listView.setAdapter(adapt);
         }
     }
     /**
@@ -171,8 +172,8 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
             final RatingBar rating = (RatingBar) view.findViewById(R.id.user_rating);
             rating.setRating(rev.getRating());
 
-            final TextView review_text = (TextView) view.findViewById(R.id.review_text);
-            review_text.setText(rev.getReviewText());
+            final TextView reviewText = (TextView) view.findViewById(R.id.review_text);
+            reviewText.setText(rev.getReviewText());
 
             return view;
 
@@ -185,7 +186,7 @@ public class IndividualMovieActivity extends Activity implements AdapterView.OnI
          * @param objects the list of Reviews to be displayed
          */
         public MyAdapter(Context context, int textViewResourceId,
-                         LinkedList<Review> objects) {
+                         List<Review> objects) {
             super(context, R.layout.review_item, textViewResourceId, objects);
         }
     }

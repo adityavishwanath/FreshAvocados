@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -41,7 +42,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     /**
      * ArrayList of admin usernames
      */
-    private final ArrayList<String> adminUsernames = new ArrayList<>();
+    private final List<String> adminUsernames = new ArrayList<>();
     /**
      * String for whether or not user is banned
      */
@@ -53,7 +54,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     /**
      * Int for vibrate time for vibrator
      */
-    private final static int VIBRATE_TIME = 50;
+    private static final int VIBRATE_TIME = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +126,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
     public void onClickGenerateUserList(View v) {
         final Integer i = adminUsernames.size();
         Log.d("List size", i.toString());
-        for (String s : adminUsernames) {
+        for (final String s : adminUsernames) {
             Log.d("User", s);
         }
         final ListView listView = (ListView) findViewById(R.id.list_view_admin);
@@ -158,7 +159,7 @@ public class AdminActivity extends Activity implements AdapterView.OnItemClickLi
          * @param context the source content
          * @param objects the list of objects to be displayed
          */
-        public MyAdapter(Context context, ArrayList<String> objects) {
+        public MyAdapter(Context context, List<String> objects) {
             super(context, R.layout.list_item_user, R.id.listing_users, objects);
         }
 

@@ -56,6 +56,16 @@ public class ReviewActivity extends Activity {
      */
     private static final int VIBRATE_TIME = 50;
 
+    /**
+     * Text standard string
+     */
+    private static final String UTF = "UTF-8";
+
+    /**
+     * String for name of class
+     */
+    private static final String REVIEWACTIVITY = "REVIEWACTIVITY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,10 +137,10 @@ public class ReviewActivity extends Activity {
             BufferedReader bufferedReader;
             String result;
             try {
-                String data = "?username=" + URLEncoder.encode(username, "UTF-8");
-                data += "&movie=" + URLEncoder.encode(movie, "UTF-8");
-                data += "&comment=" + URLEncoder.encode(comment, "UTF-8");
-                data += "&rating=" + URLEncoder.encode(rat, "UTF-8");
+                String data = "?username=" + URLEncoder.encode(username, UTF);
+                data += "&movie=" + URLEncoder.encode(movie, UTF);
+                data += "&comment=" + URLEncoder.encode(comment, UTF);
+                data += "&rating=" + URLEncoder.encode(rat, UTF);
                 link = "http://officehours.netau.net/insertreview.php" + data;
                 final URL url = new URL(link);
                 final HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -138,7 +148,7 @@ public class ReviewActivity extends Activity {
                 result = bufferedReader.readLine();
                 return result;
             } catch (java.io.IOException e) {
-                Log.d("ReviewActivity", e.getMessage());
+                Log.d(REVIEWACTIVITY, e.getMessage());
                 return e.getMessage();
             }
         }
@@ -175,17 +185,17 @@ public class ReviewActivity extends Activity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     } catch (org.json.JSONException e) {
-                        Log.d("ReviewActivity", "Some major error occurred");
+                        Log.d(REVIEWACTIVITY, "Some major error occurred");
                     }
                 } catch (JSONException e) {
-                    Log.d("ReviewActivity", "Some fatal error occurred");
-                    Log.d("ReviewActivity", "Exception: " + e.getMessage());
+                    Log.d(REVIEWACTIVITY, "Some fatal error occurred");
+                    Log.d(REVIEWACTIVITY, "Exception: " + e.getMessage());
                     Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("ReviewActivity", "Some major error occurred");
+                Log.d(REVIEWACTIVITY, "Some major error occurred");
                 Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }

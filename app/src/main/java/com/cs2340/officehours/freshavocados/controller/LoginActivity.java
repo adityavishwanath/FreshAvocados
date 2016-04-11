@@ -73,7 +73,7 @@ public class LoginActivity extends Activity {
             final Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             a.vibrate(VIBRATE_TIME);
 //          } catch (Exception e) {
-//              Log.v("EXCEPTION", e.getMessage());
+//              Log.v(EXCEPTION, e.getMessage());
 //          }
         } else if ("".equals(name)) {
             Toast.makeText(getApplicationContext(),

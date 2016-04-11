@@ -49,6 +49,16 @@ public class RegistrationActivity extends Activity {
      * Int for max lines for bio
      */
     private static final int MAX_LINES = 6;
+
+    /**
+     * String standard for text
+     */
+    private static final String UTF = "UTF-8";
+
+    /**
+     * String for name of class
+     */
+    private static final String REGISTRATIONACTIVITY = "REGISTRATIONACTIVITY";
 //    private UserManager uM;
 
     @Override
@@ -141,7 +151,7 @@ public class RegistrationActivity extends Activity {
                     email.getText().toString().trim(), major.trim(), fname.getText().toString().trim(),
                     lname.getText().toString().trim(), bio.getText().toString().trim()); //register task is private inner ASyncTask class
 //            } catch (Exception e) {
-//                Log.v("EXCEPTION", e.getMessage());
+//                Log.v(EXCEPTION, e.getMessage());
 //            }
         }
     }
@@ -214,13 +224,13 @@ public class RegistrationActivity extends Activity {
             BufferedReader bufferedReader;
             String result;
             try {
-                data = "?username=" + URLEncoder.encode(name, "UTF-8");
-                data += "&password=" + URLEncoder.encode(pass, "UTF-8");
-                data += "&Email=" + URLEncoder.encode(email, "UTF-8");
-                data += "&Major=" + URLEncoder.encode(major, "UTF-8");
-                data += "&FirstName=" + URLEncoder.encode(fname, "UTF-8");
-                data += "&LastName=" + URLEncoder.encode(lname, "UTF-8");
-                data += "&bio=" + URLEncoder.encode(bio, "UTF-8");
+                data = "?username=" + URLEncoder.encode(name, UTF);
+                data += "&password=" + URLEncoder.encode(pass, UTF);
+                data += "&Email=" + URLEncoder.encode(email, UTF);
+                data += "&Major=" + URLEncoder.encode(major, UTF);
+                data += "&FirstName=" + URLEncoder.encode(fname, UTF);
+                data += "&LastName=" + URLEncoder.encode(lname, UTF);
+                data += "&bio=" + URLEncoder.encode(bio, UTF);
                 link = "http://officehours.netau.net/signup.php" + data;
                 final URL url = new URL(link);
                 final HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -228,7 +238,7 @@ public class RegistrationActivity extends Activity {
                 result = bufferedReader.readLine();
                 return result;
             } catch (java.io.IOException e) {
-                Log.d("RegistrationActivity", e.getMessage());
+                Log.d(REGISTRATIONACTIVITY, e.getMessage());
                 return e.getMessage();
             }
         }
@@ -245,7 +255,7 @@ public class RegistrationActivity extends Activity {
                     final JSONObject jsonObj = new JSONObject(result);
                     String queryResult;
                     try {
-                        Log.d("RegistrationActivity", "Entry query_result exists");
+                        Log.d(REGISTRATIONACTIVITY, "Entry query_result exists");
                         queryResult = jsonObj.getString("query_result");
                         if ("SUCCESS".equals(queryResult)) {
                             Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
@@ -261,17 +271,17 @@ public class RegistrationActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Couldn't connect to remote database.", Toast.LENGTH_SHORT).show();
                         }
                     } catch (org.json.JSONException e) {
-                        Log.d("RegistrationActivity", "Some major error occurred");
+                        Log.d(REGISTRATIONACTIVITY, "Some major error occurred");
                     }
                 } catch (JSONException e) {
-                    Log.d("RegistrationActivity", "Some fatal error occurred");
-                    Log.d("RegistrationActivity", "Exception: " + e.getMessage());
+                    Log.d(REGISTRATIONACTIVITY, "Some fatal error occurred");
+                    Log.d(REGISTRATIONACTIVITY, "Exception: " + e.getMessage());
                     Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("RegistrationActivity", "Some major error occurred");
+                Log.d(REGISTRATIONACTIVITY, "Some major error occurred");
                 Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }

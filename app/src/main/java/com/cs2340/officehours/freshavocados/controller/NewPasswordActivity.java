@@ -141,14 +141,14 @@ public class NewPasswordActivity extends Activity {
                         Log.d("NewPasswordActivity", "Some major error occurred");
                     }
                 } catch (JSONException e) {
-                    Log.d("RegistrationActivity", "Some fatal error occurred");
-                    Log.d("RegistrationActivity", "Exception: " + e.getMessage());
+                    Log.d("REGISTRATIONACTIVITY", "Some fatal error occurred");
+                    Log.d("REGISTRATIONACTIVITY", "Exception: " + e.getMessage());
                     Log.v("EXCEPTION", e.getMessage());
                     Toast.makeText(getApplicationContext(), "Error parsing JSON data.",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("RegistrationActivity", "Some major error occurred");
+                Log.d("REGISTRATIONACTIVITY", "Some major error occurred");
                 Toast.makeText(getApplicationContext(), "Couldn't get any JSON data.",
                         Toast.LENGTH_SHORT).show();
             }

@@ -73,6 +73,55 @@ public class MainActivity extends Activity {
      */
     private static final String TITLESTRING = "title";
 
+    /**
+     * String for year
+     */
+    private static final String YEAR = "year";
+
+    /**
+     * String for abridged cast
+     */
+    private static final String CAST = "abridged_cast";
+
+    /**
+     * String for name
+     */
+    private static final String NAME = "name";
+
+    /**
+     * Text standard as a string
+     */
+    private static final String UTF = "UTF-8";
+
+    /**
+     * String for synopsis
+     */
+    private static final String SYNOPSIS = "synopsis";
+    /**
+     * String for posters
+     */
+    private static final String POSTERS = "posters";
+    /**
+     * String for thumbnail
+     */
+    private static final String THUMBNAIL = "thumbnail";
+    /**
+     * String for VolleyApp
+     */
+    private static final String VOLLEYAPP = "VolleyApp";
+    /**
+     * String for Failed Json Message
+     */
+    private static final String FAILEDJSON = "Failed to get JSON object";
+    /**
+     * String for exception message
+     */
+    private static final String EXCEPTION = "EXCEPTION";
+    /**
+     * String for JSON Request Failed
+     */
+    private static final String JSONFAILREQUEST = "JSON Request Failed!";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +165,7 @@ public class MainActivity extends Activity {
         final String query = searchField.getText().toString();
         String encodedQuery = "";
         try {
-            encodedQuery = URLEncoder.encode(query, "utf-8");
+            encodedQuery = URLEncoder.encode(query, UTF);
         } catch(java.io.UnsupportedEncodingException e) {
             Log.d(ACTIVITYNAME, "Some major error occurred");
         }
@@ -145,12 +194,12 @@ public class MainActivity extends Activity {
                         final Movie m = new Movie();
                         assert jsonObject != null;
                         final String title = jsonObject.optString(TITLESTRING);
-                        final String year = jsonObject.optString("year");
-                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                        final String synopsis = jsonObject.optString("synopsis");
-                        final JSONObject links = jsonObject.getJSONObject("posters");
-                        final String thumbnailLink = links.getString("thumbnail");
+                        final String year = jsonObject.optString(YEAR);
+                        final String actor1 = jsonObject.optJSONArray(CAST).getJSONObject(0).optString(NAME);
+                        final String actor2 = jsonObject.optJSONArray(CAST).getJSONObject(1).optString(NAME);
+                        final String synopsis = jsonObject.optString(SYNOPSIS);
+                        final JSONObject links = jsonObject.getJSONObject(POSTERS);
+                        final String thumbnailLink = links.getString(THUMBNAIL);
                         Log.d(ACTIVITYNAME, title);
                         Log.d(ACTIVITYNAME, year);
                         Log.d(ACTIVITYNAME, actor1);
@@ -159,8 +208,8 @@ public class MainActivity extends Activity {
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
-                        Log.d("VolleyApp", "Failed to get JSON object");
-                        Log.v("EXCEPTION", e.getMessage());
+                        Log.d(VOLLEYAPP, FAILEDJSON);
+                        Log.v(EXCEPTION, e.getMessage());
                     }
                 }
                 //once we have all data, then go to list screen
@@ -169,7 +218,7 @@ public class MainActivity extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                final String response = "JSON Request Failed!";
+                final String response = JSONFAILREQUEST;
                 if (jSONFailure == null) {
                     jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                 }
@@ -228,12 +277,12 @@ public class MainActivity extends Activity {
                         final Movie m = new Movie();
                         assert jsonObject != null;
                         final String title = jsonObject.optString(TITLESTRING);
-                        final String year = jsonObject.optString("year");
-                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                        final String synopsis = jsonObject.optString("synopsis");
-                        final JSONObject links = jsonObject.getJSONObject("posters");
-                        final String thumbnailLink = links.getString("thumbnail");
+                        final String year = jsonObject.optString(YEAR);
+                        final String actor1 = jsonObject.optJSONArray(CAST).getJSONObject(0).optString(NAME);
+                        final String actor2 = jsonObject.optJSONArray(CAST).getJSONObject(1).optString(NAME);
+                        final String synopsis = jsonObject.optString(SYNOPSIS);
+                        final JSONObject links = jsonObject.getJSONObject(POSTERS);
+                        final String thumbnailLink = links.getString(THUMBNAIL);
                         Log.d(ACTIVITYNAME, title);
                         Log.d(ACTIVITYNAME, year);
                         Log.d(ACTIVITYNAME, actor1);
@@ -243,8 +292,8 @@ public class MainActivity extends Activity {
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
-                        Log.d("VolleyApp", "Failed to get JSON object");
-                        Log.v("EXCEPTION", e.getMessage());
+                        Log.d(VOLLEYAPP, FAILEDJSON);
+                        Log.v(EXCEPTION, e.getMessage());
                     }
                 }
                 //once we have all data, then go to list screen
@@ -253,7 +302,7 @@ public class MainActivity extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                final String response = "JSON Request Failed!";
+                final String response = JSONFAILREQUEST;
                 if (jSONFailure == null) {
                     jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                 }
@@ -294,12 +343,12 @@ public class MainActivity extends Activity {
                         final Movie m = new Movie();
                         assert jsonObject != null;
                         final String title = jsonObject.optString(TITLESTRING);
-                        final String year = jsonObject.optString("year");
-                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                        final String synopsis = jsonObject.optString("synopsis");
-                        final JSONObject links = jsonObject.getJSONObject("posters");
-                        final String thumbnailLink = links.getString("thumbnail");
+                        final String year = jsonObject.optString(YEAR);
+                        final String actor1 = jsonObject.optJSONArray(CAST).getJSONObject(0).optString(NAME);
+                        final String actor2 = jsonObject.optJSONArray(CAST).getJSONObject(1).optString(NAME);
+                        final String synopsis = jsonObject.optString(SYNOPSIS);
+                        final JSONObject links = jsonObject.getJSONObject(POSTERS);
+                        final String thumbnailLink = links.getString(THUMBNAIL);
                         Log.d(ACTIVITYNAME, title);
                         Log.d(ACTIVITYNAME, year);
                         Log.d(ACTIVITYNAME, actor1);
@@ -308,8 +357,8 @@ public class MainActivity extends Activity {
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
-                        Log.d("VolleyApp", "Failed to get JSON object");
-                        Log.v("EXCEPTION", e.getMessage());
+                        Log.d(VOLLEYAPP, FAILEDJSON);
+                        Log.v(EXCEPTION, e.getMessage());
                     }
                 }
                 //once we have all data, then go to list screen
@@ -319,7 +368,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                final String response = "JSON Request Failed!";
+                final String response = JSONFAILREQUEST;
                 if (jSONFailure == null) {
                     jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                 }
@@ -361,12 +410,12 @@ public class MainActivity extends Activity {
                         final Movie m = new Movie();
                         assert jsonObject != null;
                         final String title = jsonObject.optString(TITLESTRING);
-                        final String year = jsonObject.optString("year");
-                        final String actor1 = jsonObject.optJSONArray("abridged_cast").getJSONObject(0).optString("name");
-                        final String actor2 = jsonObject.optJSONArray("abridged_cast").getJSONObject(1).optString("name");
-                        final String synopsis = jsonObject.optString("synopsis");
-                        final JSONObject links = jsonObject.getJSONObject("posters");
-                        final String thumbnailLink = links.getString("thumbnail");
+                        final String year = jsonObject.optString(YEAR);
+                        final String actor1 = jsonObject.optJSONArray(CAST).getJSONObject(0).optString(NAME);
+                        final String actor2 = jsonObject.optJSONArray(CAST).getJSONObject(1).optString(NAME);
+                        final String synopsis = jsonObject.optString(SYNOPSIS);
+                        final JSONObject links = jsonObject.getJSONObject(POSTERS);
+                        final String thumbnailLink = links.getString(THUMBNAIL);
                         Log.d(ACTIVITYNAME, title);
                         Log.d(ACTIVITYNAME, year);
                         Log.d(ACTIVITYNAME, actor1);
@@ -375,8 +424,8 @@ public class MainActivity extends Activity {
                         m.setData(title, year, actor1, actor2, synopsis, thumbnailLink);
                         movies.add(m);
                     } catch (JSONException e) {
-                        Log.d("VolleyApp", "Failed to get JSON object");
-                        Log.v("EXCEPTION", e.getMessage());
+                        Log.d(VOLLEYAPP, FAILEDJSON);
+                        Log.v(EXCEPTION, e.getMessage());
                     }
                 }
                 //once we have all data, then go to list screen
@@ -386,7 +435,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                final String response = "JSON Request Failed!";
+                final String response = JSONFAILREQUEST;
                 if (jSONFailure == null) {
                     jSONFailure = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
                 }

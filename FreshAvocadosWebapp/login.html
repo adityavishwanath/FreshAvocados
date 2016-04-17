@@ -46,13 +46,13 @@
     
     
     <div class = "col-xs-4 col-xs-offset-4">
-        <form action="" method="post">
-        <label class = "avasearch" style="color:#18bc9c">UserName :</label>
-        <input class = "avasearch" id="name" name="username" placeholder="username" type="text">
-        <label class = "avasearch" style="color:#18bc9c">Password :</label>
-        <input class = "avasearch" id="password" name="password" placeholder="**********" type="password">
-        <input class = "avabtn" name="submit" type="submit" value=" Login ">
-        <span><?php echo $error; ?></span>
+        <form id="loginForm" action="login.php" method="get">
+            <label class = "avasearch" style="color:#18bc9c">UserName :</label>
+            <input class = "avasearch" id="name" name="username" placeholder="username" type="text">
+            <label class = "avasearch" style="color:#18bc9c">Password :</label>
+            <input class = "avasearch" id="password" name="password" placeholder="**********" type="password">
+            <input class = "avabtn" name="submit" type="submit" value=" Login " onClick="location.href='main.html'">
+        </form>
     </div>
 
     <!-- jQuery -->

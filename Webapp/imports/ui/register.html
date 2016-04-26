@@ -1,15 +1,23 @@
 <template name="register">
 	<form name="RegisterForm">
-		<input type="text" name="firstName" placeholder="First name" />
-		<input type="text" name="lastName" placeholder="Last name" />
-		<input type="text" name="email" placeholder="Email" />
-		<select type="text" name="major" placeholder="Major">
-			<option></option>
-		</select>
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<input type="password" name="confirmPassword" placeholder="Confirm password" />
-		<textarea name="Bio" placeholder="Bio"></textarea>
-		<button type="submit">Register Now</button>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle" style="margin-top:8%">
+			<img src="/img/ava.png" style="width:60%; margin-left:20%; margin-right:20%">
+			<input class="avasearch" type="text" name="firstName" placeholder="First name" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><input class="avasearch" type="text" name="lastName" placeholder="Last name" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><input class="avasearch" type="text" name="email" placeholder="Email" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle">
+			<select class="avasearch" type="text" name="major" placeholder="Major">
+				<option>Computer Science</option>
+				<option>Engineer</option>
+				<option>Science</option>
+				<option>Business</option>
+				<option>Liberal Arts</option>
+				<option>Architecture</option>
+			</select></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><input class="avasearch" type="text" name="username" placeholder="Username" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><input class="avasearch" type="password" name="password" placeholder="Password" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><input class="avasearch" type="password" name="confirmPassword" placeholder="Confirm password" /></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><textarea class="avasearch" name="Bio" placeholder="Bio"></textarea></div>
+		<div class="row col-xs-4 col-xs-offset-4" align="middle"><button class="avabtn" type="submit">Register Now</button></div>
 	</form>
 </template>

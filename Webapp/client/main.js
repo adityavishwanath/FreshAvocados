@@ -1,11 +1,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
+import { Results } from '../imports/api/results.js';
 import './main.html';
 import '../imports/ui/register.html';
 import '../imports/ui/login.html';
 import '../imports/ui/home.html';
 import '../imports/ui/dashboard.html';
+import '../imports/ui/dashboard2.html';
 import './routes.js';
 
 if (Meteor.isClient) {
@@ -41,7 +43,7 @@ if (Meteor.isClient) {
 
 	});
 
-	Template.dashboard.helpers({
+	Template.dashboard2.helpers({
 	  firstName: function() {
 	    return Meteor.user().profile.firstName;
 	  },
@@ -54,9 +56,23 @@ if (Meteor.isClient) {
 	    return Meteor.user().profile.mail;
 	  },
 
-	  movieList: function() {
-	  	return movieList;
-	  }
+      results: function() {
+        return Results.find({});
+      },
+	});
+
+	Template.dashboard.helpers({
+	  firstName: function() {
+	    return Meteor.user().profile.firstName;
+	  },
+
+	  lastName: function() {
+	    return Meteor.user().profile.lastName;
+	  },
+
+	  email: function() {
+	    return Meteor.user().profile.mail;
+	  },
 	});
 
 	Template.dashboard.events ({
@@ -69,13 +85,26 @@ if (Meteor.isClient) {
 		},
 
 		'click #searchMovies': function(event) {
-			event.preventDefault();
+			
 			Meteor.http.call("GET", 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=yedukp76ffytfuy24zsqk7f5&q=jack',function(error,result){
-     			//console.log(result);
      			var listMovies = JSON.parse(result.content).movies;
-     			console.log(listMovies);
-
+     			
+     			// console.log(listMovies[0]);
+     			// console.log(listMovies[0].title);
+     			for (var i = 0; i < 10; i++) {
+     				Results.insert({
+                  		title: listMovies[i].title,
+                  		year: listMovies[i].year,
+                  		runtime: listMovies[i].runtime,
+                  		synopsis: listMovies[i].synopsis,
+                  		thumb: listMovies[i].posters.thumbnail,
+                	});
+     			}
+     			
+     			
 			});
+			event.preventDefault();
+			Router.go('/movieList');
 		}
 
 	});

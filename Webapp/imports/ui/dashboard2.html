@@ -1,0 +1,22 @@
+<template name="dashboard2">
+	<div class="row col-xs-4 col-xs-offset-4" align="middle" style="margin-top:15%">
+		<img src="/img/ava.png" style="width:60%; margin-left:20%; margin-right:20%">
+		<h1>Welcome {{ firstName }} {{movieList}}</h1></div>
+	<div class="row col-xs-4 col-xs-offset-4" align="middle" style="margin-top:15%"><button class="avabtn" id="searchMovies">Search Movies</button></div>
+	<div class="row col-xs-4 col-xs-offset-4" align="middle" style="margin-top:15%"><button class="avabtn" id="logout">LOGOUT</button></div>
+
+	<ul>
+		{{#each results}}
+		<div class="row col-xs-4 col-xs-offset-4" align="middle" style="margin-top:15%">
+			<li>
+				<img src="{{ thumb }}">
+				<h1>{{ title}}</h1>
+				<h2>{{ year }}</h2>
+				<h3>{{ runtime }}</h3>
+				<p>{{ synopsis }}</p>
+			</li>
+		</div>
+		{{/each}}
+	</ul>
+
+</template>

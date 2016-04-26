@@ -14,3 +14,7 @@ Router.route('/register', function () {
 Router.route('/dashboard', function(){
   this.render('dashboard');
 });
+
+Router.route('/movieList', function(){
+  this.render('dashboard2');
+});

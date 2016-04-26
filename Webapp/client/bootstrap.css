@@ -9,7 +9,9 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-
+body {
+  margin: 0;
+}
 article,
 aside,
 details,
@@ -6756,37 +6758,3 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-/* CSS declarations go here */
-body {
-    webkit-tap-highlight-color: #222;
-    background-color: dimgray;
-}
-
-.avabtn{
-  color: white;
-  font-size: 20px;
-  border: solid 2px #18bc9c;
-  background: transparent;
-  transition: all 0.3s ease-in-out;
-  margin-top: 15px;
-
-  margin-left: 20%;
-  margin-right: 20%;
-  width: 60%;
-
-}
-.avabtn:hover,
-.avabtn:focus,
-.avabtn:active,
-.avabtn.active {
-  color: #18bc9c;
-  background: white;
-  border: solid 5px white;
-}
-
-.avasearch {
-  margin-top: 15px;
-  margin-left: 20%;
-  margin-right: 20%;
-  width: 60%;
-}

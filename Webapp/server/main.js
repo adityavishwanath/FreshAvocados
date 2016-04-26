@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-
+import '../imports/api/results.js';
 var connectHandler = WebApp.rawConnectHandlers;
 
 Meteor.startup(() => {
